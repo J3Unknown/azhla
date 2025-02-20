@@ -80,7 +80,7 @@ class _SpecialRequestsListState extends State<SpecialRequestsList> {
               ListView.separated(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) => cardBuilder(context, index, AssetsManager.location, '${getTranslated(context, 'Request No.')} ${_requestsListModel!.result![index].requestNumber}', _requestsListModel!.result![index].category!.name, _requestsListModel!.result![index].familyName, _requestsListModel!.result![index].createdAt, (){} , _requestsListModel!.result![index].status!.replaceAll('_', ' ')),
+                itemBuilder: (context, index) => cardBuilder(context, index, AssetsManager.location, '${getTranslated(context, 'Request No.')} ${_requestsListModel!.result![index].requestNumber}', _requestsListModel!.result![index].category!.name, _requestsListModel!.result![index].familyName, _requestsListModel!.result![index].createdAt , _requestsListModel!.result![index].status!.replaceAll(StringsManager.underScore, StringsManager.space)),
                 separatorBuilder: (context, index) => const SizedBox(height: 10,),
                 itemCount: _requestsListModel!.result!.length
                 ),
@@ -92,9 +92,9 @@ class _SpecialRequestsListState extends State<SpecialRequestsList> {
     );
   }
 
-  Widget cardBuilder(context, index, image, requestNo, type, governance, date, clearButtonAction, status) {
+  Widget cardBuilder(context, index, image, requestNo, type, governance, date, status) {
     return InkWell(
-      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SpecialRequestChat(title: requestNo, specialRequestDetails: _requestsListModel!.result![index].specialRequestDetails!,))),
+      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SpecialRequestChat(title: requestNo, request: _requestsListModel!, index: index,))),
       child: Card(
         borderOnForeground: true,
         margin: const EdgeInsets.symmetric(horizontal: 12),
@@ -103,7 +103,7 @@ class _SpecialRequestsListState extends State<SpecialRequestsList> {
         elevation: 10,
         shadowColor: ColorsManager.black.withOpacity(0.5),
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15)
+          borderRadius: BorderRadius.circular(15)
         ),
         child: SizedBox(
           height: 130.h,
@@ -151,7 +151,7 @@ class _SpecialRequestsListState extends State<SpecialRequestsList> {
                         radius: 20,
                         backgroundColor: ColorsManager.red,
                         child: IconButton(
-                          onPressed: clearButtonAction, // need action
+                          onPressed: () => SpecialRequestListServices.deleteSpecialRequest(context, _requestsListModel!.result![index].id.toString()), // need action
                           icon: const Icon(IconsManager.clearSoldIcon, color: ColorsManager.white,),
                         ),
                       ),

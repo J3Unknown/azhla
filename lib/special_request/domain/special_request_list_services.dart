@@ -62,7 +62,8 @@ class SpecialRequestListServices {
     required String date,
     required String time,
     required String description,
-  }) async {
+  }) async
+  {
     var request = MultipartRequest('POST', Uri.parse(AppConstants.ADD_SPECIAL_REQUEST));
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -108,6 +109,96 @@ class SpecialRequestListServices {
       var bodyJson = jsonDecode(body);
       log(bodyJson);
       showToastError(context,"We ran into problem");
+      return null;
+    }
+  }
+
+  //TODO: Edit Cancel Special Request by checking the headers and parameters
+  static Future<bool?> deleteSpecialRequest(context, String id) async {
+    var request = MultipartRequest('POST', Uri.parse('${AppConstants.SPECIAL_REQUEST}?id=$id'));
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    log(AppConstants.SPECIAL_REQUEST);
+    Locale locale = await getLocale();
+    log(id);
+    String token = '';
+    if (prefs.containsKey(AppConstants.TOKEN)) {
+      token = prefs.getString(AppConstants.TOKEN)!;
+    }
+    //log(token);
+
+    request.headers.addAll({
+      'Accept':'application/json',
+      AppConstants.AUTORIZATION:'Bearer $token',
+      'Lang':locale.languageCode
+    });
+
+    StreamedResponse response = await request.send();
+
+    if(response.statusCode == 200){
+      var body = await response.stream.bytesToString();
+      log(response.statusCode.toString());
+      log(body.toString());
+      var bodyJson = jsonDecode(body);
+      log(bodyJson['result'].toString());
+
+      if (bodyJson['success'] == false) {
+        showToastError(context, bodyJson['msg']);
+        return null;
+      } else {
+        showToastReminder(context, 'Special request Canceled Successfully');
+        return true;
+      }
+    }else{
+      showToastError(context, 'we ran into a problem');
+      log(response.statusCode.toString());
+      return null;
+    }
+  }
+
+  static Future<SpecialRequestDetails?> sendMessage(context, specialRequestID, content) async{
+
+    var request = MultipartRequest('GET', Uri.parse(AppConstants.SPECIAL_REQUEST));
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    log(AppConstants.SPECIAL_REQUEST);
+    Locale locale = await getLocale();
+
+    String token = '';
+    if (prefs.containsKey(AppConstants.TOKEN)) {
+      token = prefs.getString(AppConstants.TOKEN)!;
+    }
+    //log(token);
+
+    request.headers.addAll({
+      'Accept':'application/json',
+      AppConstants.AUTORIZATION:'Bearer $token',
+      'Lang':locale.languageCode
+    });
+
+    request.fields.addAll({
+      'type' : 'text',
+      'content' : content,
+      'special_request_id' : specialRequestID.toString(),
+    });
+
+    StreamedResponse response = await request.send();
+
+    if(response.statusCode == 200){
+      var body = await response.stream.bytesToString();
+      log(response.statusCode.toString());
+      log(body.toString());
+      var bodyJson = jsonDecode(body);
+      log(bodyJson['result'].toString());
+
+      if (bodyJson['success'] == false) {
+        showToastError(context, bodyJson['msg']);
+        return null;
+      } else {
+        SpecialRequestDetails request = SpecialRequestDetails.fromJson(bodyJson);
+        return request;
+      }
+    }else{
+      showToastError(context, 'we ran into a problem');
+      log(response.statusCode.toString());
       return null;
     }
   }

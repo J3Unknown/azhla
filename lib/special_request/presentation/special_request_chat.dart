@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:azhlha/special_request/data/message_model.dart';
 import 'package:azhlha/special_request/data/requests_list_model.dart';
+import 'package:azhlha/special_request/domain/special_request_list_services.dart';
 import 'package:azhlha/utill/assets_manager.dart';
 import 'package:azhlha/utill/colors_manager.dart';
 import 'package:azhlha/utill/localization_helper.dart';
@@ -13,8 +14,9 @@ import '../../utill/icons_manager.dart';
 
 class SpecialRequestChat extends StatefulWidget {
   late String title;
-  late List<SpecialRequestDetails> specialRequestDetails;
-  SpecialRequestChat({super.key, required this.title, required this.specialRequestDetails});
+  late int index;
+  late RequestsListModel request;
+  SpecialRequestChat({super.key, required this.title, required this.index, required this.request});
 
   @override
   State<SpecialRequestChat> createState() => _SpecialRequestChatState();
@@ -26,7 +28,7 @@ class _SpecialRequestChatState extends State<SpecialRequestChat> {
 
   @override
   void initState() {
-    messages = widget.specialRequestDetails;
+    messages = widget.request.result![widget.index].specialRequestDetails!;
     super.initState();
   }
 
@@ -34,6 +36,7 @@ class _SpecialRequestChatState extends State<SpecialRequestChat> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
+      backgroundColor: ColorsManager.white,
       appBar: AppBar(
         elevation: 1,
         automaticallyImplyLeading: false,
@@ -57,12 +60,11 @@ class _SpecialRequestChatState extends State<SpecialRequestChat> {
                   child: ListView.builder(
                     keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                     reverse: true,
-                    itemBuilder:(context, index) => index == 0
-                        ? _fileDownloadBuilder((){})
-                        : _fullChatBody(messages[index]),
+                    itemBuilder:(context, index) => _fullChatBody(messages[index]),
                     itemCount: messages.length,
                   ),
                 ),
+                _fileDownloadBuilder((){}),
                 _chatInputBuilder(),
               ],
             )
@@ -117,7 +119,8 @@ class _SpecialRequestChatState extends State<SpecialRequestChat> {
   {
     setState(() {
       if(_chatController.text.isNotEmpty) {
-        //messages.insert(0, Messages_Model(_chatController.text, DateTime.now()));
+        messages.insert(0, SpecialRequestDetails(id: widget.request.result![widget.index].id, role: 'user', content: _chatController.text, createdAt: DateTime.now().toString()));
+        SpecialRequestListServices.sendMessage(context, widget.request.result![widget.index].id, _chatController.text);
         _chatController.clear();
       }
     });
@@ -128,32 +131,42 @@ class _SpecialRequestChatState extends State<SpecialRequestChat> {
     child: Column(
       crossAxisAlignment: model.role == 'admin admin'? CrossAxisAlignment.start:CrossAxisAlignment.end,
       children: [
-        model.role == 'admin admin'?_senderHeader(model.createdAt):_receiverHeader(model.createdAt),
+        model.role == 'admin admin'?_adminHeader(model.createdAt):_userHeader(model.createdAt),
         const SizedBox(height: 20,),
         _chatTextBuilder(model.content)
       ],
     ),
   );
 
-  Widget _senderHeader(date) => Row(
+  Widget _adminHeader(date) => Row(
     children: [
       CircleAvatar(
-        backgroundColor: ColorsManager.black, //background image needs to be adjusted
-        radius: 30.h,
+        backgroundColor: ColorsManager.grey,
+        radius: 31.h,
+        child: CircleAvatar(
+          backgroundColor: ColorsManager.white,
+          radius: 30.h,
+          child: const Text('A', style: TextStyle(fontSize: 28, color: ColorsManager.primary),),
+        ),
       ),
       const SizedBox(width: 10,),
-      Text(date),
+      Text(DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse(date))),
     ],
   );
 
-  Widget _receiverHeader(date) => Row(
+  Widget _userHeader(date) => Row(
     mainAxisSize: MainAxisSize.min,
     children: [
-      Text(date),
+      Text(DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse(date))),
       const SizedBox(width: 10,),
       CircleAvatar(
-        backgroundColor: ColorsManager.black, //Background Image needs to be adjusted
-        radius: 30.h,
+        backgroundColor: ColorsManager.grey,
+        radius: 31.h,
+        child: CircleAvatar(
+          backgroundColor: ColorsManager.white,
+          radius: 30.h,
+          child: const Text('U', style: TextStyle(fontSize: 28, color: ColorsManager.primary),),
+        ),
       ),
     ],
   );

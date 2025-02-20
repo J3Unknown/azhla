@@ -15,6 +15,7 @@ class AppConstants {
 
   static const String SPECIAL_REQUEST = MAIN_URL + 'special_request';
   static const String ADD_SPECIAL_REQUEST = MAIN_URL + 'save_special_request';
+  static const String DELETE_SPECIAL_REQUEST = MAIN_URL + 'special_request_changeStatus/4';
 
   static const double FILTER_MAX_PRICE = 10000000; // 10 000 000
   static const double FILTER_MIN_PRICE = 0; // 0
@@ -66,6 +67,7 @@ class AppConstants {
 
 class StringsManager{
   static const String dash = '-';
+  static const String underScore = '_';
   static const String space = ' ';
   static const String colon = ':';
 }
