@@ -53,23 +53,11 @@ class SpecialRequestListServices {
     }
   }
 
-  static Future<bool?> sendSpecialRequest(context,
-  {
-    required int categoryId,
-    required int areaId,
-    required String familyName,
-    required int budget,
-    required String date,
-    required String time,
-    required String description,
-  }) async
-  {
+  static Future<bool?> sendSpecialRequest(context, {required int categoryId, required int areaId, required String familyName, required int budget, required String date, required String time, required String description,}) async {
     var request = MultipartRequest('POST', Uri.parse(AppConstants.ADD_SPECIAL_REQUEST));
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
-    //log("token"+token);
-    // Headers
     Locale locale = await getLocale();
     request.headers.addAll({
       'Authorization': "Bearer $token",
@@ -113,21 +101,21 @@ class SpecialRequestListServices {
     }
   }
 
-  //TODO: Edit Cancel Special Request by checking the headers and parameters
   static Future<bool?> deleteSpecialRequest(context, String id) async {
-    var request = MultipartRequest('POST', Uri.parse('${AppConstants.SPECIAL_REQUEST}?id=$id'));
+    var request = MultipartRequest('POST', Uri.parse('${AppConstants.DELETE_SPECIAL_REQUEST}$id'));
+    log(AppConstants.DELETE_SPECIAL_REQUEST+id.toString());
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    log(AppConstants.SPECIAL_REQUEST);
     Locale locale = await getLocale();
     log(id);
     String token = '';
     if (prefs.containsKey(AppConstants.TOKEN)) {
       token = prefs.getString(AppConstants.TOKEN)!;
     }
-    //log(token);
+   //token = prefs.getString("token")!;
+    log(token);
 
     request.headers.addAll({
-      'Accept':'application/json',
+      //'Accept':'application/json',
       AppConstants.AUTORIZATION:'Bearer $token',
       'Lang':locale.languageCode
     });
@@ -157,27 +145,28 @@ class SpecialRequestListServices {
 
   static Future<SpecialRequestDetails?> sendMessage(context, specialRequestID, content) async{
 
-    var request = MultipartRequest('GET', Uri.parse(AppConstants.SPECIAL_REQUEST));
+    var request = MultipartRequest('POST', Uri.parse(AppConstants.SAVE_SPECIAL_REQUEST_DETAILS));
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    log(AppConstants.SPECIAL_REQUEST);
+    log(AppConstants.SAVE_SPECIAL_REQUEST_DETAILS);
     Locale locale = await getLocale();
 
     String token = '';
     if (prefs.containsKey(AppConstants.TOKEN)) {
       token = prefs.getString(AppConstants.TOKEN)!;
     }
-    //log(token);
+    log(token);
 
     request.headers.addAll({
-      'Accept':'application/json',
+      //'Accept':'application/json',
       AppConstants.AUTORIZATION:'Bearer $token',
       'Lang':locale.languageCode
     });
-
+    log(content);
+    log(specialRequestID.toString());
     request.fields.addAll({
       'type' : 'text',
       'content' : content,
-      'special_request_id' : specialRequestID.toString(),
+      'special_requests_id' : specialRequestID.toString(),
     });
 
     StreamedResponse response = await request.send();

@@ -3,6 +3,7 @@ import 'package:azhlha/favourite_screen/presentation/favorite_screen.dart';
 import 'package:azhlha/my_reservations/presentation/my_reservations.dart';
 import 'package:azhlha/setting_screen/presentation/setting_screen.dart';
 import 'package:azhlha/shared/alerts.dart';
+import 'package:azhlha/utill/app_constants.dart';
 import 'package:azhlha/utill/localization_helper.dart';
 import 'package:azhlha/welcome_screens/presentation/first_welcome_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,9 +22,8 @@ class ButtomNavBarScreen extends StatefulWidget {
   _ButtomNavBarScreenState createState() => _ButtomNavBarScreenState();
 }
 
-class _ButtomNavBarScreenState extends State<ButtomNavBarScreen>  with
-    AutomaticKeepAliveClientMixin<ButtomNavBarScreen>{
-  PersistentTabController _controller  = PersistentTabController(initialIndex: 0);
+class _ButtomNavBarScreenState extends State<ButtomNavBarScreen>  with AutomaticKeepAliveClientMixin<ButtomNavBarScreen>{
+  final PersistentTabController _controller  = PersistentTabController(initialIndex: 0);
 
   String token = '';
 
@@ -36,8 +36,8 @@ class _ButtomNavBarScreenState extends State<ButtomNavBarScreen>  with
   }
   void initawaits() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if(prefs.containsKey("token")) {
-      token = prefs.getString("token")!;
+    if(prefs.containsKey(AppConstants.TOKEN)) {
+      token = prefs.getString(AppConstants.TOKEN)!;
     }
   }
   @override
@@ -48,14 +48,14 @@ class _ButtomNavBarScreenState extends State<ButtomNavBarScreen>  with
       screens: _buildScreens(),
       items: _navBarsItems(),
       confineInSafeArea: true,
-      backgroundColor: Colors.white, // Default is Colors.white.
+      backgroundColor: ColorsManager.white, // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
       resizeToAvoidBottomInset: true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
       stateManagement: true, // Default is true.
       hideNavigationBarWhenKeyboardShows: true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
       decoration: NavBarDecoration(
         borderRadius: BorderRadius.circular(10.0),
-        colorBehindNavBar: Colors.white,
+        colorBehindNavBar: ColorsManager.white,
       ),
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
@@ -74,7 +74,7 @@ class _ButtomNavBarScreenState extends State<ButtomNavBarScreen>  with
   @override
   bool get wantKeepAlive => true; // ** and here
   List<Widget> _buildScreens() {
-    return [
+    return const [
       HomeScreen(),
       MyReservations(),
       BasketScreen(),

@@ -94,7 +94,9 @@ class _SpecialRequestsListState extends State<SpecialRequestsList> {
 
   Widget cardBuilder(context, index, image, requestNo, type, governance, date, status) {
     return InkWell(
-      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SpecialRequestChat(title: requestNo, request: _requestsListModel!, index: index,))),
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => SpecialRequestChat(title: requestNo, request: _requestsListModel!, index: index,)));
+      },
       child: Card(
         borderOnForeground: true,
         margin: const EdgeInsets.symmetric(horizontal: 12),

@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../utill/colors_manager.dart';
 import '../../utill/localization_helper.dart';
 import '../data/cities_object.dart';
 import '../domain/address_service.dart';
@@ -157,7 +158,7 @@ class _AddAddressState extends State<AddAddress> with SingleTickerProviderStateM
         title: Text(
           getTranslated(context, "Address")!,
           style: TextStyle(
-            color: Color.fromRGBO(170, 143, 10, 1),
+            color: ColorsManager.primary,
             fontSize: 22.sp,
             fontWeight: FontWeight.bold,
           ),
@@ -256,13 +257,13 @@ class _AddAddressState extends State<AddAddress> with SingleTickerProviderStateM
                         height: 50.h,
                         width: 0.8.sw,
                         decoration: BoxDecoration(
-                          color: Color.fromRGBO(170, 143, 10, 1),
+                          color: ColorsManager.primary,
                           borderRadius: BorderRadius.circular(10.sp),
                         ),
                         child: Center(
                           child: Text(
                             getTranslated(context, "Save and Continue")!,
-                            style: TextStyle(fontSize: 20.sp, color: Colors.white),
+                            style: TextStyle(fontSize: 20.sp, color: ColorsManager.white),
                           ),
                         ),
                       ),
@@ -293,7 +294,7 @@ class _AddAddressState extends State<AddAddress> with SingleTickerProviderStateM
           width: 0.9.sw,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.sp),
-            border: Border.all(color: Color.fromRGBO(170, 143, 10, 1)),
+            border: Border.all(color: ColorsManager.primary),
           ),
           child: TextFormField(
             controller: controller,
@@ -327,7 +328,7 @@ class _AddAddressState extends State<AddAddress> with SingleTickerProviderStateM
           width: 0.9.sw,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.sp),
-            border: Border.all(color: Color.fromRGBO(170, 143, 10, 1)),
+            border: Border.all(color: ColorsManager.primary),
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton2<CitiesObject>(
@@ -337,21 +338,18 @@ class _AddAddressState extends State<AddAddress> with SingleTickerProviderStateM
                 child: Text(hint),
               ),
               value: value,
-              items: items
-                  .map(
-                    (item) => DropdownMenuItem<CitiesObject>(
-                  value: item,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10.w),
-                    child: Text(item.name!,
-    style:  TextStyle(
-    fontSize: 16.sp,
-    ),
+              items: items.map((item) => DropdownMenuItem<CitiesObject>(
+                value: item,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
+                  child: Text(
+                    item.name!,
+                    style:  TextStyle(
+                    fontSize: 16.sp,
                     ),
                   ),
                 ),
-              )
-                  .toList(),
+              ),).toList(),
               onChanged: onChanged,
               buttonStyleData: const ButtonStyleData(
                 padding: EdgeInsets.symmetric(horizontal: 10),

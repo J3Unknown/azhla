@@ -7,6 +7,7 @@ import 'package:azhlha/utill/assets_manager.dart';
 import 'package:azhlha/utill/colors_manager.dart';
 import 'package:azhlha/utill/localization_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import '../../utill/app_constants.dart';
@@ -33,9 +34,10 @@ class _SpecialRequestChatState extends State<SpecialRequestChat> {
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: true, // Allow the Scaffold to resize
       backgroundColor: ColorsManager.white,
       appBar: AppBar(
         elevation: 1,
@@ -45,32 +47,55 @@ class _SpecialRequestChatState extends State<SpecialRequestChat> {
           onPressed: () => Navigator.of(context).pop(),
           icon: const Icon(IconsManager.backButtonIcon),
         ),
-        title: Text(widget.title, style: const TextStyle(color: ColorsManager.primary),),
+        title: Text(
+          widget.title,
+          style: const TextStyle(color: ColorsManager.primary),
+        ),
         actions: [
           IconButton(
-              onPressed: (){}, //search button action
-              icon: const Icon(IconsManager.searchIcon)
+            onPressed: () {}, // search button action
+            icon: const Icon(IconsManager.searchIcon),
           ),
         ],
       ),
-      body: SafeArea(
-        child: Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-                    reverse: true,
-                    itemBuilder:(context, index) => _fullChatBody(messages[index]),
-                    itemCount: messages.length,
+      body: Column(
+        children: [
+          // Chat Messages List
+          Expanded(
+            child: ListView.builder(
+              //physics: const BouncingScrollPhysics(),
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              itemBuilder: (context, index) => _fullChatBody(messages[index]),
+              itemCount: messages.length,
+            ),
+          ),
+          // Use KeyboardVisibilityBuilder to detect when the keyboard is shown
+          KeyboardVisibilityBuilder(
+            builder: (context, isKeyboardVisible) {
+              return AnimatedPadding(
+                padding: EdgeInsets.only(
+                  bottom: isKeyboardVisible?300:0,
+                ),
+                duration: const Duration(milliseconds: 380),
+                curve: Curves.easeInOut,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _fileDownloadBuilder(() {}),
+                      _chatInputBuilder(),
+                    ],
                   ),
                 ),
-                _fileDownloadBuilder((){}),
-                _chatInputBuilder(),
-              ],
-            )
+              );
+            },
+          ),
+        ],
       ),
     );
   }
+
 
   @override
   void dispose() {
@@ -85,8 +110,8 @@ class _SpecialRequestChatState extends State<SpecialRequestChat> {
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: ColorsManager.primary),
-          borderRadius: BorderRadius.circular(10)
+            borderSide: const BorderSide(color: ColorsManager.primary),
+            borderRadius: BorderRadius.circular(10)
         ),
         hintText: getTranslated(context, KeysManager.typeHere)!,
         hintStyle: const TextStyle(color: Colors.grey),
@@ -117,19 +142,20 @@ class _SpecialRequestChatState extends State<SpecialRequestChat> {
 
   _sendMessage()
   {
-    setState(() {
-      if(_chatController.text.isNotEmpty) {
-        messages.insert(0, SpecialRequestDetails(id: widget.request.result![widget.index].id, role: 'user', content: _chatController.text, createdAt: DateTime.now().toString()));
+    if(_chatController.text.isNotEmpty) {
+      setState(() {
+        messages.insert(messages.length, SpecialRequestDetails(id: widget.request.result![widget.index].id, role: 'user', content: _chatController.text, createdAt: DateTime.now().toString()));
         SpecialRequestListServices.sendMessage(context, widget.request.result![widget.index].id, _chatController.text);
         _chatController.clear();
-      }
-    });
+
+      });
+    }
   }
 
   Widget _fullChatBody(SpecialRequestDetails model) => Padding(
     padding: const EdgeInsets.all(20.0),
     child: Column(
-      crossAxisAlignment: model.role == 'admin admin'? CrossAxisAlignment.start:CrossAxisAlignment.end,
+      crossAxisAlignment: model.role == 'admin'? CrossAxisAlignment.start:CrossAxisAlignment.end,
       children: [
         model.role == 'admin admin'?_adminHeader(model.createdAt):_userHeader(model.createdAt),
         const SizedBox(height: 20,),
@@ -173,15 +199,15 @@ class _SpecialRequestChatState extends State<SpecialRequestChat> {
 
   Widget _chatTextBuilder(text) => Container(
     decoration: BoxDecoration(
-      border: Border.all(color: ColorsManager.grey.withOpacity(0.25)),
-      borderRadius: BorderRadius.circular(10),
-      color: ColorsManager.grey1.withOpacity(0.1)
+        border: Border.all(color: ColorsManager.grey.withOpacity(0.25)),
+        borderRadius: BorderRadius.circular(10),
+        color: ColorsManager.grey1.withOpacity(0.1)
     ),
     width: 0.85.sw,
     padding: const EdgeInsets.all(15),
     child: Align(
-      alignment: Alignment.center,
-      child: Text(text)
+        alignment: Alignment.center,
+        child: Text(text)
     ),
   );
 

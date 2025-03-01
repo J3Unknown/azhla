@@ -89,7 +89,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
               body:
               LoadingOverlay(
               progressIndicator: SpinKitSpinningLines(color: ColorsManager.primary,),
-    color: Color.fromRGBO(254, 222, 0, 0.1),
+    color: ColorsManager.primary0_1Transparency,
     isLoading: isLoading,
     child: isLoading == true
     ? Container():
@@ -102,7 +102,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                         width:0.8.sw,
                         height: 50.h,
                         child: TabBar(
-                          indicatorColor:Color.fromRGBO(175, 147, 92, 1),
+                          indicatorColor:ColorsManager.primary,
                             tabs:
 
                             <Widget>[
@@ -196,7 +196,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                                 width: 220.w,
                                                 child: Row(
                                                   children: [
-                                                    Icon(Icons.location_on_outlined,color: Color.fromRGBO(166, 139, 12, 1),),
+                                                    Icon(Icons.location_on_outlined,color: ColorsManager.primary,),
                                                     SizedBox(width: 5.w,),
                                                     Text(
                                                       favoriteSeller[position].details.toString(),
@@ -234,14 +234,14 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                                                   height: 50.h,
                                                                   width:50.w,
                                                                   decoration: BoxDecoration(
-                                                                    color: Colors.red,
+                                                                    color: ColorsManager.red,
                                                                     borderRadius: BorderRadius.circular(25.sp),
                                                                   ),
                                                                   child:
-                                                                  Center(child: Icon(CupertinoIcons.xmark_circle_fill,color: Colors.white,size: 30.sp,),)
+                                                                  Center(child: Icon(CupertinoIcons.xmark_circle_fill,color: ColorsManager.white,size: 30.sp,),)
                                                               ),
                                                               SizedBox(height: 20.h,),
-                                                              Text(getTranslated(context, "delete Seller favourite")!,style: TextStyle(color: Colors.red,fontSize: 20.sp),),
+                                                              Text(getTranslated(context, "delete Seller favourite")!,style: TextStyle(color: ColorsManager.red,fontSize: 20.sp),),
                                                               SizedBox(height: 20.h,),
                                                               Center(
                                                                 child: InkWell(
@@ -255,7 +255,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                                                           color: ColorsManager.primary,
                                                                         )
                                                                     ),
-                                                                    child: Center(child: Text(getTranslated(context, "Confirm")!,style: TextStyle(color: Colors.white),)),
+                                                                    child: Center(child: Text(getTranslated(context, "Confirm")!,style: TextStyle(color: ColorsManager.white),)),
                                                                   ),
                                                                   onTap: (){
                                                                     FavoriteService.deleteFromFavoritesSeller(context,favoriteSeller[position].id.toString()).then((value){
@@ -344,7 +344,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                     width: 0.9.sw,
                                     height: 120.h,
                                     decoration: BoxDecoration(
-                                      color: Colors.white,
+                                      color: ColorsManager.white,
                                       borderRadius: BorderRadius.circular(20.sp),
                                       boxShadow:[
                                         BoxShadow(
@@ -385,7 +385,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
 
                                               Text(
                                                 favorites[position].title.toString(),
-                                                style: TextStyle(fontSize: 12.0,color: Colors.grey),
+                                                style: TextStyle(fontSize: 12.0,color: ColorsManager.grey1),
                                               ),
                                               SizedBox(height: 5.h,),
 

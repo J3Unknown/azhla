@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:azhlha/address_screen/presentation/add_address.dart';
 import 'package:azhlha/payment_screen/presentation/payment_screen.dart';
 import 'package:azhlha/profile_screen/data/profile_object.dart';
+import 'package:azhlha/utill/colors_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -45,7 +46,7 @@ class _AddressScreenState extends State<AddressScreen> {
           Navigator.pop(context);
         },
         ),
-        title:  Text(getTranslated(context, "Address")!,style: TextStyle(color: Color.fromRGBO(170, 143, 10, 1),fontSize: 22.sp,fontWeight: FontWeight.bold),),
+        title:  Text(getTranslated(context, "Address")!,style: TextStyle(color: ColorsManager.primary,fontSize: 22.sp,fontWeight: FontWeight.bold),),
         centerTitle: true,
       ),
       body: Column(
@@ -61,7 +62,7 @@ class _AddressScreenState extends State<AddressScreen> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.sp),
                   border: Border.all(
-                    color: Color.fromRGBO(193, 193, 193, 1)
+                    color: ColorsManager.grey1
                   )
                 ),
                 child: Row(
@@ -81,7 +82,7 @@ class _AddressScreenState extends State<AddressScreen> {
           ),
           SizedBox(height: 10.h,),
           Container(
-            height: 0.5.sh,
+            height: 0.6.sh,
             width: 0.9.sw,
             child: ListView.builder(
             shrinkWrap: true,
@@ -97,75 +98,79 @@ class _AddressScreenState extends State<AddressScreen> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20.sp),
                     border: Border.all(
-                      color: Color.fromRGBO(170, 143, 10, 1)
+                      color: ColorsManager.primary
                     )
                   ),
                   child: Row(
 
                     children: <Widget>[
 
-                      Container(
-                          height: 150.h,
-                          width: 250.w,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Icon(Icons.location_on_outlined,size: 20.sp,),
-                                  SizedBox(width: 5.w,),
-                                  Text("Address ${position+1}",style: TextStyle(fontSize: 20.sp,fontWeight: FontWeight.bold),),
-                                ],
-                              ),
-                              SizedBox(height: 10.h,),
-                              Row(
-                                children: [
-                                  SizedBox(width: 10.w,),
-                                  Text(name,style: TextStyle(color: Colors.black87,fontSize: 20.sp),),
-                                ],
-                              ),
-                              SizedBox(height: 10.h,),
-                              Row(
-                                children: [
-                                  SizedBox(width: 10.w,),
-                                  Text(phone,style: TextStyle(color: Colors.black87,fontSize: 20.sp),),
-                                ],
-                              ),
-                              SizedBox(height: 10.h,),
-                              Row(
-                                children: [
-                                  SizedBox(width: 10.w,),
-                                  Text((address[position].floorNo == null||address[position].floorNo!.isEmpty )?"":(address[position].floorNo!+" - "+address[position].buildingNo!),style: TextStyle(fontSize: 20.sp,color: Colors.grey),),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  SizedBox(width: 10.w,),
-                                  Text((address[position].blockNo!+" - "+address[position].region!.name!),style: TextStyle(fontSize: 20.sp,color: Colors.grey),),
-                                ],
-                              ),
-                            ],
-                          )),
+                      ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width - MediaQuery.of(context).size.width/2.5,
+                          maxHeight: MediaQuery.of(context).size.width,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(Icons.location_on_outlined,size: 20.sp,),
+                                SizedBox(width: 5.w,),
+                                Text("Address ${position+1}",style: TextStyle(fontSize: 20.sp,fontWeight: FontWeight.bold),),
+                              ],
+                            ),
+                            SizedBox(height: 10.h,),
+                            Row(
+                              children: [
+                                SizedBox(width: 10.w,),
+                                Text(name,style: TextStyle(color: Colors.black87,fontSize: 20.sp),),
+                              ],
+                            ),
+                            SizedBox(height: 10.h,),
+                            Row(
+                              children: [
+                                SizedBox(width: 10.w,),
+                                Text(phone,style: TextStyle(color: Colors.black87,fontSize: 20.sp),),
+                              ],
+                            ),
+                            SizedBox(height: 10.h,),
+                            Row(
+                              children: [
+                                SizedBox(width: 10.w,),
+                                Text((address[position].floorNo == null||address[position].floorNo!.isEmpty )?"":(address[position].floorNo!+" - "+address[position].buildingNo!),style: TextStyle(fontSize: 20.sp,color: Colors.grey),),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                SizedBox(width: 10.w,),
+                                Text((address[position].blockNo!+" - "+address[position].region!.name!),style: TextStyle(fontSize: 20.sp,color: Colors.grey),),
+                              ],
+                            ),
+                          ],
+                        )
+                      ),
 
-                      SizedBox(width: 50.w,),
+                      //SizedBox(width: 50.w,),
+                      const Spacer(),
                       Transform.scale(
-                    scale: 1.5,
-                     child: Radio(
-                        activeColor: Color.fromRGBO(170, 143, 10, 1),
-                        value: position,
-                        groupValue: _radioValue,
-                          onChanged: (value){
-                          setState(() {
-                            _radioValue = value!;
-                            id =address[position].id.toString();
-                            log(id);
-                          });
-
+                        scale: 1.5,
+                        child: Radio(
+                          activeColor: ColorsManager.primary,
+                          value: position,
+                          groupValue: _radioValue,
+                            onChanged: (value){
+                            setState(() {
+                              _radioValue = value!;
+                              id =address[position].id.toString();
+                              log(id);
+                            });
                           },
-                      )),
-
+                        )
+                      ),
                     ],
                   ),
                 ),
@@ -174,17 +179,17 @@ class _AddressScreenState extends State<AddressScreen> {
             ),
 
           ),
-          SizedBox(height: 40.h,),
+          SizedBox(height: 10.h,),
           Center(
             child: InkWell(
               child: Container(
                 height: 50.h,
                 width: 0.8.sw,
                 decoration: BoxDecoration(
-                    color: Color.fromRGBO(170, 143, 10, 1),
+                    color: ColorsManager.primary,
                     borderRadius: BorderRadius.circular(10.sp),
                     border: Border.all(
-                      color: Color.fromRGBO(170, 143, 10, 1),
+                      color: ColorsManager.primary,
                     )
                 ),
                 child: Center(child: Text(getTranslated(context, "Next")!,style: TextStyle(fontSize: 20.sp,color: Colors.white),)),
@@ -195,7 +200,7 @@ class _AddressScreenState extends State<AddressScreen> {
               },
             ),
           ),
-          SizedBox(height: 30.h,),
+          SizedBox(height: 10.h,),
         ],
       ),
     );

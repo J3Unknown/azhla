@@ -163,7 +163,7 @@ showToastReminder(BuildContext context, String msg){
             SizedBox(
               height: 10.h,
             ),
-            Center(child: Text(msg,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22.sp),)),
+            Center(child: Text(msg,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22.sp), textAlign: TextAlign.center,)),
             SizedBox(
               height: 15.h,
             ),
@@ -177,11 +177,12 @@ showToastReminder(BuildContext context, String msg){
                     borderRadius: BorderRadius.circular(20.sp)
                 ),
                 child: TextButton(
-                  child: Text(getTranslated(context, KeysManager.close)!,style: TextStyle(color: ColorsManager.white),),
+                  child: Text(getTranslated(context, KeysManager.close)!,style: const TextStyle(color: ColorsManager.white),),
                   onPressed : () {
-                    Navigator.pop(context);
-                    //Navigator.of(context, rootNavigator: true).pop('dialog');
-                    //Navigator.of(context, rootNavigator: true).pop('dialog');
+                    Navigator.of(context, rootNavigator: true).pop('dialog');
+                    if (Navigator.canPop(context)) {
+                      Navigator.pop(context);
+                    }
                   },
                 ),
               ),
