@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../utill/app_constants.dart';
+import '../../utill/colors_manager.dart';
 import '../../utill/localization_helper.dart';
 import '../data/EventReminderObject.dart';
 import '../domain/events_service.dart';
@@ -36,7 +37,7 @@ class _EventRemindersState extends State<EventReminders> {
             Navigator.pop(context);
           },
         ),
-        title:  Text(getTranslated(context, "Event Reminders")!,style: TextStyle(color: Color.fromRGBO(170, 143, 10, 1),fontSize: 22.sp,fontWeight: FontWeight.bold),),
+        title:  Text(getTranslated(context, "Event Reminders")!,style: TextStyle(color: ColorsManager.primary,fontSize: 22.sp,fontWeight: FontWeight.bold),),
         centerTitle: true,
       ),
       body: Column(
@@ -74,7 +75,7 @@ class _EventRemindersState extends State<EventReminders> {
                       height: 150.h,
                       decoration: BoxDecoration(
                         border: Border.all(
-                            color: Color.fromRGBO(170, 143, 10, 1)
+                            color: ColorsManager.primary
                         ),
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20.sp),
@@ -131,7 +132,7 @@ class _EventRemindersState extends State<EventReminders> {
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Icon(CupertinoIcons.location_solid,size: 15.sp,color: Color.fromRGBO(166, 139, 12, 1),),
+                                    Icon(CupertinoIcons.location_solid,size: 15.sp,color: ColorsManager.primary,),
                                     Text(
                                       events[position]!.address!,
                                       style: TextStyle(fontSize: 15.0),
@@ -197,10 +198,10 @@ class _EventRemindersState extends State<EventReminders> {
                                                   height: 50.h,
                                                   width: 0.4.sw,
                                                   decoration: BoxDecoration(
-                                                      color: Color.fromRGBO(170, 143, 10, 1),
+                                                      color: ColorsManager.primary,
                                                       borderRadius: BorderRadius.circular(10.sp),
                                                       border: Border.all(
-                                                        color: Color.fromRGBO(170, 143, 10, 1),
+                                                        color: ColorsManager.primary,
                                                       )
                                                   ),
                                                   child: Center(child: Text(getTranslated(context, "Confirm")!,style: TextStyle(color: Colors.white),)),
@@ -228,7 +229,7 @@ class _EventRemindersState extends State<EventReminders> {
                                                   decoration: BoxDecoration(
                                                       borderRadius: BorderRadius.circular(10.sp),
                                                       border: Border.all(
-                                                        color: Color.fromRGBO(170, 143, 10, 1),
+                                                        color: ColorsManager.primary,
                                                       )
                                                   ),
                                                   child: Center(child: Text(getTranslated(context, "Cancel")!)),

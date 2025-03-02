@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:azhlha/profile_screen/presentation/profile_screen.dart';
+import 'package:azhlha/utill/colors_manager.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +57,7 @@ class _AddAddressProfileState extends State<AddAddressProfile> {
         title: Text(
           getTranslated(context, "Address")!,
           style: TextStyle(
-              color: Color.fromRGBO(170, 143, 10, 1),
+              color: ColorsManager.primary,
               fontSize: 22.sp,
               fontWeight: FontWeight.bold),
         ),
@@ -86,7 +87,7 @@ class _AddAddressProfileState extends State<AddAddressProfile> {
                 width: 0.9.sw,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.sp),
-                    border: Border.all(color: Color.fromRGBO(170, 143, 10, 1))),
+                    border: Border.all(color: ColorsManager.primary)),
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton2<CitiesObject>(
                     isExpanded: true,
@@ -140,7 +141,7 @@ class _AddAddressProfileState extends State<AddAddressProfile> {
                 width: 0.9.sw,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.sp),
-                    border: Border.all(color: Color.fromRGBO(170, 143, 10, 1))),
+                    border: Border.all(color: ColorsManager.primary)),
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton2<CitiesObject>(
                     isExpanded: true,
@@ -198,7 +199,7 @@ class _AddAddressProfileState extends State<AddAddressProfile> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.sp),
                                 border: Border.all(
-                                    color: Color.fromRGBO(170, 143, 10, 1)
+                                    color: ColorsManager.primary
                                 )
                             ),
                             child: TextFormField(
@@ -227,7 +228,7 @@ class _AddAddressProfileState extends State<AddAddressProfile> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.sp),
                                 border: Border.all(
-                                    color: Color.fromRGBO(170, 143, 10, 1)
+                                    color: ColorsManager.primary
                                 )
                             ),
                             child: TextFormField(
@@ -259,7 +260,7 @@ class _AddAddressProfileState extends State<AddAddressProfile> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10.sp),
                                     border: Border.all(
-                                        color: Color.fromRGBO(170, 143, 10, 1)
+                                        color: ColorsManager.primary
                                     )
                                 ),
                                 child: TextFormField(
@@ -288,7 +289,7 @@ class _AddAddressProfileState extends State<AddAddressProfile> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10.sp),
                                     border: Border.all(
-                                        color: Color.fromRGBO(170, 143, 10, 1)
+                                        color: ColorsManager.primary
                                     )
                                 ),
                                 child: TextFormField(
@@ -319,7 +320,7 @@ class _AddAddressProfileState extends State<AddAddressProfile> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.sp),
                                 border: Border.all(
-                                    color: Color.fromRGBO(170, 143, 10, 1)
+                                    color: ColorsManager.primary
                                 )
                             ),
                             child: TextFormField(
@@ -345,10 +346,10 @@ class _AddAddressProfileState extends State<AddAddressProfile> {
                   height: 50.h,
                   width: 0.8.sw,
                   decoration: BoxDecoration(
-                      color: Color.fromRGBO(170, 143, 10, 1),
+                      color: ColorsManager.primary,
                       borderRadius: BorderRadius.circular(10.sp),
                       border: Border.all(
-                        color: Color.fromRGBO(170, 143, 10, 1),
+                        color: ColorsManager.primary,
                       )
                   ),
                   child: Center(child: Text(getTranslated(context, "Submit")!,style: TextStyle(fontSize: 20.sp,color: Colors.white),)),

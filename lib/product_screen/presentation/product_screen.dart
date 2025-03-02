@@ -19,6 +19,7 @@ import 'package:wc_flutter_share/wc_flutter_share.dart';
 import '../../basket_screen/domain/basket_service.dart';
 import '../../shared/alerts.dart';
 import '../../stores_screen/domain/stores_service.dart';
+import '../../utill/colors_manager.dart';
 import '../data/product_object.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -57,7 +58,7 @@ class _ProductScreenState extends State<ProductScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         leading: InkWell(child:Icon(CupertinoIcons.back),onTap: (){Navigator.pop(context);},),
-        title:  Text(widget.catName,style: TextStyle(color: Color.fromRGBO(170, 143, 10, 1),fontSize: 22.sp,fontWeight: FontWeight.bold),),
+        title:  Text(widget.catName,style: TextStyle(color: ColorsManager.primary,fontSize: 22.sp,fontWeight: FontWeight.bold),),
         centerTitle: true,
         actions: [InkWell(child:Icon(Icons.share),
           onTap: () async{
@@ -72,9 +73,9 @@ class _ProductScreenState extends State<ProductScreen> {
       body:
     LoadingOverlay(
           progressIndicator: SpinKitSpinningLines(
-          color: Color.fromRGBO(254, 222, 0, 1),
+          color: ColorsManager.primary,
           ),
-          color: Color.fromRGBO(254, 222, 0, 0.1),
+          color: ColorsManager.primary0_1Transparency,
           isLoading: isLoading,
           child: isLoading == true
           ? Container()
@@ -98,7 +99,7 @@ class _ProductScreenState extends State<ProductScreen> {
                               decoration: BoxDecoration(
 
                                 border: Border.all(
-                                  color: Color.fromRGBO(170, 143, 10, 1),
+                                  color: ColorsManager.primary,
                                 ),
                                   //color: Colors.black87,
                                   image: DecorationImage(
@@ -122,7 +123,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(25.sp)
                                 ),
-                                child: Center(child: (favourite == 1)?Icon(CupertinoIcons.heart_solid ,size: 30.sp,color:Colors.red):Icon(CupertinoIcons.heart ,size: 30.sp,color: Color.fromRGBO(170, 143, 10, 1)))),
+                                child: Center(child: (favourite == 1)?Icon(CupertinoIcons.heart_solid ,size: 30.sp,color:Colors.red):Icon(CupertinoIcons.heart ,size: 30.sp,color: ColorsManager.primary))),
                             onTap: ()async{
                               log("here from fav");
                               SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -183,7 +184,7 @@ class _ProductScreenState extends State<ProductScreen> {
               activeIndex: index,
               count: productDetails.images!.length,
               effect: SlideEffect(
-                  activeDotColor: Color.fromRGBO(170, 143, 10, 1),
+                  activeDotColor: ColorsManager.primary,
                   dotWidth:25.w,
                   dotHeight:5.h
               ),
@@ -197,7 +198,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 borderRadius: BorderRadius.circular(20.sp),
                 boxShadow: [
                   BoxShadow(
-                    color: Color.fromRGBO(170, 143, 10, 1),
+                    color: ColorsManager.primary,
                     offset: Offset(0.0, 1.0),
                     blurRadius: 5,
                 )]
@@ -313,10 +314,10 @@ class _ProductScreenState extends State<ProductScreen> {
                   height: 50.h,
                   width: 0.8.sw,
                   decoration: BoxDecoration(
-                      color: Color.fromRGBO(170, 143, 10, 1),
+                      color: ColorsManager.primary,
                       borderRadius: BorderRadius.circular(10.sp),
                       border: Border.all(
-                        color: Color.fromRGBO(170, 143, 10, 1),
+                        color: ColorsManager.primary,
                       )
                   ),
                   child: Center(child: Text( getTranslated(context, "Purchase")!,style: TextStyle(fontSize: 20.sp,color: Colors.white),)),

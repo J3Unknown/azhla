@@ -76,7 +76,7 @@ class _AddSpecialRequestState extends State<AddSpecialRequest> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.sp),
                       border: Border.all(
-                          color: ColorsManager.grey1
+                          color: ColorsManager.primary
                       )
                   ),
                   child: DropdownButtonHideUnderline(
@@ -132,7 +132,7 @@ class _AddSpecialRequestState extends State<AddSpecialRequest> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.sp),
                       border: Border.all(
-                          color: ColorsManager.grey1
+                          color: ColorsManager.primary
                       )
                   ),
                   child: DropdownButtonHideUnderline(
@@ -184,7 +184,7 @@ class _AddSpecialRequestState extends State<AddSpecialRequest> {
                   width: 0.9.sw,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.sp),
-                    border: Border.all(color: ColorsManager.grey1)
+                    border: Border.all(color: ColorsManager.primary)
                   ),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton2<CitiesObject>(
@@ -236,7 +236,7 @@ class _AddSpecialRequestState extends State<AddSpecialRequest> {
                   width: 0.98.sw,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.sp),
-                    border: Border.all(color: ColorsManager.grey1)
+                    border: Border.all(color: ColorsManager.primary)
                   ),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton2<EventsObject>(
@@ -293,7 +293,7 @@ class _AddSpecialRequestState extends State<AddSpecialRequest> {
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: ColorsManager.grey1)
+                    borderSide: const BorderSide(color: ColorsManager.primary)
                   ),
                   hintText: getTranslated(context, KeysManager.typeHere)!,
                   hintStyle: const TextStyle(color: Colors.grey),
@@ -311,7 +311,7 @@ class _AddSpecialRequestState extends State<AddSpecialRequest> {
                     child: TextFormField(
                       validator: RequiredValidator(errorText: getTranslated(context, KeysManager.requiredFieldMessage)!),
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(
+                        enabledBorder: OutlineInputBorder(
                           borderSide: const BorderSide(color: ColorsManager.primary),
                           borderRadius: BorderRadius.circular(10)
                         ),
@@ -348,7 +348,7 @@ class _AddSpecialRequestState extends State<AddSpecialRequest> {
                           errorText:
                           getTranslated(context, KeysManager.requiredFieldMessage)!),
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(
+                        enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(color: ColorsManager.primary),
                             borderRadius: BorderRadius.circular(10)
                         ),
@@ -393,7 +393,7 @@ class _AddSpecialRequestState extends State<AddSpecialRequest> {
                   hintStyle: const TextStyle(color: Colors.grey),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: ColorsManager.grey1)
+                    borderSide: const BorderSide(color: ColorsManager.primary)
                   ),
                 ),
                 style: const TextStyle(color: ColorsManager.black),

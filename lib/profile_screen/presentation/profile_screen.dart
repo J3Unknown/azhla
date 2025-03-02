@@ -12,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../buttom_nav_bar/presentation/buttom_nav_screen.dart';
 import '../../utill/app_constants.dart';
+import '../../utill/colors_manager.dart';
 import '../../utill/localization_helper.dart';
 import '../domain/profile_service.dart';
 
@@ -48,7 +49,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Navigator.pop(context);
         },
         ),
-        title:  Text(getTranslated(context, "Profile")!,style: TextStyle(color: Color.fromRGBO(170, 143, 10, 1),fontSize: 22.sp,fontWeight: FontWeight.bold),),
+        title:  Text(getTranslated(context, "Profile")!,style: TextStyle(color: ColorsManager.primary,fontSize: 22.sp,fontWeight: FontWeight.bold),),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -104,7 +105,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.sp),
                       border: Border.all(
-                          color: Color.fromRGBO(170, 143, 10, 1)
+                          color: ColorsManager.primary
                       )
                   ),
                   child: TextFormField(
@@ -131,7 +132,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.sp),
                       border: Border.all(
-                          color: Color.fromRGBO(170, 143, 10, 1)
+                          color: ColorsManager.primary
                       )
                   ),
                   child: TextFormField(
@@ -160,7 +161,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.sp),
                       border: Border.all(
-                          color: Color.fromRGBO(170, 143, 10, 1)
+                          color: ColorsManager.primary
                       )
                   ),
                   child: TextFormField(
@@ -184,10 +185,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   height: 50.h,
                   width: 0.8.sw,
                   decoration: BoxDecoration(
-                      color: Color.fromRGBO(170, 143, 10, 1),
+                      color: ColorsManager.primary,
                       borderRadius: BorderRadius.circular(10.sp),
                       border: Border.all(
-                        color: Color.fromRGBO(170, 143, 10, 1),
+                        color: ColorsManager.primary,
                       )
                   ),
                   child: Center(child: Text(getTranslated(context, "Update")!,style: TextStyle(color: Colors.white,fontSize: 22.sp,fontWeight: FontWeight.bold),)),
@@ -206,7 +207,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.sp),
                       border: Border.all(
-                        color: Color.fromRGBO(170, 143, 10, 1),
+                        color: ColorsManager.primary,
                       )
                   ),
                   child: Center(child: Text(getTranslated(context, "Add New Address")!)),
@@ -264,10 +265,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 height: 50.h,
                                 width: 0.4.sw,
                                 decoration: BoxDecoration(
-                                    color: Color.fromRGBO(170, 143, 10, 1),
+                                    color: ColorsManager.primary,
                                     borderRadius: BorderRadius.circular(10.sp),
                                     border: Border.all(
-                                      color: Color.fromRGBO(170, 143, 10, 1),
+                                      color: ColorsManager.primary,
                                     )
                                 ),
                                 child: Center(child: Text(getTranslated(context, "Confirm")!,style: TextStyle(color: Colors.white),)),
@@ -287,7 +288,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10.sp),
                                     border: Border.all(
-                                      color: Color.fromRGBO(170, 143, 10, 1),
+                                      color: ColorsManager.primary,
                                     )
                                 ),
                                 child: Center(child: Text(getTranslated(context, "Cancel")!)),

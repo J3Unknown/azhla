@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 5.h,
 
             decoration: BoxDecoration(
-                color: Color.fromRGBO(170, 143, 10, 1),
+                color: ColorsManager.primary,
               image: DecorationImage(
                 image: AssetImage("assets/image/all.png"),
                 fit: BoxFit.cover

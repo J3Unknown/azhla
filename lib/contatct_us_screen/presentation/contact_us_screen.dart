@@ -60,7 +60,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
             progressIndicator: SpinKitSpinningLines(
               color: ColorsManager.primary,
             ),
-            color: Color.fromRGBO(254, 222, 0, 0.1),
+            color: ColorsManager.primary0_1Transparency,
             isLoading: isLoading,
             child: isLoading == true
                 ? Container():SingleChildScrollView(

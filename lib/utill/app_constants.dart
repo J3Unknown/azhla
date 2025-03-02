@@ -4,7 +4,7 @@ class AppConstants {
   //static const String MAIN_URL = "https://etmaaen.com/azhalha/api/"; // 'http://127.0.0.1:8000/api/'; // For Real Devices => run in terminal -> adb reverse tcp:8000 tcp:8000
   //static const String MAIN_URL = "https://ezhalhakw.com/ezhalha/api/"; // 'http://127.0.0.1:8000/api/'; // For Real Devices => run in terminal -> adb reverse tcp:8000 tcp:8000
   static const String MAIN_URL = "https://ezhalhakw.com/mogeeb/api/"; // 'http://127.0.0.1:8000/api/'; // For Real Devices => run in terminal -> adb reverse tcp:8000 tcp:8000
-  static const String MAIN_URL_IMAGE = "https://ezhalhakw.com/ezhalha/";
+  static const String MAIN_URL_IMAGE = "https://ezhalhakw.com/mogeeb/";
   //static const String MAIN_URL = ''; // For Emulator
 
   static const String GET_ALL_ADS = 'https://omar.tqnia.me/onstore2/';

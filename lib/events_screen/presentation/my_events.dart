@@ -19,6 +19,7 @@ import '../../product_screen/presentation/product_screen.dart';
 import '../../shared/alerts.dart';
 import '../../stores_screen/presentation/stores_screen.dart';
 import '../../utill/app_constants.dart';
+import '../../utill/colors_manager.dart';
 
 class MyEvents extends StatefulWidget {
   const MyEvents({Key? key}) : super(key: key);
@@ -69,7 +70,7 @@ class _MyEventsState extends State<MyEvents> {
               title: Text(
                 getTranslated(context, "My EVents")!,
                 style: TextStyle(
-                    color: Color.fromRGBO(170, 143, 10, 1),
+                    color: ColorsManager.primary,
                     fontSize: 22.sp,
                     fontWeight: FontWeight.bold),
               ),
@@ -96,9 +97,9 @@ class _MyEventsState extends State<MyEvents> {
             ),
             body:   LoadingOverlay(
                 progressIndicator: SpinKitSpinningLines(
-                  color: Color.fromRGBO(254, 222, 0, 1),
+                  color: ColorsManager.primary,
                 ),
-                color: Color.fromRGBO(254, 222, 0, 0.1),
+                color: ColorsManager.primary0_1Transparency,
                 isLoading: isLoading,
                 child: isLoading == true
                     ? Container()
@@ -111,7 +112,7 @@ class _MyEventsState extends State<MyEvents> {
                       width: 0.99.sw,
                       height: 50.h,
                       child: TabBar(
-                          indicatorColor: Color.fromRGBO(175, 147, 92, 1),
+                          indicatorColor: ColorsManager.primary,
                           tabs: <Widget>[
                             Center(
                               child: Container(
@@ -176,7 +177,7 @@ class _MyEventsState extends State<MyEvents> {
                                     borderRadius: BorderRadius.circular(20.sp),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Color.fromRGBO(170, 143, 10, 1),
+                                        color: ColorsManager.primary,
                                         offset: Offset(0.0, 1.0),
                                         blurRadius: 5,
                                       ),
@@ -203,9 +204,7 @@ class _MyEventsState extends State<MyEvents> {
                                                       .approved![position]
                                                       .image!),
                                             ),
-                                            border: Border.all(
-                                                color: Color.fromRGBO(
-                                                    170, 143, 10, 1))),
+                                            border: Border.all(color: ColorsManager.primary)),
                                       ),
                                       SizedBox(
                                         width: 30.w,
@@ -246,8 +245,7 @@ class _MyEventsState extends State<MyEvents> {
                                               children: [
                                                 Icon(
                                                   Icons.location_on_outlined,
-                                                  color: Color.fromRGBO(
-                                                      166, 139, 12, 1),
+                                                  color: ColorsManager.primary,
                                                   size: 20.sp,
                                                 ),
                                                 SizedBox(
@@ -382,10 +380,10 @@ class _MyEventsState extends State<MyEvents> {
                                                                   width:
                                                                   0.4.sw,
                                                                   decoration: BoxDecoration(
-                                                                      color: Color.fromRGBO(170, 143, 10, 1),
+                                                                      color: ColorsManager.primary,
                                                                       borderRadius: BorderRadius.circular(10.sp),
                                                                       border: Border.all(
-                                                                        color: Color.fromRGBO(170, 143, 10, 1),
+                                                                        color: ColorsManager.primary,
                                                                       )),
                                                                   child: Center(
                                                                       child: Text(
@@ -428,7 +426,7 @@ class _MyEventsState extends State<MyEvents> {
                                                                   decoration: BoxDecoration(
                                                                       borderRadius: BorderRadius.circular(10.sp),
                                                                       border: Border.all(
-                                                                        color: Color.fromRGBO(170, 143, 10, 1),
+                                                                        color: ColorsManager.primary,
                                                                       )),
                                                                   child:
                                                                   Center(child: Text(getTranslated(context, "Cancel")!)),
@@ -461,7 +459,7 @@ class _MyEventsState extends State<MyEvents> {
                                             ),
                                             onTap: (){
                                               Navigator.push(context, MaterialPageRoute(
-                                                  builder: (BuildContext context) => EditEventPage(underReview:  myEventDTOs.approved![position]!)));
+                                                  builder: (BuildContext context) => EditEventPage(underReview:  myEventDTOs.approved![position])));
                                             },
                                           )
 // SizedBox(height: 50.h,),
@@ -513,7 +511,7 @@ class _MyEventsState extends State<MyEvents> {
                                     borderRadius: BorderRadius.circular(20.sp),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Color.fromRGBO(170, 143, 10, 1),
+                                        color: ColorsManager.primary,
                                         offset: Offset(0.0, 1.0),
                                         blurRadius: 5,
                                       ),
@@ -534,19 +532,16 @@ class _MyEventsState extends State<MyEvents> {
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(30.sp)),
                                             image: DecorationImage(
-                                              image: NetworkImage(AppConstants
-                                                      .MAIN_URL_IMAGE +
-                                                  myEventDTOs
-                                                      .underReview![position]
-                                                      .image!),
+                                              image: NetworkImage(
+                                                  AppConstants.MAIN_URL_IMAGE +
+                                                  myEventDTOs.underReview![position].image!
+                                              ),
+                                              fit: BoxFit.cover
                                             ),
                                             border: Border.all(
-                                                color: Color.fromRGBO(
-                                                    170, 143, 10, 1))),
+                                                color: ColorsManager.primary)),
                                       ),
-                                      SizedBox(
-                                        width: 30.w,
-                                      ),
+                                      Spacer(),
                                       Container(
                                         height: 120.h,
                                         width: 0.55.sw,
@@ -557,8 +552,7 @@ class _MyEventsState extends State<MyEvents> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              myEventDTOs
-                                                  .underReview![position].name
+                                              myEventDTOs.underReview![position].name
                                                   .toString(),
                                               style: TextStyle(
                                                   fontSize: 24.sp,
@@ -583,8 +577,7 @@ class _MyEventsState extends State<MyEvents> {
                                               children: [
                                                 Icon(
                                                   Icons.location_on_outlined,
-                                                  color: Color.fromRGBO(
-                                                      166, 139, 12, 1),
+                                                  color: ColorsManager.primary,
                                                   size: 20.sp,
                                                 ),
                                                 SizedBox(
@@ -634,9 +627,7 @@ class _MyEventsState extends State<MyEvents> {
                                                           13, 24, 99, 1)
                                                       ),
                                                 ),
-                                                SizedBox(
-                                                  width: 30.w,
-                                                ),
+                                                Spacer(),
                                               ],
                                             ),
                                           ],
@@ -719,10 +710,10 @@ class _MyEventsState extends State<MyEvents> {
                                                                           width:
                                                                               0.4.sw,
                                                                           decoration: BoxDecoration(
-                                                                              color: Color.fromRGBO(170, 143, 10, 1),
+                                                                              color: ColorsManager.primary,
                                                                               borderRadius: BorderRadius.circular(10.sp),
                                                                               border: Border.all(
-                                                                                color: Color.fromRGBO(170, 143, 10, 1),
+                                                                                color: ColorsManager.primary,
                                                                               )),
                                                                           child: Center(
                                                                               child: Text(
@@ -765,7 +756,7 @@ class _MyEventsState extends State<MyEvents> {
                                                                           decoration: BoxDecoration(
                                                                               borderRadius: BorderRadius.circular(10.sp),
                                                                               border: Border.all(
-                                                                                color: Color.fromRGBO(170, 143, 10, 1),
+                                                                                color: ColorsManager.primary,
                                                                               )),
                                                                           child:
                                                                               Center(child: Text(getTranslated(context, "Cancel")!)),
@@ -797,27 +788,26 @@ class _MyEventsState extends State<MyEvents> {
                                               ),
                                             ),
                                             onTap: (){
-                                              Navigator.push(context, MaterialPageRoute(
-                                                  builder: (BuildContext context) => EditEventPage(underReview:  myEventDTOs.underReview![position]!)));
+                                              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => EditEventPage(underReview:  myEventDTOs.underReview![position])));
                                             },
                                           )
-// SizedBox(height: 50.h,),
-// Container(
-//     height: 25.h,
-//     width:25.w,
-//     decoration: BoxDecoration(
-//       color: Colors.white,
-//       borderRadius: BorderRadius.circular(15.sp),
-//       boxShadow:[
-//         BoxShadow(
-//           color: Colors.grey.withOpacity(0.5),
-//           blurRadius: 2,
-//         ),
-//       ],
-//     ),
-//     child:
-//     Center(child: Icon(CupertinoIcons.forward,color: Colors.black87,size: 25.sp,))
-// ),
+                                      // SizedBox(height: 50.h,),
+                                      // Container(
+                                      //     height: 25.h,
+                                      //     width:25.w,
+                                      //     decoration: BoxDecoration(
+                                      //       color: Colors.white,
+                                      //       borderRadius: BorderRadius.circular(15.sp),
+                                      //       boxShadow:[
+                                      //         BoxShadow(
+                                      //           color: Colors.grey.withOpacity(0.5),
+                                      //           blurRadius: 2,
+                                      //         ),
+                                      //       ],
+                                      //     ),
+                                      //     child:
+                                      //     Center(child: Icon(CupertinoIcons.forward,color: Colors.black87,size: 25.sp,))
+                                      // ),
                                         ],
                                       ),
                                       SizedBox(
@@ -832,7 +822,7 @@ class _MyEventsState extends State<MyEvents> {
                           },
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         height: 0.35.sh,
                         width: 1.sw,
                         child: ListView.builder(
@@ -848,9 +838,9 @@ class _MyEventsState extends State<MyEvents> {
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(20.sp),
-                                    boxShadow: [
+                                    boxShadow: const [
                                       BoxShadow(
-                                        color: Color.fromRGBO(170, 143, 10, 1),
+                                        color: ColorsManager.primary,
                                         offset: Offset(0.0, 1.0),
                                         blurRadius: 5,
                                       ),
@@ -868,18 +858,17 @@ class _MyEventsState extends State<MyEvents> {
                                         height: 50.h,
                                         width: 50.w,
                                         decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(30.sp)),
-                                            image: DecorationImage(
-                                              image: NetworkImage(AppConstants
-                                                  .MAIN_URL_IMAGE +
-                                                  myEventDTOs
-                                                      .expired![position]
-                                                      .image!),
-                                            ),
-                                            border: Border.all(
-                                                color: Color.fromRGBO(
-                                                    170, 143, 10, 1))),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(30.sp)),
+                                          image: DecorationImage(
+                                            image: NetworkImage(AppConstants
+                                                .MAIN_URL_IMAGE +
+                                                myEventDTOs
+                                                    .expired![position]
+                                                    .image!),
+                                          ),
+                                          border: Border.all(color: ColorsManager.primary)
+                                        ),
                                       ),
                                       SizedBox(
                                         width: 30.w,
@@ -920,8 +909,7 @@ class _MyEventsState extends State<MyEvents> {
                                               children: [
                                                 Icon(
                                                   Icons.location_on_outlined,
-                                                  color: Color.fromRGBO(
-                                                      166, 139, 12, 1),
+                                                  color: ColorsManager.primary,
                                                   size: 20.sp,
                                                 ),
                                                 SizedBox(
@@ -1056,10 +1044,10 @@ class _MyEventsState extends State<MyEvents> {
                                                                   width:
                                                                   0.4.sw,
                                                                   decoration: BoxDecoration(
-                                                                      color: Color.fromRGBO(170, 143, 10, 1),
+                                                                      color: ColorsManager.primary,
                                                                       borderRadius: BorderRadius.circular(10.sp),
                                                                       border: Border.all(
-                                                                        color: Color.fromRGBO(170, 143, 10, 1),
+                                                                        color: ColorsManager.primary,
                                                                       )),
                                                                   child: Center(
                                                                       child: Text(
@@ -1102,7 +1090,7 @@ class _MyEventsState extends State<MyEvents> {
                                                                   decoration: BoxDecoration(
                                                                       borderRadius: BorderRadius.circular(10.sp),
                                                                       border: Border.all(
-                                                                        color: Color.fromRGBO(170, 143, 10, 1),
+                                                                        color: ColorsManager.primary,
                                                                       )),
                                                                   child:
                                                                   Center(child: Text(getTranslated(context, "Cancel")!)),

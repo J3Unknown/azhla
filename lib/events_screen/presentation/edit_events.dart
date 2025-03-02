@@ -13,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../address_screen/data/cities_object.dart';
 import '../../address_screen/domain/address_service.dart';
 import '../../shared/validations.dart';
+import '../../utill/colors_manager.dart';
 import '../../utill/localization_helper.dart';
 import '../data/MyEventsDTO.dart';
 import '../data/events_object.dart';
@@ -87,7 +88,7 @@ class _EditEventPageState extends State<EditEventPage> {
         title: Text(
           getTranslated(context, "Add Event")!,
           style: TextStyle(
-              color: Color.fromRGBO(170, 143, 10, 1),
+              color: ColorsManager.primary,
               fontSize: 22.sp,
               fontWeight: FontWeight.bold),
         ),
@@ -139,7 +140,7 @@ class _EditEventPageState extends State<EditEventPage> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.sp),
                       border:
-                      Border.all(color: Color.fromRGBO(170, 143, 10, 1))),
+                      Border.all(color: ColorsManager.primary)),
                   child: TextFormField(
                     validator: RequiredValidator(
                         errorText:
@@ -154,7 +155,7 @@ class _EditEventPageState extends State<EditEventPage> {
                 SizedBox(
                   height: 10.h,
                 ),
-                Text(getTranslated(context, "Categorise")!),
+                Text(getTranslated(context, "Categories")!),
                 SizedBox(
                   height: 10.h,
                 ),
@@ -165,12 +166,12 @@ class _EditEventPageState extends State<EditEventPage> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.sp),
                         border:
-                        Border.all(color: Color.fromRGBO(170, 143, 10, 1))),
+                        Border.all(color: ColorsManager.primary)),
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton2<EventsObject>(
                         isExpanded: true,
                         hint: Text(
-                          getTranslated(context, "Categorise")!,
+                          getTranslated(context, "Categories")!,
                           style: TextStyle(
                             fontSize: 14,
                             color: Theme.of(context).hintColor,
@@ -221,7 +222,7 @@ class _EditEventPageState extends State<EditEventPage> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.sp),
                       border:
-                      Border.all(color: Color.fromRGBO(170, 143, 10, 1))),
+                      Border.all(color: ColorsManager.primary)),
                   child: TextFormField(
                     textAlign: TextAlign.center,
                     validator: RequiredValidator(
@@ -247,7 +248,7 @@ class _EditEventPageState extends State<EditEventPage> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.sp),
                         border:
-                        Border.all(color: Color.fromRGBO(170, 143, 10, 1))),
+                        Border.all(color: ColorsManager.primary)),
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton2<CitiesObject>(
                         isExpanded: true,
@@ -311,7 +312,7 @@ class _EditEventPageState extends State<EditEventPage> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10.sp),
                             border: Border.all(
-                                color: Color.fromRGBO(170, 143, 10, 1))),
+                                color: ColorsManager.primary)),
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton2<CitiesObject>(
                             isExpanded: true,
@@ -384,7 +385,7 @@ class _EditEventPageState extends State<EditEventPage> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.sp),
                       border:
-                      Border.all(color: Color.fromRGBO(170, 143, 10, 1))),
+                      Border.all(color: ColorsManager.primary)),
                   child: Center(
                     child: TextFormField(
                       validator: RequiredValidator(
@@ -428,7 +429,7 @@ class _EditEventPageState extends State<EditEventPage> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.sp),
                       border:
-                      Border.all(color: Color.fromRGBO(170, 143, 10, 1))),
+                      Border.all(color: ColorsManager.primary)),
                   child: Center(
                     child: TextFormField(
                       validator: RequiredValidator(
@@ -468,7 +469,7 @@ class _EditEventPageState extends State<EditEventPage> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.sp),
                       border:
-                      Border.all(color: Color.fromRGBO(170, 143, 10, 1))),
+                      Border.all(color: ColorsManager.primary)),
                   child: TextFormField(
                     controller: descriptionController,
                     textAlign: TextAlign.center,
@@ -524,7 +525,7 @@ class _EditEventPageState extends State<EditEventPage> {
                     },
                     child: Text(getTranslated(context, "Next")!),
                     style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(170, 143, 10, 1),
+                      primary: ColorsManager.primary,
                       padding: EdgeInsets.symmetric(
                           horizontal: size.width * 0.3, vertical: 15),
                       textStyle: TextStyle(fontSize: 18),

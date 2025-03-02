@@ -60,7 +60,7 @@ class _WebViewTermsState extends State<WebViewTerms> {
         progressIndicator: const SpinKitSpinningLines(
           color: ColorsManager.primary,
         ),
-        color: const Color.fromRGBO(254, 222, 0, 0.1),
+        color: ColorsManager.primary0_1Transparency,
         isLoading: isLoading,
         child: WebView(
           initialUrl: (lang == 'en')

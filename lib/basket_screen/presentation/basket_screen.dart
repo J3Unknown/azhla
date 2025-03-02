@@ -156,7 +156,7 @@ class _BasketScreenState extends State<BasketScreen> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.all(Radius.circular(30.sp)),
                                   image: DecorationImage(
-                                    image: NetworkImage(AppConstants.MAIN_URL_IMAGE+ basket![0].orderDetails![position]!.product!.mainImage!),
+                                    image: NetworkImage(AppConstants.MAIN_URL_IMAGE+ basket[0].orderDetails![position].product!.mainImage!),
                                   ),
                                   border: Border.all(
                                       color: ColorsManager.primary
@@ -164,7 +164,7 @@ class _BasketScreenState extends State<BasketScreen> {
                               ),
                             ),
                             SizedBox(width: 30.w,),
-                            Container(
+                            SizedBox(
                               height: 90.h,
                               width: 0.35.sw,
                               child: Column(
@@ -197,7 +197,7 @@ class _BasketScreenState extends State<BasketScreen> {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                InkWell(child: Icon(CupertinoIcons.heart)),
+                                const InkWell(child: Icon(CupertinoIcons.heart)),
                                 SizedBox(height: 50.h,),
                                 Container(
                                     height: 25.h,
