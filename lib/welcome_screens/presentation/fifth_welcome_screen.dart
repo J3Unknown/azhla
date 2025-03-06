@@ -54,11 +54,11 @@ class _FifthWelcomeScreenState extends State<FifthWelcomeScreen> {
             ),
             SizedBox(height: 20.h,),
             // Text(getTranslated(context, "Congratulation")!,style: TextStyle(color: Colors.black87,fontSize: 22.sp,),),
-            Center(child: Text( "With ezhalha,",style: TextStyle(color: Colors.black87,fontSize: 22.sp,),)),
+            Center(child: Text( "With Maras,",style: TextStyle(color: Colors.black87,fontSize: 22.sp,),)),
             Center(child: Text( "save your time and effort",style: TextStyle(color: Colors.black87,fontSize: 22.sp,),)),
             SizedBox(height: 10.h,),
             // Text("ازهلها",style: TextStyle(color: Colors.black87,fontSize: 22.sp,),),
-            Text("مع ازهلها وفر وقتك ومجهودك",style: TextStyle(color: Colors.black87,fontSize: 22.sp,),),
+            Text("مع معرس وفر وقتك ومجهودك",style: TextStyle(color: Colors.black87,fontSize: 22.sp,),),
             SizedBox(height: 30.h,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

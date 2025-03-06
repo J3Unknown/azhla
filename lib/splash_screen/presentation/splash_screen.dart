@@ -85,115 +85,70 @@
 //   }
 // }
 import 'dart:async';
-
+import 'dart:typed_data';
+import 'package:flutter_gif/flutter_gif.dart';
 import 'package:azhlha/buttom_nav_bar/presentation/buttom_nav_screen.dart';
+import 'package:azhlha/utill/assets_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../welcome_screens/presentation/first_welcome_screen.dart';
+import '../../welcome_screens/presentation/onBoarding.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
-  late VideoPlayerController _controller;
+class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+  late FlutterGifController _gifController;
 
   @override
   void initState() {
     super.initState();
+    _gifController = FlutterGifController(vsync: this);
 
-    // Initialize the video player
-    _controller = VideoPlayerController.asset('assets/image/splashvideo.mp4')
-      ..initialize().then((_) {
-        // Start playing the video
-        _controller.play();
+    // Adjust the GIF settings
+    _gifController.repeat(
+      min: 0,
+      max: 21, // Change this based on the number of frames in your GIF
+      period: const Duration(milliseconds: 2300), // Match the GIF duration
+    );
 
-        // Add listener for video completion
-        // _controller.addListener(() {
-        //   if (_controller.value.position >= _controller.value.duration) {
-        //     _navigateToNextScreen(); // Navigate once the video finishes
-        //   }
-        // });
-        _route();
-
-
-        setState(() {}); // Refresh UI after video initializes
-      });
+    _route();
   }
+
   void _route() {
-     //SharedPreferences.getInstance().then((value) => value.setString(AppConstants.USER, "1234567"));
-    Timer(Duration(seconds: 5), () async{
+    Timer(const Duration(milliseconds: 2300), () async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      // Logged in?
-      if(!prefs.containsKey("FirstTime")){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => FirstWelcomeScreen()));
+      if (!prefs.containsKey("FirstTime")) {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (BuildContext context) => OnBoarding()));
+      } else {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (BuildContext context) => ButtomNavBarScreen(intial: 0,)));
       }
-
-        // else if(!prefs.containsKey("token")) {
-        //   Navigator.pushReplacement(context, MaterialPageRoute(
-        //       builder: (BuildContext context) => ButtomNavBarScreen()));
-        // }
-        else{
-          Navigator.pushReplacement(context, MaterialPageRoute(
-              builder: (BuildContext context) => ButtomNavBarScreen(intial: 0,)));
-        }
-
-
-
-      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => RegisterScreen()));
     });
-
-
-  }
-  Future<void> _navigateToNextScreen() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool isFirstTime = !prefs.containsKey("FirstTime");
-
-    if (isFirstTime) {
-      // Navigate to FirstWelcomeScreen and mark as visited
-      prefs.setBool("FirstTime", true);
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => FirstWelcomeScreen()),
-      );
-    } else {
-      // Directly navigate to BottomNavBarScreen
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ButtomNavBarScreen(intial: 0),
-        ),
-      );
-    }
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: _controller.value.isInitialized
-          ? SizedBox.expand(
-        child: FittedBox(
-          fit: BoxFit.cover,
-          child: SizedBox(
-            width: _controller.value.size.width,
-            height: _controller.value.size.height,
-            child: VideoPlayer(_controller),
+      body: Center(
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: GifImage(
+            fit: BoxFit.cover,
+            controller: _gifController,
+            image: const AssetImage(imagePath + AssetsManager.splash),
           ),
         ),
-      )
-          : Center(
-        child: CircularProgressIndicator(), // Show loading indicator
       ),
     );
   }
 }
+

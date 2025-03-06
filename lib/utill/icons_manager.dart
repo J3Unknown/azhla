@@ -8,5 +8,7 @@ class IconsManager{
   static const IconData processingIcon = Icons.data_saver_off;
   static const IconData clearSoldIcon = CupertinoIcons.clear_circled_solid;
   static const IconData sendIcon = Icons.send;
+  static const IconData addIcon = Icons.add;
   static const IconData accessTimeIcon = Icons.access_time;
+  static const IconData rightArrowIcon = CupertinoIcons.right_chevron;
 }

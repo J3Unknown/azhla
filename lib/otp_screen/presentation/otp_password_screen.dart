@@ -80,7 +80,7 @@ class _OtpPasswordScreenState extends State<OtpPasswordScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: 200.h,),
-            Center(child: Text(getTranslated(context,"Ezhalha")!,style: TextStyle(color: ColorsManager.primary,fontSize: 50.sp,fontWeight: FontWeight.bold),)),
+            Center(child: Text(getTranslated(context,"Maras")!,style: TextStyle(color: ColorsManager.primary,fontSize: 50.sp,fontWeight: FontWeight.bold),)),
             SizedBox(height: 30.h,),
             Text(getTranslated(context, "Enter Received OTP")!,style: TextStyle(color: Colors.black87,fontSize: 20.sp),),
             SizedBox(height: 40.h,),

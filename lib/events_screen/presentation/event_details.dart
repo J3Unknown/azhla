@@ -154,10 +154,10 @@ class _EventDetailsState extends State<EventDetails> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20.sp),
-                    boxShadow: const [
+                    boxShadow: [
                        BoxShadow(
-                        color: ColorsManager.primary,
-                        offset: Offset(0.0, 1.0),
+                        color: ColorsManager.black.withOpacity(0.2),
+                        offset: const Offset(3, 6),
                         blurRadius: 5,
                       ),
                     ],
@@ -422,8 +422,8 @@ class _EventDetailsState extends State<EventDetails> {
                 //
                 // },
               ),
-            ):(widget.eventsDetailsObject.type! == KeysManager.female)?
-            Padding(
+            ):
+            (widget.eventsDetailsObject.type! == KeysManager.female)? Padding(
               padding:  EdgeInsets.all(20.sp),
               child: InkWell(
                 child: Container(
@@ -432,10 +432,10 @@ class _EventDetailsState extends State<EventDetails> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20.sp),
-                    boxShadow: const [
+                    boxShadow: [
                       BoxShadow(
-                        color: ColorsManager.primary,
-                        offset: Offset(0.0, 1.0),
+                        color: ColorsManager.black.withOpacity(0.2),
+                        offset: const Offset(3, 6),
                         blurRadius: 5,
                       ),
                     ],
@@ -696,7 +696,8 @@ class _EventDetailsState extends State<EventDetails> {
                 //
                 // },
               ),
-            ):Column(
+            ):
+            Column(
               children: [
                 Padding(
                   padding:  EdgeInsets.only(left:20.w,right: 20.w,top: 10.h,bottom: 10.h),
@@ -707,10 +708,10 @@ class _EventDetailsState extends State<EventDetails> {
                       decoration: BoxDecoration(
                         color: ColorsManager.white,
                         borderRadius: BorderRadius.circular(20.sp),
-                        boxShadow: const [
+                        boxShadow: [
                           BoxShadow(
-                            color: ColorsManager.primary,
-                            offset: Offset(0.0, 1.0),
+                            color: ColorsManager.black.withOpacity(0.2),
+                            offset: const Offset(3, 6),
                             blurRadius: 5,
                           ),
                         ],
@@ -1076,7 +1077,7 @@ class _EventDetailsState extends State<EventDetails> {
                                         ),
                                       ),
                                       onTap: (){
-                                        _callNumber(widget.eventsDetailsObject!.fPhone!);
+                                        _callNumber(widget.eventsDetailsObject.fPhone!);
                                       },
                                     ),
                                     SizedBox(width: 10.w,),

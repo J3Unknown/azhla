@@ -128,9 +128,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
-
-
-
   @override
   State<MyHomePage> createState() => _MyHomePageState();
   static void setLocale(BuildContext context, Locale newLocale) {
@@ -190,13 +187,13 @@ class _MyHomePageState extends State<MyHomePage> {
           return MaterialApp(
             navigatorKey: navKey,
             debugShowCheckedModeBanner: false,
-            localizationsDelegates: [
+            localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
             ],
-            supportedLocales: [
+            supportedLocales: const [
               Locale('en', ''),
               Locale('ar', ''),
             ],
@@ -212,9 +209,9 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             // OR Locale('ar', 'AE') OR Other RTL locales,
             theme: ThemeData(
-                primarySwatch: Colors.blue,
+                primaryColor: Colors.blue,
                 textTheme: TextTheme(button: TextStyle(fontSize: 18.sp)),
-                appBarTheme: AppBarTheme(
+                appBarTheme: const AppBarTheme(
                     iconTheme: IconThemeData(
                         color: Colors.black
                     )

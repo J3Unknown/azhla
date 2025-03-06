@@ -19,7 +19,7 @@ class _SocialLoginScreenState extends State<SocialLoginScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(getTranslated(context,"Ezhalha")!,style: TextStyle(color: ColorsManager.primary,fontSize: 50.sp,fontWeight: FontWeight.bold),),
+          Text(getTranslated(context,"Maras")!,style: TextStyle(color: ColorsManager.primary,fontSize: 50.sp,fontWeight: FontWeight.bold),),
           SizedBox(height: 30.h,),
           Text("Welcome to Our app",style: TextStyle(color: Colors.black87,fontSize: 20.sp),),
           SizedBox(height: 40.h,),

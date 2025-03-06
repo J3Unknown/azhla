@@ -321,7 +321,7 @@ class _BasketScreenState extends State<BasketScreen> {
                       ),
                     ),
                     onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProductScreen(Id: basket[0].orderDetails![position].product!.id!,catName: getTranslated(context,"Ezhalha")!,)));
+                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProductScreen(Id: basket[0].orderDetails![position].product!.id!,catName: getTranslated(context,"Maras")!,)));
 
                     },
                   );

@@ -65,7 +65,7 @@ class _SignUpState extends State<SignUp> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: 100.h,),
-            Center(child: Text(getTranslated(context,"Ezhalha")!,style: TextStyle(color: ColorsManager.primary, fontSize: 50.sp,fontWeight: FontWeight.bold),)),
+            Center(child: Text(getTranslated(context,"Maras")!,style: TextStyle(color: ColorsManager.primary, fontSize: 50.sp,fontWeight: FontWeight.bold),)),
             SizedBox(height: 30.h,),
             Text(getTranslated(context, "Sign Up")!,style: TextStyle(color: Colors.black87,fontSize: 20.sp),),
             SizedBox(height: 40.h,),
@@ -113,7 +113,7 @@ class _SignUpState extends State<SignUp> {
                         child: Row(
                           children: [
                             SizedBox(width: 5.h,),
-                            (locale.languageCode == "en")?Text("+965",style: TextStyle(color: Colors.grey),):Container(),
+                            (locale.languageCode == "en")?Text("+974",style: TextStyle(color: Colors.grey),):Container(),
                             Container(
                               height: 50.h,
                               width: 0.65.sw,
@@ -130,7 +130,7 @@ class _SignUpState extends State<SignUp> {
                                   )
                               ),
                             ),
-                            (locale.languageCode == "ar")?Text("965+",style: TextStyle(color: Colors.grey),):Container()
+                            (locale.languageCode == "ar")?Text("974+",style: TextStyle(color: Colors.grey),):Container()
                           ],
                         ),
                       ),
@@ -280,7 +280,7 @@ class _SignUpState extends State<SignUp> {
       return;
     }
 
-    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => OtpScreen(name: fullNameController.text,phone: "965"+phoneController.text,password: passwordController.text,)) );
+    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => OtpScreen(name: fullNameController.text,phone: "974"+phoneController.text,password: passwordController.text,)) );
 
   }
 }

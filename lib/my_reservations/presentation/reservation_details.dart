@@ -415,7 +415,7 @@ class _ReservationDetailsState extends State<ReservationDetails> {
                         ),
                       ),
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProductScreen(Id: widget.reservationsObject.orderDetails![position].product!.id!,catName: getTranslated(context,"Ezhalha")!,)));
+                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProductScreen(Id: widget.reservationsObject.orderDetails![position].product!.id!,catName: getTranslated(context,"Maras")!,)));
 
                       },
                     ),

@@ -51,12 +51,12 @@ class _FrogetPasswordScreenState extends State<FrogetPasswordScreen> {
           },
         ),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: ColorsManager.white,
       body: LoadingOverlay(
           progressIndicator: SpinKitSpinningLines(
-            color: Color.fromRGBO(254, 222, 0, 1),
+            color: ColorsManager.primary,
           ),
-          color: Color.fromRGBO(254, 222, 0, 0.1),
+          color: ColorsManager.primary0_1Transparency,
           isLoading: isLoading,
           child: isLoading == true
               ? Container()
@@ -65,7 +65,7 @@ class _FrogetPasswordScreenState extends State<FrogetPasswordScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Center(child: Text(getTranslated(context,"Ezhalha")!,style: TextStyle(color: ColorsManager.primary,fontSize: 50.sp,fontWeight: FontWeight.bold),)),
+          Center(child: Text(getTranslated(context,"Maras")!,style: TextStyle(color: ColorsManager.primary,fontSize: 50.sp,fontWeight: FontWeight.bold),)),
           SizedBox(height: 30.h,),
           Text(getTranslated(context, "Enter your Number")!,style: TextStyle(color: Colors.black87,fontSize: 20.sp),),
           SizedBox(height: 40.h,),
@@ -88,7 +88,7 @@ class _FrogetPasswordScreenState extends State<FrogetPasswordScreen> {
                 child: Row(
                   children: [
                     SizedBox(width: 5.h,),
-                    (locale.languageCode == "en")?Text("+965",style: TextStyle(color: Colors.grey),):Container(),
+                    (locale.languageCode == "en")?Text("+974",style: TextStyle(color: Colors.grey),):Container(),
                     Container(
                       height: 50.h,
                       width: 0.65.sw,
@@ -104,7 +104,7 @@ class _FrogetPasswordScreenState extends State<FrogetPasswordScreen> {
                           )
                       ),
                     ),
-                    (locale.languageCode == "ar")?Text("965+",style: TextStyle(color: Colors.grey),):Container()
+                    (locale.languageCode == "ar")?Text("974+",style: TextStyle(color: Colors.grey),):Container()
                   ],
                 ),
               )
@@ -144,7 +144,7 @@ class _FrogetPasswordScreenState extends State<FrogetPasswordScreen> {
   setState(() {
     isLoading = true;
   });
-    OtpService.sendOTPPassword(context, "965"+phoneController.text).then((value){
+    OtpService.sendOTPPassword(context, "974"+phoneController.text).then((value){
       log(value.toString());
       if(value != null) {
         setState(() {
@@ -152,7 +152,7 @@ class _FrogetPasswordScreenState extends State<FrogetPasswordScreen> {
           setState(() {
             isLoading = false;
           });
-          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => OtpPasswordScreen(phone: "965"+phoneController.text,firstOtp: otpCode,)) );
+          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => OtpPasswordScreen(phone: "974"+phoneController.text,firstOtp: otpCode,)) );
 
           // launchWhatsApp(value!.otpLink!);
         });

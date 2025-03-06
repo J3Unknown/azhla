@@ -111,5 +111,6 @@ class KeysManager{
   static const String showImage = 'show image';
   static const String fileDownload = 'FileDownload.pdf';
   static const String typeHere = 'Type Here';
+  static const String skip = 'Skip';
   static const String expectedBudget = 'Expected Budget / QR';
 }

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:azhlha/date_time_screen/presentation/date_time_screen.dart';
 import 'package:azhlha/date_time_screen/presentation/order_seller_screen.dart';
+import 'package:azhlha/utill/colors_manager.dart';
 import 'package:azhlha/utill/localization_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -139,7 +140,7 @@ class _SellerDateScreentate extends State<SellerDateScreen> {
                               height: 40.h,
                               width: 40.w,
                               decoration: BoxDecoration(
-                                  color: Color.fromRGBO(170, 143, 10, 1),
+                                  color: ColorsManager.primary,
                                   borderRadius: BorderRadius.circular(20.sp)
                               ),
 
@@ -171,7 +172,7 @@ class _SellerDateScreentate extends State<SellerDateScreen> {
                               borderRadius: BorderRadius.circular(40.sp),
                               color: Colors.white,
                               border: Border.all(
-                                color: Color.fromRGBO(170, 143, 10, 1),
+                                color: ColorsManager.primary,
                               ),
 
                             ),
@@ -188,7 +189,7 @@ class _SellerDateScreentate extends State<SellerDateScreen> {
                             width: 120.w,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(40.sp),
-                              color: Color.fromRGBO(170, 143, 10, 1),
+                              color: ColorsManager.primary,
                             ),
                             child: Center(child: Text(getTranslated(context, "Done")!,style: TextStyle(color: Colors.white),)),
                           ),

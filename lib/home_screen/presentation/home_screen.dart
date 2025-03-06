@@ -53,15 +53,14 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         leading: InkWell(
           child:Padding(
-          padding:  EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Container(
             width: 5.w,
             height: 5.h,
-
-            decoration: BoxDecoration(
-                color: ColorsManager.primary,
+            decoration: const BoxDecoration(
+              //color: ColorsManager.primary,
               image: DecorationImage(
-                image: AssetImage("assets/image/all.png"),
+                image: AssetImage(imagePath + AssetsManager.calender),
                 fit: BoxFit.cover
               )
             ),
@@ -82,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
         },
         ),
-        title:  Text(getTranslated(context,"Ezhalha")!,style: TextStyle(color: Color.fromRGBO(116, 3, 60, 1),fontSize: 22.sp,fontWeight: FontWeight.bold),), // Color changed
+        title:  Text(getTranslated(context,"Maras")!,style: TextStyle(color: Color.fromRGBO(116, 3, 60, 1),fontSize: 22.sp,fontWeight: FontWeight.bold),), // Color changed
         centerTitle: false, //changed
         actions: [
           InkWell(child:
@@ -169,44 +168,44 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 180.h,
               width: 1.sw,
               child: GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: false,
-                        itemCount: homeObject.categories!.length,
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                        crossAxisCount: 2
-                        ),
-                        itemBuilder: (BuildContext context, int index) {
-                          return InkWell(
-                            child: SizedBox(
-                              height: 150.h,
-                              width: 0.2.sw,
-                              //color: Colors.black87,
-                              child: Column(
-                                children: [
-                                  Container(
-                                      height:130.h,
-                                      width: 150.w,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: NetworkImage(AppConstants.MAIN_URL_IMAGE+homeObject.categories![index].image!),
-                                      ),
-                                      borderRadius: BorderRadius.circular(30.sp),
-                                      border: Border.all(
-                                        color: ColorsManager.primary
-                                      )
-                                    ), ),
-                                    SizedBox(height: 10.h,),
-                                    Text(homeObject.categories![index].name!,style: TextStyle(color: Colors.black87,fontWeight: FontWeight.bold,fontSize: 20.sp),),
-                                ],
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: false,
+                itemCount: homeObject.categories!.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 2
+                ),
+                itemBuilder: (BuildContext context, int index) {
+                  return InkWell(
+                    child: SizedBox(
+                      height: 150.h,
+                      width: 0.2.sw,
+                      //color: Colors.black87,
+                      child: Column(
+                        children: [
+                          Container(
+                              height:130.h,
+                              width: 150.w,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: NetworkImage(AppConstants.MAIN_URL_IMAGE+homeObject.categories![index].image!),
                               ),
-                            ),
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => OrderSellerScreen(catName: homeObject.categories![index].name!,children: homeObject.categories![index].children!,)));
-                            },
-                          );
-      }
+                              borderRadius: BorderRadius.circular(30.sp),
+                              border: Border.all(
+                                color: ColorsManager.primary
+                              )
+                            ), ),
+                            SizedBox(height: 10.h,),
+                            Text(homeObject.categories![index].name!,style: TextStyle(color: Colors.black87,fontWeight: FontWeight.bold,fontSize: 20.sp),),
+                        ],
+                      ),
+                    ),
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => OrderSellerScreen(catName: homeObject.categories![index].name!,children: homeObject.categories![index].children!,)));
+                    },
+                  );
+                }
               ),
             ),
             Row(

@@ -529,7 +529,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                     ),
                                   ),
                                   onTap: (){
-                                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProductScreen(Id: favorites[position].id!,catName: getTranslated(context,"Ezhalha")!,)));
+                                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProductScreen(Id: favorites[position].id!,catName: getTranslated(context,"Maras")!,)));
 
                                   },
                                 ),

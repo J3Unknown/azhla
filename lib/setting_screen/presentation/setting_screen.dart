@@ -10,6 +10,7 @@ import 'package:azhlha/sign_in_screen/presentation/sign_in_screen.dart';
 import 'package:azhlha/special_request/presentation/add_special_request.dart';
 import 'package:azhlha/terms_and_conditions/presentation/terms_and_conditions.dart';
 import 'package:azhlha/utill/app_constants.dart';
+import 'package:azhlha/utill/assets_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -130,7 +131,6 @@ class _SettingScreenState extends State<SettingScreen> {
                         color: ColorsManager.grey1
                     ),
                     image: DecorationImage(
-                        //image: NetworkImage(AppConstants.MAIN_URL_IMAGE+image),
                         image: AssetImage("assets/image/person.png"),
                         fit: BoxFit.contain
                     )
@@ -160,7 +160,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         width: 20.w,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage("assets/image/profile.png")
+                            image: AssetImage(imagePath+AssetsManager.person)
                           )
                         ),
                       ),
@@ -207,7 +207,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         width: 20.w,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage("assets/image/lang.png")
+                                image: AssetImage(imagePath+AssetsManager.globe)
                             )
                         ),
                       ),
@@ -243,145 +243,14 @@ class _SettingScreenState extends State<SettingScreen> {
                     children: [
                       SizedBox(width: 5.w,),
                       Container(
-                        height: 15.h,
-                        width: 20.w,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage("assets/image/support.png")
-                            )
-                        ),
-                      ),
-                      SizedBox(width: 10.w,),
-                      Container(
-                          height: 20.h,
-                          width: 0.6.sw,
-                          child: Text(getTranslated(context, "Contact Us")!)),
-                      Icon(CupertinoIcons.forward)
-                    ],
-                  )),
-
-                ),
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ContactUsScreen()));
-                },
-              ),
-            ),
-            SizedBox(height: 10.h,),
-            Center(
-              child: InkWell(
-                child: Container(
-                  height: 50.h,
-                  width: 0.8.sw,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.sp),
-                      border: Border.all(
-                        color: ColorsManager.primary,
-                      )
-                  ),
-                  child: Center(child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(width: 5.w,),
-                      Container(
-                        height: 15.h,
-                        width: 20.w,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage("assets/image/Reminder.png")
-                            )
-                        ),
-                      ),
-                      SizedBox(width: 10.w,),
-                      Container(
-                          height: 20.h,
-                          width: 0.6.sw,
-                          child: Text(getTranslated(context, "Event Reminder")!)),
-                      Icon(CupertinoIcons.forward)
-                    ],
-                  )),
-
-                ),
-                onTap: (){
-                  if(token != '') {
-                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>EventReminders()));
-
-                    //  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProfileScreen()) );
-                  }
-                  else {
-                   showToastSetting(context,getTranslated(context, "please login")!);
-                  }
-                },
-              ),
-            ),
-            SizedBox(height: 10.h,),
-            Center(
-              child: InkWell(
-                child: Container(
-                  height: 50.h,
-                  width: 0.8.sw,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.sp),
-                    border: Border.all(
-                      color: ColorsManager.primary,
-                    )
-                  ),
-                  child: Center(child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(width: 5.w,),
-                      Container(
-                        height: 15.h,
-                        width: 20.w,
-                        decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage("assets/image/Reminder.png")
-                            )
-                        ),
-                      ),
-                      SizedBox(width: 10.w,),
-                      SizedBox(
                         height: 20.h,
-                        width: 0.6.sw,
-                        child: Text(getTranslated(context, "My EVents")!)
+                        width: 20.w,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(imagePath+AssetsManager.todoList)
+                            )
+                        ),
                       ),
-                      const Icon(CupertinoIcons.forward)
-                    ],
-                  )),
-
-                ),
-                onTap: (){
-                  if(token != '') {
-                    Navigator.push(
-                        context,MaterialPageRoute(
-                            builder: (BuildContext context) => const MyEvents()));
-                    //  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProfileScreen()) );
-                  }
-                  else {
-                    showToastSetting(context,getTranslated(context, "please login")!);
-                  }
-                },
-              ),
-            ),
-            SizedBox(height: 10.h,),
-            Center(
-              child: InkWell(
-                child: Container(
-                  height: 50.h,
-                  width: 0.8.sw,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.sp),
-                      border: Border.all(
-                        color: ColorsManager.primary,
-                      )
-                  ),
-                  child: Center(child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(width: 5.w,),
-                      const Icon(CupertinoIcons.sparkles, color: ColorsManager.primary,),
                       SizedBox(width: 10.w,),
                       SizedBox(
                           height: 20.h,
@@ -421,12 +290,151 @@ class _SettingScreenState extends State<SettingScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      SizedBox(width: 5.w,),
+                      Container(
+                        height: 15.h,
+                        width: 20.w,
+                        decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(imagePath+AssetsManager.calender2)
+                            )
+                        ),
+                      ),
+                      SizedBox(width: 10.w,),
+                      SizedBox(
+                          height: 20.h,
+                          width: 0.6.sw,
+                          child: Text(getTranslated(context, "My EVents")!)
+                      ),
+                      const Icon(CupertinoIcons.forward)
+                    ],
+                  )),
+
+                ),
+                onTap: (){
+                  if(token != '') {
+                    Navigator.push(
+                        context,MaterialPageRoute(
+                        builder: (BuildContext context) => const MyEvents()));
+                    //  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProfileScreen()) );
+                  }
+                  else {
+                    showToastSetting(context,getTranslated(context, "please login")!);
+                  }
+                },
+              ),
+            ),
+            SizedBox(height: 10.h,),
+            Center(
+              child: InkWell(
+                child: Container(
+                  height: 50.h,
+                  width: 0.8.sw,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.sp),
+                      border: Border.all(
+                        color: ColorsManager.primary,
+                      )
+                  ),
+                  child: Center(child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(width: 5.w,),
                       Container(
                         height: 15.h,
                         width: 20.w,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage("assets/image/terms.png")
+                                image: AssetImage(imagePath+AssetsManager.specialCalender)
+                            )
+                        ),
+                      ),
+                      SizedBox(width: 10.w,),
+                      Container(
+                          height: 20.h,
+                          width: 0.6.sw,
+                          child: Text(getTranslated(context, "Event Reminders")!)),
+                      Icon(CupertinoIcons.forward)
+                    ],
+                  )),
+
+                ),
+                onTap: (){
+                  if(token != '') {
+                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>EventReminders()));
+
+                    //  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProfileScreen()) );
+                  }
+                  else {
+                   showToastSetting(context,getTranslated(context, "please login")!);
+                  }
+                },
+              ),
+            ),
+            SizedBox(height: 10.h,),
+            Center(
+              child: InkWell(
+                child: Container(
+                  height: 50.h,
+                  width: 0.8.sw,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.sp),
+                      border: Border.all(
+                        color: ColorsManager.primary,
+                      )
+                  ),
+                  child: Center(child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(width: 5.w,),
+                      Container(
+                        height: 15.h,
+                        width: 20.w,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(imagePath+AssetsManager.headphones)
+                            )
+                        ),
+                      ),
+                      SizedBox(width: 10.w,),
+                      Container(
+                          height: 20.h,
+                          width: 0.6.sw,
+                          child: Text(getTranslated(context, "Support")!)),
+                      Icon(CupertinoIcons.forward)
+                    ],
+                  )),
+
+                ),
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ContactUsScreen()));
+                },
+              ),
+            ),
+            SizedBox(height: 10.h,),
+            Center(
+              child: InkWell(
+                child: Container(
+                  height: 50.h,
+                  width: 0.8.sw,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.sp),
+                      border: Border.all(
+                        color: ColorsManager.primary,
+                      )
+                  ),
+                  child: Center(child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 20.h,
+                        width: 20.w,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(imagePath+AssetsManager.handShake)
                             )
                         ),
                       ),
@@ -467,7 +475,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         width: 20.w,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage("assets/image/about.png")
+                                image: AssetImage(imagePath+AssetsManager.info)
                             )
                         ),
                       ),
@@ -489,32 +497,21 @@ class _SettingScreenState extends State<SettingScreen> {
                   height: 50.h,
                   width: 0.8.sw,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.sp),
-                      border: Border.all(
-                        color: ColorsManager.primary,
-                      )
+                    borderRadius: BorderRadius.circular(10.sp),
+                    color: ColorsManager.red
                   ),
-                  child: Center(child: Row(
+                  child: Center(
+                    child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
-                        height: 15.h,
-                        width: 20.w,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-
-                                image: AssetImage((token != '')?"assets/image/logout.png":"assets/image/login.png")
-                            )
-                        ),
-                      ),
-
+                      Icon((token != '')?Icons.logout:Icons.login, color: ColorsManager.white,),
                       SizedBox(width: 10.w,),
                       Container(
                           height: 20.h,
                           width: 0.6.sw,
-                          child: Text(getTranslated(context, word)!)),
-                      Icon(CupertinoIcons.forward)
+                          child: Text(getTranslated(context, word)!, style: TextStyle(color: ColorsManager.white),)),
+                      Icon(CupertinoIcons.forward, color: ColorsManager.white,)
                     ],
                   )),
                 ),

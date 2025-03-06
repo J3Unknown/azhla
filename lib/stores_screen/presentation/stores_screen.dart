@@ -4,6 +4,7 @@ import 'package:azhlha/product_screen/presentation/product_screen.dart';
 import 'package:azhlha/shared/alerts.dart';
 import 'package:azhlha/stores_screen/domain/stores_service.dart';
 import 'package:azhlha/utill/app_constants.dart';
+import 'package:azhlha/utill/colors_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -74,7 +75,7 @@ class _StoresScreenState extends State<StoresScreen> {
         leading: InkWell(child:Icon(CupertinoIcons.back),onTap: (){
           Navigator.pop(context);
         },),
-        title:  Text(widget.catName,style: TextStyle(color: Color.fromRGBO(170, 143, 10, 1),fontSize: 22.sp,fontWeight: FontWeight.bold),),
+        title:  Text(widget.catName,style: TextStyle(color: ColorsManager.primary,fontSize: 22.sp,fontWeight: FontWeight.bold),),
         centerTitle: true,
         // actions: [InkWell(child:Icon(CupertinoIcons.search),),
         //   SizedBox(width: 10.w,)
@@ -84,9 +85,9 @@ class _StoresScreenState extends State<StoresScreen> {
       body:
     LoadingOverlay(
     progressIndicator: SpinKitSpinningLines(
-    color: Color.fromRGBO(254, 222, 0, 1),
+    color: ColorsManager.primary,
     ),
-    color: Color.fromRGBO(254, 222, 0, 0.1),
+    color: ColorsManager.primary0_1Transparency,
     isLoading: isLoading,
     child: isLoading == true
     ? Container():
@@ -143,7 +144,7 @@ class _StoresScreenState extends State<StoresScreen> {
                           borderRadius: BorderRadius.circular(15.sp),
                           boxShadow:[
                             BoxShadow(
-                              color: Color.fromRGBO(170, 143, 10, 1),
+                              color: ColorsManager.black.withOpacity(0.2),
                               blurRadius: 2,
                             ),
                           ],
@@ -282,8 +283,8 @@ class _StoresScreenState extends State<StoresScreen> {
 
                           boxShadow:[
                             BoxShadow(
-                              color: Color.fromRGBO(170, 143, 10, 1),
-                              offset: Offset(0.0, 1.0),
+                              color: ColorsManager.black.withOpacity(0.2),
+                              offset: const Offset(3, 4),
                               blurRadius: 5,
                             ),
                           ],
@@ -303,7 +304,7 @@ class _StoresScreenState extends State<StoresScreen> {
                                   ),
                                   borderRadius: BorderRadius.circular(30.sp),
                                   border: Border.all(
-                                      color: Color.fromRGBO(170, 143, 10, 1)
+                                      color: ColorsManager.primary
                                   )
                               ),
                             ),
@@ -360,7 +361,7 @@ class _StoresScreenState extends State<StoresScreen> {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                InkWell(child: (allList.isNotEmpty&&allList[position] == 1)? Icon(CupertinoIcons.heart_solid ,size: 30.sp,color:Colors.red):Icon(CupertinoIcons.heart ,size: 30.sp,color: Color.fromRGBO(170, 143, 10, 1),),
+                                InkWell(child: (allList.isNotEmpty&&allList[position] == 1)? Icon(CupertinoIcons.heart_solid ,size: 30.sp,color:Colors.red):Icon(CupertinoIcons.heart ,size: 30.sp,color: ColorsManager.primary,),
                                   onTap: () async{
                                     log("here from fav");
                                     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -465,18 +466,18 @@ class _StoresScreenState extends State<StoresScreen> {
         ],
       ): Center(
         child: Container(
-            width: 1.sw,
-            height: 50.h,
-            child: Center(child: FittedBox(
-              fit: BoxFit.scaleDown, // Scale text down if needed
+          width: 1.sw,
+          height: 50.h,
+          child: Center(child: FittedBox(
+            fit: BoxFit.scaleDown, // Scale text down if needed
 
-              child: Text(getTranslated(context, "the product of the seller will be added soon")!,style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.bold),
-                // softWrap: false, // Disable word wrapping
-                textAlign: TextAlign.center, // Center align text
-              ),
-            )
-            )),
-
+            child: Text(getTranslated(context, "the product of the seller will be added soon")!,style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.bold),
+              // softWrap: false, // Disable word wrapping
+              textAlign: TextAlign.center, // Center align text
+            ),
+          )
+          )
+        ),
       ),
     ));
   }

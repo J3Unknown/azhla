@@ -1,119 +1,124 @@
-import 'package:azhlha/basket_screen/presentation/basket_screen.dart';
-import 'package:azhlha/favourite_screen/presentation/favorite_screen.dart';
-import 'package:azhlha/my_reservations/presentation/my_reservations.dart';
-import 'package:azhlha/setting_screen/presentation/setting_screen.dart';
-import 'package:azhlha/shared/alerts.dart';
-import 'package:azhlha/utill/app_constants.dart';
-import 'package:azhlha/utill/localization_helper.dart';
-import 'package:azhlha/welcome_screens/presentation/first_welcome_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../home_screen/presentation/home_screen.dart';
+import '../../basket_screen/presentation/basket_screen.dart';
+import '../../favourite_screen/presentation/favorite_screen.dart';
+import '../../my_reservations/presentation/my_reservations.dart';
+import '../../setting_screen/presentation/setting_screen.dart';
 import '../../utill/colors_manager.dart';
+import '../../utill/localization_helper.dart';
 
 class ButtomNavBarScreen extends StatefulWidget {
   late int intial;
-  ButtomNavBarScreen({Key? key,required this.intial}) : super(key: key);
+  ButtomNavBarScreen({Key? key, required this.intial}) : super(key: key);
 
   @override
   _ButtomNavBarScreenState createState() => _ButtomNavBarScreenState();
 }
 
-class _ButtomNavBarScreenState extends State<ButtomNavBarScreen>  with AutomaticKeepAliveClientMixin<ButtomNavBarScreen>{
-  final PersistentTabController _controller  = PersistentTabController(initialIndex: 0);
-
+class _ButtomNavBarScreenState extends State<ButtomNavBarScreen> {
+  late int _selectedIndex;
   String token = '';
 
-@override
+  @override
   void initState() {
-  _controller.jumpToTab(widget.intial);
-  initawaits();
-    // TODO: implement initState
     super.initState();
+    _selectedIndex = widget.intial;
+    initToken();
   }
-  void initawaits() async{
+
+  void initToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if(prefs.containsKey(AppConstants.TOKEN)) {
-      token = prefs.getString(AppConstants.TOKEN)!;
+    if (prefs.containsKey("token")) {
+      setState(() {
+        token = prefs.getString("token")!;
+      });
     }
   }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  final List<Widget> _screens = [
+    PageNavigator(screen: const HomeScreen()),
+    PageNavigator(screen: const MyReservations()),
+    PageNavigator(screen: const BasketScreen()),
+    PageNavigator(screen: const FavoriteScreen()),
+    PageNavigator(screen: const SettingScreen()),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return PersistentTabView(
-      context,
-      controller: _controller,
-      screens: _buildScreens(),
-      items: _navBarsItems(),
-      confineInSafeArea: true,
-      backgroundColor: ColorsManager.white, // Default is Colors.white.
-      handleAndroidBackButtonPress: true, // Default is true.
-      resizeToAvoidBottomInset: true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
-      stateManagement: true, // Default is true.
-      hideNavigationBarWhenKeyboardShows: true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
-      decoration: NavBarDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        colorBehindNavBar: ColorsManager.white,
+    return Scaffold(
+      body: _screens[_selectedIndex], // Only shows the selected screen
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _selectedIndex,
+        selectedItemColor: ColorsManager.primary,
+        unselectedItemColor: CupertinoColors.systemGrey,
+        onTap: _onItemTapped,
+        items: [
+          BottomNavigationBarItem(
+            icon: const Icon(CupertinoIcons.home),
+            label: getTranslated(context, "Home"),
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(CupertinoIcons.calendar),
+            label: getTranslated(context, "Reservations"),
+          ),
+          BottomNavigationBarItem(
+            icon: const ImageIcon(
+              AssetImage("assets/image/basket.png"),
+              size: 25,
+            ),
+            label: getTranslated(context, "Basket"),
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(CupertinoIcons.heart),
+            label: getTranslated(context, "Favorite"),
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(CupertinoIcons.line_horizontal_3_decrease),
+            label: getTranslated(context, "More"),
+          ),
+        ],
       ),
-      popAllScreensOnTapOfSelectedTab: true,
-      popActionScreens: PopActionScreensType.all,
-      itemAnimationProperties: ItemAnimationProperties( // Navigation Bar's items animation properties.
-        duration: Duration(milliseconds: 200),
-        curve: Curves.ease,
-      ),
-      screenTransitionAnimation: ScreenTransitionAnimation( // Screen transition animation on change of selected tab.
-        animateTabTransition: true,
-        curve: Curves.ease,
-        duration: Duration(milliseconds: 200),
-      ),
-      navBarStyle: NavBarStyle.simple, // Choose the nav bar style with this property.
     );
   }
+}
+
+class PageNavigator extends StatefulWidget {
+  final Widget screen;
+  PageNavigator({required this.screen});
+
   @override
-  bool get wantKeepAlive => true; // ** and here
-  List<Widget> _buildScreens() {
-    return const [
-      HomeScreen(),
-      MyReservations(),
-      BasketScreen(),
-      FavoriteScreen(),
-      SettingScreen(),
-    ];
+  _PageNavigatorState createState() => _PageNavigatorState();
+}
+
+class _PageNavigatorState extends State<PageNavigator> {
+  late GlobalKey<NavigatorState> _navigatorKey;
+
+  @override
+  void initState() {
+    super.initState();
+    _navigatorKey = GlobalKey<NavigatorState>();
+    print("InitState called for ${widget.screen.runtimeType}"); // Debugging
   }
-  List<PersistentBottomNavBarItem> _navBarsItems() {
-    return [
-      PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.home),
-        title: (getTranslated(context, "Home")!),
-        activeColorPrimary: ColorsManager.primary,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.calendar),
-        title: (getTranslated(context, "Reservations")!),
-        activeColorPrimary: ColorsManager.primary,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
-      PersistentBottomNavBarItem(
-        icon:Icon(Icons.shopping_cart_outlined),
-        title: (getTranslated(context, "Basket")!),
-        activeColorPrimary: ColorsManager.primary,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.heart),
-        title: (getTranslated(context, "Favorite")!),
-        activeColorPrimary: ColorsManager.primary,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.line_horizontal_3_decrease),
-        title: (getTranslated(context, "More")),
-        activeColorPrimary: ColorsManager.primary,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
-    ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Navigator(
+      key: _navigatorKey,
+      onGenerateRoute: (routeSettings) {
+        return MaterialPageRoute(
+          builder: (context) => widget.screen,
+        );
+      },
+    );
   }
 }

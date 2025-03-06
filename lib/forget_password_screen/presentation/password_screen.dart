@@ -47,7 +47,7 @@ class _NewPasswordScreenScreenState extends State<NewPasswordScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Center(child: Text(getTranslated(context,"Ezhalha")!,style: TextStyle(color: ColorsManager.primary,fontSize: 50.sp,fontWeight: FontWeight.bold),)),
+            Center(child: Text(getTranslated(context,"Maras")!,style: TextStyle(color: ColorsManager.primary,fontSize: 50.sp,fontWeight: FontWeight.bold),)),
             SizedBox(height: 30.h,),
             // Text(getTranslated(context, "Enter your Number")!,style: TextStyle(color: Colors.black87,fontSize: 20.sp),),
             SizedBox(height: 40.h,),

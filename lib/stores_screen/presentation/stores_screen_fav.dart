@@ -4,6 +4,7 @@ import 'package:azhlha/product_screen/presentation/product_screen.dart';
 import 'package:azhlha/shared/alerts.dart';
 import 'package:azhlha/stores_screen/domain/stores_service.dart';
 import 'package:azhlha/utill/app_constants.dart';
+import 'package:azhlha/utill/colors_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -67,7 +68,7 @@ class _StoresScreenFavState extends State<StoresScreenFav> {
         leading: InkWell(child:Icon(CupertinoIcons.back),onTap: (){
           Navigator.pop(context);
         },),
-        title:  Text(getTranslated(context,"Ezhalha")!,style: TextStyle(color: Color.fromRGBO(170, 143, 10, 1),fontSize: 22.sp,fontWeight: FontWeight.bold),),
+        title:  Text(getTranslated(context,"Maras")!,style: TextStyle(color: ColorsManager.primary,fontSize: 22.sp,fontWeight: FontWeight.bold),),
         centerTitle: true,
         // actions: [InkWell(child:Icon(CupertinoIcons.search),),
         //   SizedBox(width: 10.w,)
@@ -118,7 +119,7 @@ class _StoresScreenFavState extends State<StoresScreenFav> {
                           borderRadius: BorderRadius.circular(15.sp),
                           boxShadow:[
                             BoxShadow(
-                              color: Color.fromRGBO(170, 143, 10, 1),
+                              color: ColorsManager.primary,
                               blurRadius: 2,
                             ),
                           ],
@@ -130,7 +131,7 @@ class _StoresScreenFavState extends State<StoresScreenFav> {
                           children: [
                             // Padding(
                             //   padding:  EdgeInsets.only(left: 10.w,right: 10.w),
-                            //   child: InkWell(child:(allList.isNotEmpty&&allList[position] == 1)? Icon(CupertinoIcons.heart_solid ,size: 30.sp,color:Colors.red):Icon(CupertinoIcons.heart ,size: 30.sp,color: Color.fromRGBO(170, 143, 10, 1),),
+                            //   child: InkWell(child:(allList.isNotEmpty&&allList[position] == 1)? Icon(CupertinoIcons.heart_solid ,size: 30.sp,color:Colors.red):Icon(CupertinoIcons.heart ,size: 30.sp,color: ColorsManager.primary,),
                             //     onTap: (){
                             //       if(allList.isEmpty ||allList![position] == 0  ) {
                             //         StoresService.AddProductFav(context,
@@ -213,7 +214,7 @@ class _StoresScreenFavState extends State<StoresScreenFav> {
                         ),
                       ),
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProductScreen(Id: stores[position].id!,catName:getTranslated(context,"Ezhalha")!)));
+                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProductScreen(Id: stores[position].id!,catName:getTranslated(context,"Maras")!)));
 
                       },
                     ),
@@ -257,7 +258,7 @@ class _StoresScreenFavState extends State<StoresScreenFav> {
 
                           boxShadow:[
                             BoxShadow(
-                              color: Color.fromRGBO(170, 143, 10, 1),
+                              color: ColorsManager.primary,
                               offset: Offset(0.0, 1.0),
                               blurRadius: 5,
                             ),
@@ -278,7 +279,7 @@ class _StoresScreenFavState extends State<StoresScreenFav> {
                                   ),
                                   borderRadius: BorderRadius.circular(30.sp),
                                   border: Border.all(
-                                      color: Color.fromRGBO(170, 143, 10, 1)
+                                      color: ColorsManager.primary
                                   )
                               ),
                             ),
@@ -335,7 +336,7 @@ class _StoresScreenFavState extends State<StoresScreenFav> {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                InkWell(child: (allList.isNotEmpty&&allList[position] == 1)? Icon(CupertinoIcons.heart_solid ,size: 30.sp,color:Colors.red):Icon(CupertinoIcons.heart ,size: 30.sp,color: Color.fromRGBO(170, 143, 10, 1),),
+                                InkWell(child: (allList.isNotEmpty&&allList[position] == 1)? Icon(CupertinoIcons.heart_solid ,size: 30.sp,color:Colors.red):Icon(CupertinoIcons.heart ,size: 30.sp,color: ColorsManager.primary,),
                                   onTap: (){
                                     if(allList.isEmpty ||allList![position] == 0  ) {
                                       StoresService.AddProductFav(context,
@@ -390,7 +391,7 @@ class _StoresScreenFavState extends State<StoresScreenFav> {
                         ),
                       ),
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProductScreen(Id: stores[position].id!,catName: getTranslated(context,"Ezhalha")!,)));
+                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProductScreen(Id: stores[position].id!,catName: getTranslated(context,"Maras")!,)));
                       },
                     ),
                   );

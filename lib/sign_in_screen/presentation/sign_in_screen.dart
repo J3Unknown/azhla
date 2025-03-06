@@ -69,9 +69,9 @@ class _SignInScreenState extends State<SignInScreen> {
       backgroundColor: Colors.white,
       body:  LoadingOverlay(
         progressIndicator: SpinKitSpinningLines(
-        color: Color.fromRGBO(254, 222, 0, 1),
+        color: ColorsManager.primary0_1Transparency,
     ),
-    color: Color.fromRGBO(254, 222, 0, 0.1),
+    color: ColorsManager.primary,
     isLoading: isLoading,
     child: isLoading == true
     ? Container():
@@ -79,7 +79,7 @@ class _SignInScreenState extends State<SignInScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Center(child: Text(getTranslated(context,"Ezhalha")!,style: TextStyle(color: ColorsManager.primary ,fontSize: 50.sp,fontWeight: FontWeight.bold),)),
+          Center(child: Text(getTranslated(context,"Maras")!,style: TextStyle(color: ColorsManager.primary ,fontSize: 50.sp,fontWeight: FontWeight.bold),)),
           SizedBox(height: 30.h,),
           Text(getTranslated(context, "Sign In")!,style: TextStyle(color: Colors.black87,fontSize: 20.sp),),
           SizedBox(height: 40.h,),
@@ -105,7 +105,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: Row(
                       children: [
                         SizedBox(width: 5.h,),
-                        (locale.languageCode == "en")?Text("+965",style: TextStyle(color: Colors.grey),):Container(),
+                        (locale.languageCode == "en")?Text("+974",style: TextStyle(color: Colors.grey),):Container(),
                         Container(
                           height: 50.h,
                           width: 0.65.sw,
@@ -122,7 +122,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               )
                           ),
                         ),
-                        (locale.languageCode == "ar")?Text("965+",style: TextStyle(color: Colors.grey),):Container()
+                        (locale.languageCode == "ar")?Text("974+",style: TextStyle(color: Colors.grey),):Container()
                       ],
                     ),
                   ),
@@ -253,7 +253,7 @@ class _SignInScreenState extends State<SignInScreen> {
     setState(() {
       isLoading = true;
     });
-    UserService.login(context,"965"+phoneController.text,passwordController.text).then((data) async {
+    UserService.login(context,"974"+phoneController.text,passwordController.text).then((data) async {
       if(data == null){
         setState(() {
           isLoading = false;

@@ -6,6 +6,7 @@ import 'package:azhlha/home_screen/data/home_object.dart';
 import 'package:azhlha/product_screen/presentation/product_screen.dart';
 import 'package:azhlha/stores_screen/presentation/stores_screen.dart';
 import 'package:azhlha/utill/app_constants.dart';
+import 'package:azhlha/utill/assets_manager.dart';
 import 'package:azhlha/utill/localization_helper.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,6 +19,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../date_time_screen/presentation/order_seller_screen.dart';
 import '../../home_screen/domain/home_service.dart';
 import '../../shared/alerts.dart';
+import '../../utill/colors_manager.dart';
 
 class CategoriesScreen extends StatefulWidget {
   late List<Children> children;
@@ -94,7 +96,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         leading: InkWell(child:Icon(CupertinoIcons.back),onTap: (){Navigator.pop(context);},),
-        title:  Text(widget.catName,style: TextStyle(color: Color.fromRGBO(170, 143, 10, 1),fontSize: 22.sp,fontWeight: FontWeight.bold),),
+        title:  Text(widget.catName,style: TextStyle(color: ColorsManager.primary,fontSize: 22.sp,fontWeight: FontWeight.bold),),
         centerTitle: true,
         // actions: [InkWell(child:Icon(CupertinoIcons.search),),
         //   SizedBox(width: 10.w,)
@@ -123,7 +125,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           //     decoration: BoxDecoration(
           //       borderRadius: BorderRadius.circular(10.sp),
           //       border: Border.all(
-          //         color: Color.fromRGBO(170, 143, 10, 1)
+          //         color: ColorsManager.primary
           //       )
           //     ),
           //     child: DropdownButtonHideUnderline(
@@ -168,7 +170,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           // SizedBox(height: 10.h,),
           Padding(
             padding: EdgeInsets.only(left: 10.w,right: 10.w),
-            child: Text(getTranslated(context, "Categorise")!,style: TextStyle(fontSize: 20.sp),),
+            child: Text(getTranslated(context, "Categories")!,style: TextStyle(fontSize: 20.sp),),
           ),
           SizedBox(height: 20.h,),
           Center(
@@ -180,10 +182,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     width: 90.w,
                     height: 100.h,
                     decoration: BoxDecoration(
-                      color: (showAll != true)?Colors.white:Color.fromRGBO(175, 147, 92, 1),
+                      color: ColorsManager.white,
                       borderRadius: BorderRadius.circular(5.sp),
                       border: Border.all(
-                          color: Color.fromRGBO(170, 143, 10, 1)
+                          color:  (showAll != true)?ColorsManager.grey1:ColorsManager.primary
                       ),
                       boxShadow:[
                         BoxShadow(
@@ -202,7 +204,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           width: 50.w,
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage("assets/image/all.png"),
+                                image: AssetImage(imagePath+AssetsManager.calender,),
                               )
                           ),
                         ),
@@ -232,7 +234,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     }
                   },
                 ),
-                Container(
+                SizedBox(
                   height: 100.h,
                   width: 0.7.sw,
                   child: ListView.builder(
@@ -247,19 +249,19 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                             height: 80.h,
                             decoration: BoxDecoration(
                               border: Border.all(
-                                  color: Color.fromRGBO(170, 143, 10, 1)
+                                  color: (show[position] != true)? ColorsManager.grey1:ColorsManager.primary
                               ),
                               // border: Border.all(
-                              //       color: Color.fromRGBO(170, 143, 10, 1)
+                              //       color: ColorsManager.primary
                               //   ),
-                              color: (show[position] != true)?Colors.white:Color.fromRGBO(175, 147, 92, 1),                          borderRadius: BorderRadius.circular(5.sp),
+                              color: ColorsManager.white,
+                              borderRadius: BorderRadius.circular(5.sp),
                               boxShadow:[
-                                  BoxShadow(
-                                    color: Color.fromRGBO(170, 143, 10, 1),
-                                    blurRadius: 2,
-                                  ),
-                                ],
-
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  blurRadius: 4,
+                                ),
+                              ],
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -271,7 +273,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(30.sp),
                                       border: Border.all(
-                                          color: Color.fromRGBO(170, 143, 10, 1)
+                                          color: ColorsManager.primary
                                       ),
                                     image: DecorationImage(
                                       image: NetworkImage(AppConstants.MAIN_URL_IMAGE+ sellersChildern![position].image!),
@@ -321,7 +323,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             padding:  EdgeInsets.only(left: 10.w,right: 10.w),
             child: Text(getTranslated(context, "Stores")!,style: TextStyle(fontSize: 20.sp),),
           ),
-           SingleChildScrollView(
+          SingleChildScrollView(
             child: Container(
               height: 0.55.sh,
               width: 1.sw,
@@ -337,160 +339,160 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               ),
               child:  LoadingOverlay(
                 progressIndicator: SpinKitSpinningLines(
-                  color: Color.fromRGBO(254, 222, 0, 1),
+                  color: ColorsManager.primary,
                 ),
-                color: Color.fromRGBO(254, 222, 0, 0.1),
+                color: ColorsManager.primary0_1Transparency,
                 isLoading: isLoading2,
-                child: isLoading2 == true
-                    ? Container()
-
-                    :ListView.builder(
-                scrollDirection: Axis.vertical,
-                itemCount: sellers2.length,
-                itemBuilder: (context, position) {
-                  return Padding(
-                    padding:  EdgeInsets.only(top: 5.h,left: 20.w,right: 20.w,bottom: 5.h),
-                    child: InkWell(
-                      child: Container(
-                        width: 0.75.sw,
-                        height: 120.h,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20.sp),
-
-                          boxShadow:[
-                            BoxShadow(
-                              color: Color.fromRGBO(170, 143, 10, 1),
-                              offset: Offset(0.0, 1.0),
-                              blurRadius: 5,
-                            ),
-                          ],
-
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            SizedBox(width: 10.w,),
-                            Container(
-                              height: 50.h,
-                              width: 50.w,
-
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage(AppConstants.MAIN_URL_IMAGE+sellers2[position]!.imgPath!),
-                                  ),
-                                  borderRadius: BorderRadius.circular(30.sp),
-                                  border: Border.all(
-                                      color: Color.fromRGBO(170, 143, 10, 1)
-                                  )
+                child: isLoading2 == true ? Container()
+                :ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: sellers2.length,
+                  itemBuilder: (context, position) {
+                    return Padding(
+                      padding:  EdgeInsets.symmetric(vertical: 10.h,horizontal: 20.w),
+                      child: InkWell(
+                        child: Container(
+                          width: 0.75.sw,
+                          height: 120.h,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20.sp),
+                            border: Border.all(color: ColorsManager.primary.withOpacity(0.3)),
+                            boxShadow:[
+                              BoxShadow(
+                                color: ColorsManager.black.withOpacity(0.2),
+                                offset: const Offset(3, 4),
+                                blurRadius: 5,
                               ),
-                            ),
-                            SizedBox(width: 30.w,),
-                            Container(
-                              height: 150.h,
-                              width: 0.45.sw,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    sellers2[position].name.toString(),
-                                    style: TextStyle(fontSize: 24.sp,color: Color.fromRGBO(13, 24, 99, 1),fontWeight: FontWeight.bold),
-                                  ),
-                                  // Text(
-                                  //   sellers[position].name.toString(),
-                                  //   style: TextStyle(fontSize: 15.0),
-                                  // ),
-                                  SizedBox(height: 10.h,),
-                                  Row(
-                                    children: [
-                                      Icon(CupertinoIcons.location_solid,color: Color.fromRGBO(166, 139, 12, 1),),
-                                      Text(
-                                        sellers2[position].details.toString(),
-                                        style: TextStyle(fontSize: 15.sp,color: Colors.grey),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(width: 50.w,),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  height: 30.h,
-                                  width:30.w,
-                                    decoration: BoxDecoration(
-                                      color: Color.fromRGBO(175, 147, 92, 1),
-                                      borderRadius: BorderRadius.circular(15.sp),
+                            ],
+
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(width: 10.w,),
+                              Container(
+                                height: 50.h,
+                                width: 50.w,
+
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: NetworkImage(AppConstants.MAIN_URL_IMAGE+sellers2[position]!.imgPath!),
                                     ),
-                                    child:
-                                    Center(child: Text("35%",style: TextStyle(fontSize: 10.sp,color: Colors.white),),)),
-                                SizedBox(height: 30.h,),
-                                InkWell(child: (allList.isNotEmpty&&allList[position] == 1)? Icon(CupertinoIcons.heart_solid ,size: 30.sp,color:Colors.red):Icon(CupertinoIcons.heart ,size: 30.sp,color: Color.fromRGBO(170, 143, 10, 1),),
-                                  onTap: () async{
-                                    SharedPreferences prefs = await SharedPreferences.getInstance();
-                                    if(prefs.containsKey("token")) {
-                                      if (allList![position] == 0) {
-                                        CategoriesService.AddSellerFav(context,
-                                            sellers2[position].id.toString())
-                                            .then((value) {
-                                          log(value.toString());
-                                          setState(() {
-                                            if (value == true) {
-                                              loadData();
-                                            }
-                                          });
-                                          //log(basket.length.toString());
-                                        });
-                                      }
-                                      else {
-                                        CategoriesService.DeleteSellerFav(
-                                            context,
-                                            sellers2[position].id.toString())
-                                            .then((value) {
-                                          log(value.toString());
-                                          setState(() {
-                                            if (value == true) {
-                                              loadData();
-                                            }
-                                          });
-                                          //log(basket.length.toString());
-                                        });
-                                      }
-                                    }else{
-                                      showToastLogin(context,getTranslated(context, "please login")!);
-
-                                    }
-                                  },
-                                )
-                              ],
-                            ),
-                          ],
+                                    borderRadius: BorderRadius.circular(30.sp),
+                                    border: Border.all(
+                                        color: ColorsManager.primary
+                                    )
+                                ),
+                              ),
+                              SizedBox(width: 20.w,),
+                              Container(
+                                constraints: BoxConstraints(
+                                  maxWidth: 0.55.sw,
+                                  maxHeight: 150.h,
+                                ),
+                                //width: 0.55.sw,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      sellers2[position].name.toString(),
+                                      style: TextStyle(fontSize: 24.sp,color: ColorsManager.deepBlue,fontWeight: FontWeight.bold),
+                                    ),
+                                    // Text(
+                                    //   sellers[position].name.toString(),
+                                    //   style: TextStyle(fontSize: 15.0),
+                                    // ),
+                                    SizedBox(height: 10.h,),
+                                    Row(
+                                      children: [
+                                        Icon(CupertinoIcons.location_solid,color: ColorsManager.primary,),
+                                        Text(
+                                          sellers2[position].details.toString(),
+                                          style: TextStyle(fontSize: 15.sp,color: Colors.grey),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              //SizedBox(width: 50.w,),
+                              const Spacer(),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Container(
+                                      height: 30.h,
+                                      width:30.w,
+                                      decoration: BoxDecoration(
+                                        color: ColorsManager.primary,
+                                        borderRadius: BorderRadius.circular(15.sp),
+                                      ),
+                                      child: Center(child: Text("35%",style: TextStyle(fontSize: 10.sp,color: Colors.white),),)
+                                    ),
+                                    InkWell(child: (allList.isNotEmpty&&allList[position] == 1)? Icon(CupertinoIcons.heart_solid ,size: 30.sp,color:Colors.red):Icon(CupertinoIcons.heart ,size: 30.sp,color: ColorsManager.primary,),
+                                      onTap: () async{
+                                        SharedPreferences prefs = await SharedPreferences.getInstance();
+                                        if(prefs.containsKey("token")) {
+                                          if (allList![position] == 0) {
+                                            CategoriesService.AddSellerFav(context, sellers2[position].id.toString()).then((value) {
+                                              log(value.toString());
+                                              setState(() {
+                                                if (value == true) {
+                                                  loadData();
+                                                }
+                                              });
+                                              //log(basket.length.toString());
+                                            });
+                                          }
+                                          else {
+                                            CategoriesService.DeleteSellerFav(context, sellers2[position].id.toString()).then((value) {
+                                              log(value.toString());
+                                              setState(() {
+                                                if (value == true) {
+                                                  loadData();
+                                                }
+                                              });
+                                              //log(basket.length.toString());
+                                            });
+                                          }
+                                        }else{
+                                          showToastLogin(context,getTranslated(context, "please login")!);
+                                        }
+                                      },
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
+                        onTap: () async{
+                          SharedPreferences prefs = await SharedPreferences.getInstance();
+
+                          // Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>  OrderSellerScreen(categoryId: sellers![position].pivot!.categoryId!, sellerId: sellers![position].pivot!.sellerId!, imgPath: sellers![position].imgPath!,)));
+
+                          if(prefs.containsKey("OrderDate")){
+                            date = prefs.getString("OrderDate")!;}
+                          else{
+                            date =dateTime.year.toString()+"-"+dateTime.month.toString()+"-"+dateTime.day.toString();
+                          }
+                          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => StoresScreen(categoryId: sellers2![position].pivot!.categoryId!, catName: widget.catName,sellerId: sellers2![position].pivot!.sellerId!, imgPath: sellers2![position].imgPath!,date: date,)));
+                        },
                       ),
-                      onTap: () async{
-                        SharedPreferences prefs = await SharedPreferences.getInstance();
-
-                        // Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>  OrderSellerScreen(categoryId: sellers![position].pivot!.categoryId!, sellerId: sellers![position].pivot!.sellerId!, imgPath: sellers![position].imgPath!,)));
-
-                        if(prefs.containsKey("OrderDate")){
-                          date = prefs.getString("OrderDate")!;}
-                        else{
-                          date =dateTime.year.toString()+"-"+dateTime.month.toString()+"-"+dateTime.day.toString();
-                        }
-                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => StoresScreen(categoryId: sellers2![position].pivot!.categoryId!, catName: widget.catName,sellerId: sellers2![position].pivot!.sellerId!, imgPath: sellers2![position].imgPath!,date: date,)));
-                      },
-                    ),
-                  );
-                },
-              )),
+                    );
+                  },
+                )
+              ),
             ),
           ),
-            SizedBox(height: 30.h,),
-        ],),
+          SizedBox(height: 10.h,),
+        ],
+        ),
       )),
     );
   }
@@ -501,7 +503,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     HomeService.home(context,catId,widget.govId).then((value){
       log(value.toString());
       setState(() {
-        sellers2 = value!.categories![0].children![0]!.sellers!;
+        sellers2 = value!.categories![0].children![0].sellers!;
         // initawaits();
         setState(() {
           isLoading2 = false;
