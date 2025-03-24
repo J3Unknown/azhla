@@ -29,6 +29,13 @@ class AssetsManager{
   static const String info = '/infoIcon.png';
   static const String handShake = '/handShakeIcon.png';
   static const String specialCalender = '/specialCalenderIcon.png';
+  static const String eventsCalender = '/events-calendar-events-calendar.png';
   static const String calender2 = '/calenderIcon.png';
   static const String todoList = '/todoListIcon.png';
+  static const String whatsappLogo = '/whatsappLogo.png';
+  static const String facebookLogo = '/facebookLogo.png';
+  static const String instagramLogo = '/instagramLogo.png';
+  static const String specialRequestAlert = '/special_request_add_icon.png';
+  static const String menIcon = '/men.png';
+  static const String womenIcon = '/women.png';
 }

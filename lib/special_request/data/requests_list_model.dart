@@ -31,7 +31,6 @@ class Result{
   int? id;
   int? userId;
   int? categoryId;
-  String? familyName;
   int? areaId;
   int? budget;
   String? date;
@@ -48,7 +47,6 @@ class Result{
     this.id,
     this.userId,
     this.categoryId,
-    this.familyName,
     this.areaId,
     this.budget,
     this.date,
@@ -66,7 +64,6 @@ class Result{
     id = json['id'];
     userId = json['user_id'];
     categoryId = json['category_id'];
-    familyName = json['family_name'];
     areaId = json['area_id'];
     budget = json['budget'];
     date = json['date'];
@@ -90,7 +87,6 @@ class Result{
     data['id'] = id;
     data['user_id'] = userId;
     data['category_id'] = categoryId;
-    data['family_name'] = familyName;
     data['area_id'] = areaId;
     data['budget'] = budget;
     data['date'] = date;

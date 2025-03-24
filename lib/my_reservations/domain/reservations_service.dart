@@ -16,7 +16,7 @@ class ReservationService{
   static Future<List<ReservationsObject>?> reservations(BuildContext context) async {
     // Uri
     var request = MultipartRequest(
-        'GET', Uri.parse(AppConstants.MAIN_URL + "myOrders"));
+        'GET', Uri.parse(AppConstants.MAIN_URL + "api/myOrders"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);
@@ -61,7 +61,7 @@ class ReservationService{
   static Future<bool?> cancelOrders(BuildContext context,String id,String reason) async {
     // Uri
     var request = MultipartRequest(
-        'POST', Uri.parse(AppConstants.MAIN_URL + "cancel_order"));
+        'POST', Uri.parse(AppConstants.MAIN_URL + "api/cancel_order"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);

@@ -87,8 +87,8 @@ class _AddAddressState extends State<AddAddress> with SingleTickerProviderStateM
     });
   }
 
-  void loadRegions(int cityId) {
-    AddressService.getRegions(context, cityId).then((value) {
+  void loadRegions() {
+    AddressService.getRegions(context).then((value) {
       setState(() {
         regions = value ?? [];
       });
@@ -195,7 +195,7 @@ class _AddAddressState extends State<AddAddress> with SingleTickerProviderStateM
                       setState(() {
                         selectedCity = value;
                         selectedRegion = null;
-                        loadRegions(value!.id!);
+                        loadRegions();
                       });
                     },
                   ),

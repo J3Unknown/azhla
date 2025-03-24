@@ -16,7 +16,7 @@ class StoresService{
   static Future<List<StoresObject>?> store(BuildContext context,int categoryId,int sellerId,String date) async {
     // Uri
     var request = MultipartRequest(
-        'GET', Uri.parse(AppConstants.MAIN_URL + "products?category_id=$categoryId&seller_id=$sellerId&date=$date"));
+        'GET', Uri.parse(AppConstants.MAIN_URL + "/api/products?category_id=$categoryId&seller_id=$sellerId&date=$date"));
 
     // Headers
     Locale locale = await getLocale();
@@ -59,7 +59,7 @@ class StoresService{
   static Future<List<StoresObject>?> storeMost(BuildContext context,int categoryId,int sellerId,String date) async {
     // Uri
     var request = MultipartRequest(
-        'GET', Uri.parse(AppConstants.MAIN_URL + "most_selling?category_id=$categoryId&seller_id=$sellerId&date=$date"));
+        'GET', Uri.parse(AppConstants.MAIN_URL + "/api/most_selling?category_id=$categoryId&seller_id=$sellerId&date=$date"));
 
     // Headers
     Locale locale = await getLocale();
@@ -103,7 +103,7 @@ class StoresService{
   static Future<List<StoresObject>?> store2(BuildContext context,int sellerId) async {
     // Uri
     var request = MultipartRequest(
-        'GET', Uri.parse(AppConstants.MAIN_URL + "products?seller_id=$sellerId"));
+        'GET', Uri.parse(AppConstants.MAIN_URL + "/api/products?seller_id=$sellerId"));
 
     // Headers
     Locale locale = await getLocale();
@@ -145,7 +145,7 @@ class StoresService{
   static Future<List<StoresObject>?> storeMost2(BuildContext context,int sellerId) async {
     // Uri
     var request = MultipartRequest(
-        'GET', Uri.parse(AppConstants.MAIN_URL + "most_selling?seller_id=$sellerId"));
+        'GET', Uri.parse(AppConstants.MAIN_URL + "/api/most_selling?seller_id=$sellerId"));
 
     // Headers
     Locale locale = await getLocale();
@@ -187,7 +187,7 @@ class StoresService{
   static Future<bool?> AddProductFav(BuildContext context,String id) async {
     // Uri
     var request = MultipartRequest(
-        'POST', Uri.parse(AppConstants.MAIN_URL + "favourite_products"));
+        'POST', Uri.parse(AppConstants.MAIN_URL + "/api/favourite_products"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);
@@ -238,7 +238,7 @@ class StoresService{
   static Future<bool?> deleteProductFav(BuildContext context,String id) async {
     // Uri
     var request = MultipartRequest(
-        'DELETE', Uri.parse(AppConstants.MAIN_URL + "favourite_products?favourite_id=$id"));
+        'DELETE', Uri.parse(AppConstants.MAIN_URL + "/api/favourite_products?favourite_id=$id"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);
@@ -289,7 +289,7 @@ class StoresService{
   static Future<List<dynamic>?> getFav(BuildContext context) async {
     // Uri
     var request = MultipartRequest(
-        'GET', Uri.parse(AppConstants.MAIN_URL + "myFavourite_products"));
+        'GET', Uri.parse(AppConstants.MAIN_URL + "/api/myFavourite_products"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);

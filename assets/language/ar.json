@@ -189,5 +189,7 @@
   "Type Here": "اكتب هنا",
   "FileDownload.pdf": "تنزيل_الملف.pdf",
   "Request No.": "رقم الطلب",
-  "Add Special Request": "الطلبات الخاصة"
+  "Add Special Request": "الطلبات الخاصة",
+  "Request Added Successfully": "تمت اضافة الطلب",
+  "Your Event Added but it's sent for admins for approval": "تم اضافة طلبك، ولكن تم ارساله للمسؤولين ليتم الموافقة عليه"
 }

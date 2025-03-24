@@ -10,6 +10,7 @@ import 'package:place_picker/widgets/place_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../shared/validations.dart';
+import '../../utill/colors_manager.dart';
 import '../../utill/localization_helper.dart';
 
 class EditEventGender extends StatefulWidget {
@@ -152,7 +153,7 @@ class _EditEventGenderState extends State<EditEventGender> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(getTranslated(context, "Add Event")!,style: TextStyle(color: Color.fromRGBO(170, 143, 10, 1),fontSize: 22.sp,fontWeight: FontWeight.bold),),
+        title: Text(getTranslated(context, "Add Event")!,style: TextStyle(color: ColorsManager.primary,fontSize: 22.sp,fontWeight: FontWeight.bold),),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -168,7 +169,7 @@ class _EditEventGenderState extends State<EditEventGender> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.sp),
                     border: Border.all(
-                        color: Color.fromRGBO(170, 143, 10, 1)
+                        color: ColorsManager.primary
                     )
                 ),
                 child: DropdownButtonHideUnderline(
@@ -246,7 +247,7 @@ class _EditEventGenderState extends State<EditEventGender> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.sp),
                         border: Border.all(
-                            color: Color.fromRGBO(170, 143, 10, 1)
+                            color: ColorsManager.primary
                         )
                     ),
                     child: TextFormField(
@@ -270,7 +271,7 @@ class _EditEventGenderState extends State<EditEventGender> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.sp),
                         border: Border.all(
-                            color: Color.fromRGBO(170, 143, 10, 1)
+                            color: ColorsManager.primary
                         )
                     ),
                     child: TextFormField(
@@ -293,7 +294,7 @@ class _EditEventGenderState extends State<EditEventGender> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.sp),
                         border: Border.all(
-                            color: Color.fromRGBO(170, 143, 10, 1)
+                            color: ColorsManager.primary
                         )
                     ),
                     child: TextFormField(
@@ -314,7 +315,7 @@ class _EditEventGenderState extends State<EditEventGender> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.sp),
                           border: Border.all(
-                              color: Color.fromRGBO(170, 143, 10, 1)
+                              color: ColorsManager.primary
                           )
                       ),
                       child: Center(child: Text((manWord == "")? getTranslated(context, "location")!:manWord)),
@@ -369,7 +370,7 @@ class _EditEventGenderState extends State<EditEventGender> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.sp),
                         border: Border.all(
-                            color: Color.fromRGBO(170, 143, 10, 1)
+                            color: ColorsManager.primary
                         )
                     ),
                     child: TextFormField(
@@ -392,7 +393,7 @@ class _EditEventGenderState extends State<EditEventGender> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.sp),
                         border: Border.all(
-                            color: Color.fromRGBO(170, 143, 10, 1)
+                            color: ColorsManager.primary
                         )
                     ),
                     child: TextFormField(
@@ -415,7 +416,7 @@ class _EditEventGenderState extends State<EditEventGender> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.sp),
                         border: Border.all(
-                            color: Color.fromRGBO(170, 143, 10, 1)
+                            color: ColorsManager.primary
                         )
                     ),
                     child: TextFormField(
@@ -436,7 +437,7 @@ class _EditEventGenderState extends State<EditEventGender> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.sp),
                           border: Border.all(
-                              color: Color.fromRGBO(170, 143, 10, 1)
+                              color: ColorsManager.primary
                           )
                       ),
                       child: Center(child: Text((womanWord == "")? getTranslated(context, "location")!:womanWord)),
@@ -492,7 +493,7 @@ class _EditEventGenderState extends State<EditEventGender> {
                 },
                 child: Text(getTranslated(context, "Confirm")!),
                 style: ElevatedButton.styleFrom(
-                  primary:  Color.fromRGBO(170, 143, 10, 1),
+                  primary:  ColorsManager.primary,
                   padding: EdgeInsets.symmetric(
                       horizontal: size.width * 0.3, vertical: 15),
                   textStyle: TextStyle(fontSize: 18),

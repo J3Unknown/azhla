@@ -16,7 +16,7 @@ class PaymentServcie{
   static Future<bool?> confirmOrder(BuildContext context,String address_id,String payment_type) async {
     // Uri
     var request = MultipartRequest(
-        'POST', Uri.parse(AppConstants.MAIN_URL + "add_order"));
+        'POST', Uri.parse(AppConstants.MAIN_URL + "api/add_order"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);
@@ -76,7 +76,7 @@ class PaymentServcie{
   static Future<double?> applyCopon(BuildContext context,String price,String code) async {
     // Uri
     var request = MultipartRequest(
-        'POST', Uri.parse(AppConstants.MAIN_URL + "check_availabilty"));
+        'POST', Uri.parse(AppConstants.MAIN_URL + "api/check_availabilty"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);
@@ -136,7 +136,7 @@ class PaymentServcie{
   static Future<String?> getPaymentScreen(BuildContext context,String methodName,String orderId,String paymentOption) async {
     // Uri
     var request = MultipartRequest(
-        'POST', Uri.parse(AppConstants.MAIN_URL + "pay"));
+        'POST', Uri.parse(AppConstants.MAIN_URL + "api/pay"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);

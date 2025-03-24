@@ -46,43 +46,54 @@ class _SpecialRequestsListState extends State<SpecialRequestsList> {
         ),
         title: Text(getTranslated(context, KeysManager.specialRequest)!, style: const TextStyle(color: ColorsManager.primary),),
         actions: [
-          IconButton(
-            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => AddSpecialRequest())), //search button action
-            icon: const Icon(IconsManager.searchIcon)
+          Padding(
+            padding: const EdgeInsets.all(5),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: ColorsManager.primary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50)
+                ),
+                padding: const EdgeInsets.all(8), // Adjust padding if needed
+                minimumSize: const Size(45, 40), // Set button size
+              ),
+              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => AddSpecialRequest())), //search button action
+              child: const Icon(IconsManager.addIcon)
+            ),
           ),
         ],
       ),
-    body: LoadingOverlay(
-        progressIndicator: const SpinKitSpinningLines(
-        color: ColorsManager.primary,
-      ),
-      color: ColorsManager.primary0_1Transparency,
-      isLoading: isLoading,
-      child: isLoading == true ?
-      Container():
-      SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  readRecipient(),
-                  const SizedBox(width: 10,),
-                  const Text('Means admin respond to your request', style: TextStyle(color: ColorsManager.primary),),
-                ],
-              ),
-              const SizedBox(height: 10,),
-              ListView.separated(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) => cardBuilder(context, index, AssetsManager.location, '${getTranslated(context, 'Request No.')} ${_requestsListModel!.result![index].requestNumber}', _requestsListModel!.result![index].category!.name, _requestsListModel!.result![index].familyName, _requestsListModel!.result![index].createdAt , _requestsListModel!.result![index].status!.replaceAll(StringsManager.underScore, StringsManager.space)),
-                separatorBuilder: (context, index) => const SizedBox(height: 10,),
-                itemCount: _requestsListModel!.result!.length
+      body: LoadingOverlay(
+          progressIndicator: const SpinKitSpinningLines(
+          color: ColorsManager.primary,
+        ),
+        color: ColorsManager.primary0_1Transparency,
+        isLoading: isLoading,
+        child: isLoading == true ?
+        Container():
+        SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    readRecipient(),
+                    const SizedBox(width: 10,),
+                    const Text('Means admin respond to your request', style: TextStyle(color: ColorsManager.primary),),
+                  ],
+                ),
+                const SizedBox(height: 10,),
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) => cardBuilder(context, index, AssetsManager.location, '${getTranslated(context, 'Request No.')} ${_requestsListModel!.result![index].requestNumber}', _requestsListModel!.result![index].category!.name, _requestsListModel!.result![index].createdAt , _requestsListModel!.result![index].status!.replaceAll(StringsManager.underScore, StringsManager.space)),
+                  separatorBuilder: (context, index) => const SizedBox(height: 10,),
+                  itemCount: _requestsListModel!.result!.length
                 ),
               ],
             ),
@@ -92,7 +103,7 @@ class _SpecialRequestsListState extends State<SpecialRequestsList> {
     );
   }
 
-  Widget cardBuilder(context, index, image, requestNo, type, governance, date, status) {
+  Widget cardBuilder(context, index, image, requestNo, type, date, status) {
     return InkWell(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => SpecialRequestChat(title: requestNo, request: _requestsListModel!, index: index,)));
@@ -125,7 +136,7 @@ class _SpecialRequestsListState extends State<SpecialRequestsList> {
                   children: [
                     Text(requestNo, style: TextStyle(color: ColorsManager.deepBlue, fontWeight: FontWeight.bold, fontSize: 17.w),),
                     const SizedBox(height: 5,),
-                    Text('$type - $governance', style: TextStyle(color: ColorsManager.deepBlue, fontSize: 14.w),),
+                    Text(type, style: TextStyle(color: ColorsManager.deepBlue, fontSize: 14.w),),
                     const SizedBox(height: 5,),
                     Row(
                       children: [

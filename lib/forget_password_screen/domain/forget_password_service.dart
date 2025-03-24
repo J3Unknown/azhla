@@ -16,7 +16,7 @@ class ForgetPasswordService{
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     //log("data " + email+"  "+ password);
-    Uri uri = Uri.parse(AppConstants.MAIN_URL+"reset_password");
+    Uri uri = Uri.parse(AppConstants.MAIN_URL+"api/reset_password");
 
     log("Headers");
     Locale locale = await getLocale();

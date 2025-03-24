@@ -19,16 +19,8 @@ class AddAddressProfile extends StatefulWidget {
 }
 
 class _AddAddressProfileState extends State<AddAddressProfile> {
-  final List<String> items = [
-    'Item1',
-    'Item2',
-    'Item3',
-    'Item4',
-  ];
   String? selectedValue;
-  List<CitiesObject> cities = [];
   List<CitiesObject> regions = [];
-  CitiesObject? selectedCity;
   CitiesObject? selectedRegion;
   TextEditingController blockController = TextEditingController();
   TextEditingController streetCotroller = TextEditingController();
@@ -38,7 +30,8 @@ class _AddAddressProfileState extends State<AddAddressProfile> {
 
   @override
   void initState() {
-    loadCities();
+    //loadCities();
+    loadRegions();
     super.initState();
   }
 
@@ -98,7 +91,7 @@ class _AddAddressProfileState extends State<AddAddressProfile> {
                         color: Theme.of(context).hintColor,
                       ),
                     ),
-                    items: cities
+                    items: regions
                         .map((CitiesObject item) => DropdownMenuItem<CitiesObject>(
                       value: item,
                       child: Text(
@@ -109,12 +102,11 @@ class _AddAddressProfileState extends State<AddAddressProfile> {
                       ),
                     ))
                         .toList(),
-                    value: selectedCity,
+                    value: selectedRegion,
                     onChanged: (CitiesObject? value) {
                       setState(() {
-                        selectedCity = value;
-                        selectedRegion = null;
-                        loadRegions(selectedCity!.id!);
+                        selectedRegion = value;
+                        loadRegions();
                       });
                     },
                     buttonStyleData: const ButtonStyleData(
@@ -152,8 +144,7 @@ class _AddAddressProfileState extends State<AddAddressProfile> {
                         color: Theme.of(context).hintColor,
                       ),
                     ),
-                    items: regions
-                        .map((CitiesObject item) => DropdownMenuItem<CitiesObject>(
+                    items: regions.map((CitiesObject item) => DropdownMenuItem<CitiesObject>(
                       value: item,
                       child: Text(
                         item.name!,
@@ -161,8 +152,7 @@ class _AddAddressProfileState extends State<AddAddressProfile> {
                           fontSize: 16.sp,
                         ),
                       ),
-                    ))
-                        .toList(),
+                    )).toList(),
                     value: selectedRegion,
                     onChanged: (CitiesObject? value) {
                       setState(() {
@@ -381,18 +371,10 @@ class _AddAddressProfileState extends State<AddAddressProfile> {
     );
   }
 
-  void loadCities() {
-    AddressService.getCities(context).then((value) {
-      log(value.toString());
-      setState(() {
-        cities = value!;
-      });
-      log(cities.length.toString());
-    });
-  }
-  void loadRegions(int id) {
-    AddressService.getRegions(context,id).then((value) {
-      log(value.toString());
+  void loadRegions() {
+    log('loading regions');
+    AddressService.getRegions(context).then((value) {
+      log('value is: '+value.toString());
       setState(() {
         regions = value!;
       });

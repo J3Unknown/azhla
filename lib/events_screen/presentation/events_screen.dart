@@ -100,9 +100,39 @@ class _EventsScreenState extends State<EventsScreen> {
               );
             },
           ),
-          SizedBox(width: 10.w,),
-         // InkWell(child:Icon(CupertinoIcons.search),),
-          //SizedBox(width: 10.w,)
+          // Padding(
+          //   padding: const EdgeInsets.all(5),
+          //   child: MaterialButton(
+          //     shape: OutlineInputBorder(borderRadius: BorderRadius.circular(100), borderSide: BorderSide(color: ColorsManager.transparent)),
+          //     color: ColorsManager.primary,
+          //     minWidth: 0.1.sw,
+          //     child: Icon(IconsManager.addIcon, color: ColorsManager.white)
+          //   ),
+          // ),
+          Padding(
+            padding: const EdgeInsets.all(5),
+            child: FloatingActionButton(
+              elevation: 0,
+              backgroundColor: ColorsManager.primary,
+              onPressed: () async{
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                if(prefs.containsKey("token")) {
+                  token = prefs.getString("token")!;
+                  setState(() {
+                    //  word = "Log Out";
+                  });
+
+                }
+                if(token != '') {
+                  Navigator.push(context,MaterialPageRoute(builder: (BuildContext context) => AddEventPage()));
+                }
+                else {
+                  showToastLogin(context,getTranslated(context, "please login")!);
+                }
+              },
+              child: const Icon(IconsManager.addIcon, color: ColorsManager.white,),
+            ),
+          )
         ],
         backgroundColor: Colors.white,
       ),
@@ -132,9 +162,9 @@ class _EventsScreenState extends State<EventsScreen> {
                           width: 110.w,
                           height: 100.h,
                           decoration: BoxDecoration(
-                            color: ColorsManager.white,
+                            color: (showAll == true)?ColorsManager.primary:ColorsManager.white,
                             borderRadius: BorderRadius.circular(5.sp),
-                            border: Border.all(color: (showAll != true)?ColorsManager.grey1: ColorsManager.primary),
+                            border: Border.all(color: ColorsManager.primary),
                             boxShadow:[
                               BoxShadow(
                                 color: ColorsManager.black.withOpacity(0.2),
@@ -152,14 +182,14 @@ class _EventsScreenState extends State<EventsScreen> {
                                 width: 50.w,
                                 decoration: const BoxDecoration(
                                     image: DecorationImage(
-                                      image: AssetImage(imagePath + AssetsManager.calender),
+                                      image: AssetImage(imagePath + AssetsManager.all),
                                     )
                                 ),
                               ),
                               SizedBox(height: 5.h,),
                               Text(
                                 getTranslated(context, "All")!,
-                                style: const TextStyle(fontSize: 15.0, color: ColorsManager.black),
+                                style: TextStyle(fontSize: 15.0, color: (showAll == true)?ColorsManager.white:ColorsManager.black),
                               ),
                             ],
                           ),
@@ -193,13 +223,13 @@ class _EventsScreenState extends State<EventsScreen> {
                                   width: 110.w,
                                   height: 100.h,
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: (show[position] == true)?ColorsManager.primary:ColorsManager.grey1),
-                                    color: ColorsManager.white,
+                                    border: Border.all(color: ColorsManager.primary),
+                                    color: (show[position] == true)?ColorsManager.primary:ColorsManager.white,
                                     borderRadius: BorderRadius.circular(5.sp),
                                     boxShadow:[
                                       BoxShadow(
                                         color: ColorsManager.black.withOpacity(0.2),
-                                        offset: Offset(3, 5),
+                                        offset: const Offset(3, 5),
                                         blurRadius: 4,
                                       ),
                                     ],
@@ -213,15 +243,15 @@ class _EventsScreenState extends State<EventsScreen> {
                                         height: 50.h,
                                         width: 50.w,
                                         decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              image: NetworkImage(AppConstants.MAIN_URL_IMAGE+events[position].image!),
-                                            )
+                                          image: DecorationImage(
+                                            image: NetworkImage(AppConstants.MAIN_URL_IMAGE+events[position].image!),
+                                          )
                                         ),
                                       ),
                                       SizedBox(height: 5.h,),
                                       Text(
                                         events[position].name!,
-                                        style: TextStyle(fontSize: 15.0, color: ColorsManager.black),
+                                        style: TextStyle(fontSize: 15.0, color: (show[position] == true)?ColorsManager.white:ColorsManager.black),
                                         textAlign: TextAlign.center,
                                       ),
                                     ],
@@ -267,7 +297,7 @@ class _EventsScreenState extends State<EventsScreen> {
               ),
               SingleChildScrollView(
                 child: Container(
-                  height: 0.58.sh,
+                  height: 0.56.sh,
                   width: 1.sw,
                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(300.sp),),
                   child: LoadingOverlay(
@@ -386,7 +416,6 @@ class _EventsScreenState extends State<EventsScreen> {
                           ),
                           onTap: (){
                             Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>EventDetails(eventsDetailsObject: eventDetails[position],)));
-
                           },
                         ),
                       );
@@ -398,29 +427,6 @@ class _EventsScreenState extends State<EventsScreen> {
           ),
         )
       ),
-      floatingActionButton: FloatingActionButton(
-        elevation: 0.0,
-        child: new Icon(IconsManager.addIcon),
-        backgroundColor: ColorsManager.primary,
-        onPressed: () async{
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          if(prefs.containsKey("token")) {
-            token = prefs.getString("token")!;
-            setState(() {
-              //  word = "Log Out";
-            });
-
-          }
-          if(token != '') {
-            Navigator.push(
-                context,MaterialPageRoute(
-                    builder: (BuildContext context) => AddEventPage()));
-          }
-          else {
-            showToastLogin(context,getTranslated(context, "please login")!);
-          }
-        }
-      )
     );
   }
   void loadCities() {

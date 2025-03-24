@@ -13,7 +13,7 @@ class OtpService{
   static Future<OTPObject?> sendOTP(BuildContext context, String phone) async {
     // Uri
     var request = MultipartRequest(
-        'POST', Uri.parse(AppConstants.MAIN_URL + "send_otp_register"));
+        'POST', Uri.parse(AppConstants.MAIN_URL + "api/send_otp_register"));
 
     // Headers
     Locale locale = await getLocale();
@@ -52,7 +52,7 @@ class OtpService{
   static Future<OTPObject?> sendOTPPassword(BuildContext context, String phone) async {
     // Uri
     var request = MultipartRequest(
-        'POST', Uri.parse(AppConstants.MAIN_URL + "send_otp_password"));
+        'POST', Uri.parse(AppConstants.MAIN_URL + "api/send_otp_password"));
     log("phoneController.text "+phone);
 
     // Headers

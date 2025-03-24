@@ -12,7 +12,7 @@ import '../../utill/localization_helper.dart';
 class CategoriesService{
   static Future<bool?> AddSellerFav(BuildContext context,String id) async {
     // Uri
-    var request = MultipartRequest('POST', Uri.parse(AppConstants.MAIN_URL + "favourite_sellers"));
+    var request = MultipartRequest('POST', Uri.parse(AppConstants.MAIN_URL + "api/favourite_sellers"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);
@@ -62,7 +62,7 @@ class CategoriesService{
   static Future<bool?> DeleteSellerFav(BuildContext context,String id) async {
     // Uri
     var request = MultipartRequest(
-        'DELETE', Uri.parse(AppConstants.MAIN_URL + "favourite_sellers?favourite_id=$id"));
+        'DELETE', Uri.parse(AppConstants.MAIN_URL + "api/favourite_sellers?favourite_id=$id"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);
@@ -115,7 +115,7 @@ class CategoriesService{
   static Future<List<dynamic>?> basket(BuildContext context) async {
     // Uri
     var request = MultipartRequest(
-        'GET', Uri.parse(AppConstants.MAIN_URL + "myFavourite_sellers"));
+        'GET', Uri.parse(AppConstants.MAIN_URL + "api/myFavourite_sellers"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);

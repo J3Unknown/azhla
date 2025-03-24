@@ -218,7 +218,7 @@ class _OrderSellerScreenState extends State<OrderSellerScreen> {
 
   void loadCities() async{
     Locale locale = await getLocale();
-    AddressService.getCities(context).then((value) {
+    AddressService.getRegions(context).then((value) {
       log(value.toString());
       setState(() {
         cities = [

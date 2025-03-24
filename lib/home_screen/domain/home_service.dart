@@ -14,17 +14,17 @@ class HomeService{
     var request;
     if(category_id == null || govId == null){
       if(category_id != null){
-       request = MultipartRequest('GET', Uri.parse(AppConstants.MAIN_URL + "categories?category_id=$category_id"));
+       request = MultipartRequest('GET', Uri.parse(AppConstants.MAIN_URL + "api/categories?category_id=$category_id"));
       }
       if(govId != null){
-        request = MultipartRequest('GET', Uri.parse(AppConstants.MAIN_URL + "categories?govId=$govId"));
+        request = MultipartRequest('GET', Uri.parse(AppConstants.MAIN_URL + "api/categories?govId=$govId"));
       }
       if(category_id == null && govId == null){
-        request = MultipartRequest('GET', Uri.parse(AppConstants.MAIN_URL + "categories"));
+        request = MultipartRequest('GET', Uri.parse(AppConstants.MAIN_URL + "api/categories"));
       }
     }
     else{
-      request = MultipartRequest('GET', Uri.parse(AppConstants.MAIN_URL + "categories?category_id=$category_id&govId=$govId"));
+      request = MultipartRequest('GET', Uri.parse(AppConstants.MAIN_URL + "api/categories?category_id=$category_id&govId=$govId"));
     }
     // Uri
 

@@ -14,7 +14,7 @@ class AboutUsService{
   static Future<AboutUs?> aboutUSApi(BuildContext context) async {
     // Uri
     var request = MultipartRequest(
-        'GET', Uri.parse(AppConstants.MAIN_URL + "about_us"));
+        'GET', Uri.parse(AppConstants.MAIN_URL + "api/about_us"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // String token = prefs.getString("token")!;
     // log("token"+token);
@@ -60,7 +60,7 @@ class AboutUsService{
   static void sendContactMessage(BuildContext context, String phone,String title, String message) async {
     // Uri
     var request = MultipartRequest(
-        'POST', Uri.parse(AppConstants.MAIN_URL + "contactUs"));
+        'POST', Uri.parse(AppConstants.MAIN_URL + "api/contactUs"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     // Headers

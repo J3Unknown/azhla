@@ -109,7 +109,7 @@ class _FilterEventsState extends State<FilterEvents> {
                         setState(() {
                           selectedCity = value;
                           selectedRegion = null;
-                          loadRegions(selectedCity!.id!);
+                          loadRegions();
                           prefs.setInt("selectedCity", selectedCity!.id!);
                           log(selectedCity!.name!);
                         });
@@ -358,8 +358,8 @@ class _FilterEventsState extends State<FilterEvents> {
       log(cities.length.toString());
     });
   }
-  void loadRegions(int id) {
-    AddressService.getRegions(context,id).then((value) {
+  void loadRegions() {
+    AddressService.getRegions(context).then((value) {
       log(value.toString());
       setState(() {
         regions = value!;

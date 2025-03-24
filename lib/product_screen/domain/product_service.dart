@@ -14,7 +14,7 @@ class ProductService{
   static Future<ProductDetails?> product(BuildContext context,int id,) async {
     // Uri
     var request = MultipartRequest(
-        'GET', Uri.parse(AppConstants.MAIN_URL + "product_details?id=$id"));
+        'GET', Uri.parse(AppConstants.MAIN_URL + "api/product_details?id=$id"));
 
     // Headers
     Locale locale = await getLocale();

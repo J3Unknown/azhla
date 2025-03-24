@@ -53,7 +53,7 @@ class SpecialRequestListServices {
     }
   }
 
-  static Future<bool?> sendSpecialRequest(context, {required int categoryId, required int areaId, required String familyName, required int budget, required String date, required String time, required String description,}) async {
+  static Future<bool?> sendSpecialRequest(context, {required int categoryId, required int areaId, required int budget, required String date, required String time, required String description,}) async {
     var request = MultipartRequest('POST', Uri.parse(AppConstants.ADD_SPECIAL_REQUEST));
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -67,7 +67,7 @@ class SpecialRequestListServices {
 
     request.fields.addAll({
       'category_id' : categoryId.toString(),
-      'family_name' : familyName,
+      //'family_name' : familyName,
       'area_id' : areaId.toString(),
       'budget' : budget.toString(),
       'date' : date,
@@ -87,7 +87,8 @@ class SpecialRequestListServices {
         showToastError(context, bodyJson['msg']);
         return null;
       } else {
-        showToastReminder(context, bodyJson['msg']??'Request Added Successfully');
+        //log(bodyJson['msg']);
+        showSpecialRequestToast(context,'Request Added Successfully');
         return true;
       }
     } else {

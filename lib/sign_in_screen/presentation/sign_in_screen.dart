@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:azhlha/buttom_nav_bar/presentation/buttom_nav_screen.dart';
 import 'package:azhlha/shared/validations.dart';
 import 'package:azhlha/sign_in_screen/data/sign_in.dart';
+import 'package:azhlha/utill/assets_manager.dart';
+import 'package:azhlha/utill/icons_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -51,7 +53,7 @@ class _SignInScreenState extends State<SignInScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
 
-        leading: InkWell(child:Icon(CupertinoIcons.back),onTap: (){
+        leading: InkWell(child: Icon(IconsManager.backButtonIcon),onTap: (){
 
           if(widget.signUp == "setting"){
           Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ButtomNavBarScreen(intial: 4,)) );
@@ -75,175 +77,178 @@ class _SignInScreenState extends State<SignInScreen> {
     isLoading: isLoading,
     child: isLoading == true
     ? Container():
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Center(child: Text(getTranslated(context,"Maras")!,style: TextStyle(color: ColorsManager.primary ,fontSize: 50.sp,fontWeight: FontWeight.bold),)),
-          SizedBox(height: 30.h,),
-          Text(getTranslated(context, "Sign In")!,style: TextStyle(color: Colors.black87,fontSize: 20.sp),),
-          SizedBox(height: 40.h,),
-          Form(
-            key: formGlobalKey,
-            child:
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(getTranslated(context, "Phone Number")!,style: TextStyle(color: Color.fromRGBO(136, 144, 156, 1)),),
-                  SizedBox(height: 5.h,),
-                  Container(
-                    height: 50.h,
-                    width: 0.8.sw,
+      SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            //Text(getTranslated(context,"Maras")!,style: TextStyle(color: ColorsManager.primary ,fontSize: 50.sp,fontWeight: FontWeight.bold),),
+            Image.asset(imagePath+AssetsManager.logo, height: 180, width: 180,),
+            //SizedBox(height: 30.h,),
+            Text(getTranslated(context, "Sign In")!,style: TextStyle(color: Colors.black87,fontSize: 24.sp, fontWeight: FontWeight.w500),),
+            SizedBox(height: 40.h,),
+            Form(
+              key: formGlobalKey,
+              child:
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(getTranslated(context, "Phone Number")!,style: TextStyle(color: Color.fromRGBO(136, 144, 156, 1)),),
+                    SizedBox(height: 5.h,),
+                    Container(
+                      height: 50.h,
+                      width: 0.8.sw,
 
-                    decoration: BoxDecoration(
+                      decoration: BoxDecoration(
 
-                      borderRadius: BorderRadius.circular(10.sp),
-                        border: Border.all(
-                            color: ColorsManager.primary
-                        )
-                    ),
-                    child: Row(
-                      children: [
-                        SizedBox(width: 5.h,),
-                        (locale.languageCode == "en")?Text("+974",style: TextStyle(color: Colors.grey),):Container(),
-                        Container(
-                          height: 50.h,
-                          width: 0.65.sw,
-                          child: TextFormField(
-                            controller: phoneController,
-                              validator: RequiredValidator(errorText: 'This field is required'),
-                              textAlign: TextAlign.center,
-                              // maxLength: 8,
-                              decoration: InputDecoration(
-                                counterText: "",
-                                border: InputBorder.none,
-                                hintText: getTranslated(context, "Mobile Number")!,
-                                contentPadding: EdgeInsets.all(5.w),
-                              )
-                          ),
-                        ),
-                        (locale.languageCode == "ar")?Text("974+",style: TextStyle(color: Colors.grey),):Container()
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 20.h,),
-                  Text(getTranslated(context, "password")!,style: TextStyle(color: Color.fromRGBO(136, 144, 156, 1)),),
-                  SizedBox(height: 5.h,),
-                  Container(
-                    height: 50.h,
-                    width: 0.8.sw,
-                    decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.sp),
-                        border: Border.all(
-                            color: ColorsManager.primary
-                        )
-                    ),
-                    child: TextFormField(
-                      textDirection: TextDirection.ltr,
-                        controller: passwordController,
-                        validator: RequiredValidator(errorText: 'This field is required'),
-                        textAlign: TextAlign.center,
-                        obscureText:secure,
-
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: getTranslated(context, "password")!,
-                          contentPadding: EdgeInsets.only(top:15.sp),
-
-                          suffixIcon: InkWell(
-
-                              child: Padding(
-                                padding:  EdgeInsets.only(top: 5.h),
-                                child: Icon((secure)?CupertinoIcons.eye:CupertinoIcons.eye_slash,color: ColorsManager.primary,),
-                              ),
-                          onTap: (){
-                            if(secure == true){
-                              setState(() {
-                                secure = false;
-                              });
-                            }
-                            else{
-                              setState(() {
-                                secure = true;
-                              });
-                            }
-                          },
+                          border: Border.all(
+                              color: ColorsManager.primary
                           )
-                        )
+                      ),
+                      child: Row(
+                        children: [
+                          SizedBox(width: 5.h,),
+                          (locale.languageCode == "en")?Text("+974",style: TextStyle(color: Colors.grey),):Container(),
+                          Container(
+                            height: 50.h,
+                            width: 0.65.sw,
+                            child: TextFormField(
+                              controller: phoneController,
+                                validator: RequiredValidator(errorText: 'This field is required'),
+                                textAlign: TextAlign.center,
+                                // maxLength: 8,
+                                decoration: InputDecoration(
+                                  counterText: "",
+                                  border: InputBorder.none,
+                                  hintText: getTranslated(context, "Mobile Number")!,
+                                  contentPadding: EdgeInsets.all(5.w),
+                                )
+                            ),
+                          ),
+                          (locale.languageCode == "ar")?Text("974+",style: TextStyle(color: Colors.grey),):Container()
+                        ],
+                      ),
                     ),
-                  )
-                ],
-              ),
-          ),
+                    SizedBox(height: 20.h,),
+                    Text(getTranslated(context, "password")!,style: TextStyle(color: Color.fromRGBO(136, 144, 156, 1)),),
+                    SizedBox(height: 5.h,),
+                    Container(
+                      height: 50.h,
+                      width: 0.8.sw,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.sp),
+                          border: Border.all(
+                              color: ColorsManager.primary
+                          )
+                      ),
+                      child: TextFormField(
+                        textDirection: TextDirection.ltr,
+                          controller: passwordController,
+                          validator: RequiredValidator(errorText: 'This field is required'),
+                          textAlign: TextAlign.center,
+                          obscureText:secure,
 
-          // Column(
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   children: [
-          //
-          //   ],
-          // ),
-          SizedBox(height: 20.h,),
-          Padding(
-            padding:  EdgeInsets.only(left: 180.w),
-            child: InkWell(child:
-            Text(getTranslated(context, "Forget Password")!,style: TextStyle(color: Colors.blue,fontSize: 16.sp),),
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => FrogetPasswordScreen()) );
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: getTranslated(context, "password")!,
+                            contentPadding: EdgeInsets.only(top:15.sp),
 
-            },
-            ),
-          ),
-          SizedBox(height: 20.h,),
-          Center(
-            child: InkWell(
-              child: Container(
-                height: 50.h,
-                width: 0.8.sw,
-                decoration: BoxDecoration(
-                    color: ColorsManager.primary,
-                    borderRadius: BorderRadius.circular(10.sp),
-                    border: Border.all(
-                      color: ColorsManager.primary,
+                            suffixIcon: InkWell(
+
+                                child: Padding(
+                                  padding:  EdgeInsets.only(top: 5.h),
+                                  child: Icon((secure)?CupertinoIcons.eye:CupertinoIcons.eye_slash,color: ColorsManager.primary,),
+                                ),
+                            onTap: (){
+                              if(secure == true){
+                                setState(() {
+                                  secure = false;
+                                });
+                              }
+                              else{
+                                setState(() {
+                                  secure = true;
+                                });
+                              }
+                            },
+                            )
+                          )
+                      ),
                     )
+                  ],
                 ),
-                child: Center(child: Text(getTranslated(context, "Sign In")!,style: TextStyle(color: Colors.white,fontSize: 22.sp,fontWeight: FontWeight.bold),)),
-              ),
-              onTap: (){
-                onLoginClick();
-              },
             ),
-          ),
-          SizedBox(height: 20.h,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(getTranslated(context, "continue as a")!),
-              SizedBox(width: 5.w,),
-              InkWell(child:
-              Text(getTranslated(context, "guest")!,style: TextStyle(color: Colors.blue),),
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ButtomNavBarScreen(intial: 0,)) );
 
-                },
-              )
-            ],
-          ),
-          SizedBox(height: 20.h,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(getTranslated(context, "Don't have an account")!),
-              SizedBox(width: 5.w,),
-              InkWell(child:
-              Text(getTranslated(context, "Sign Up")!,style: TextStyle(color: Colors.blue),),
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => SignUp()) );
+            // Column(
+            //   crossAxisAlignment: CrossAxisAlignment.start,
+            //   children: [
+            //
+            //   ],
+            // ),
+            SizedBox(height: 20.h,),
+            Padding(
+              padding:  EdgeInsets.only(left: 180.w),
+              child: InkWell(child:
+              Text(getTranslated(context, "Forget Password")!,style: TextStyle(color: Colors.blue,fontSize: 16.sp),),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => FrogetPasswordScreen()) );
 
+              },
+              ),
+            ),
+            SizedBox(height: 20.h,),
+            Center(
+              child: InkWell(
+                child: Container(
+                  height: 50.h,
+                  width: 0.8.sw,
+                  decoration: BoxDecoration(
+                      color: ColorsManager.primary,
+                      borderRadius: BorderRadius.circular(10.sp),
+                      border: Border.all(
+                        color: ColorsManager.primary,
+                      )
+                  ),
+                  child: Center(child: Text(getTranslated(context, "Sign In")!,style: TextStyle(color: Colors.white,fontSize: 22.sp,fontWeight: FontWeight.bold),)),
+                ),
+                onTap: (){
+                  onLoginClick();
                 },
-              )
-            ],
-          ),
-        ],
+              ),
+            ),
+            SizedBox(height: 20.h,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(getTranslated(context, "continue as a")!),
+                SizedBox(width: 5.w,),
+                InkWell(child:
+                Text(getTranslated(context, "guest")!,style: TextStyle(color: Colors.blue),),
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ButtomNavBarScreen(intial: 0,)) );
+
+                  },
+                )
+              ],
+            ),
+            SizedBox(height: 20.h,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(getTranslated(context, "Don't have an account")!),
+                SizedBox(width: 5.w,),
+                InkWell(child:
+                Text(getTranslated(context, "Sign Up")!,style: TextStyle(color: Colors.blue),),
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => SignUp()) );
+
+                  },
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     ));
   }

@@ -3,20 +3,20 @@ class AppConstants {
 
   //static const String MAIN_URL = "https://etmaaen.com/azhalha/api/"; // 'http://127.0.0.1:8000/api/'; // For Real Devices => run in terminal -> adb reverse tcp:8000 tcp:8000
   //static const String MAIN_URL = "https://ezhalhakw.com/ezhalha/api/"; // 'http://127.0.0.1:8000/api/'; // For Real Devices => run in terminal -> adb reverse tcp:8000 tcp:8000
-  static const String MAIN_URL = "https://ezhalhakw.com/mogeeb/api/"; // 'http://127.0.0.1:8000/api/'; // For Real Devices => run in terminal -> adb reverse tcp:8000 tcp:8000
+  static const String MAIN_URL = "https://ezhalhakw.com/mogeeb/"; // 'http://127.0.0.1:8000/api/'; // For Real Devices => run in terminal -> adb reverse tcp:8000 tcp:8000
   static const String MAIN_URL_IMAGE = "https://ezhalhakw.com/mogeeb/";
   //static const String MAIN_URL = ''; // For Emulator
 
   static const String GET_ALL_ADS = 'https://omar.tqnia.me/onstore2/';
   static const String POST_AD = '/api/v2/seller/auth/login';
-  static const String LOGIN = MAIN_URL + 'login';
-  static const String REGISTER = MAIN_URL + 'register';
-  static const String SHOW_CATEGORIES = MAIN_URL + 'categories';
+  static const String LOGIN = MAIN_URL + 'api/login';
+  static const String REGISTER = MAIN_URL + 'api/register';
+  static const String SHOW_CATEGORIES = MAIN_URL + 'api/categories';
 
-  static const String SPECIAL_REQUEST = '${MAIN_URL}special_request';
-  static const String ADD_SPECIAL_REQUEST = '${MAIN_URL}save_special_request';
-  static const String DELETE_SPECIAL_REQUEST = '${MAIN_URL}special_request_changeStatus/';
-  static const String SAVE_SPECIAL_REQUEST_DETAILS = '${MAIN_URL}save_special_request_details';
+  static const String SPECIAL_REQUEST = '${MAIN_URL}api/special_request';
+  static const String ADD_SPECIAL_REQUEST = '${MAIN_URL}api/save_special_request';
+  static const String DELETE_SPECIAL_REQUEST = '${MAIN_URL}api/special_request_changeStatus/';
+  static const String SAVE_SPECIAL_REQUEST_DETAILS = '${MAIN_URL}api/save_special_request_details';
 
   static const double FILTER_MAX_PRICE = 10000000; // 10 000 000
   static const double FILTER_MIN_PRICE = 0; // 0

@@ -1,6 +1,4 @@
 import 'dart:developer';
-
-import 'package:azhlha/special_request/data/message_model.dart';
 import 'package:azhlha/special_request/data/requests_list_model.dart';
 import 'package:azhlha/special_request/domain/special_request_list_services.dart';
 import 'package:azhlha/utill/assets_manager.dart';
@@ -10,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../utill/app_constants.dart';
 import '../../utill/icons_manager.dart';
 
@@ -51,43 +50,24 @@ class _SpecialRequestChatState extends State<SpecialRequestChat> {
           widget.title,
           style: const TextStyle(color: ColorsManager.primary),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {}, // search button action
-            icon: const Icon(IconsManager.searchIcon),
-          ),
-        ],
       ),
       body: Column(
         children: [
           // Chat Messages List
           Expanded(
             child: ListView.builder(
-              //physics: const BouncingScrollPhysics(),
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               itemBuilder: (context, index) => _fullChatBody(messages[index]),
               itemCount: messages.length,
             ),
           ),
           // Use KeyboardVisibilityBuilder to detect when the keyboard is shown
+          if(widget.request.result![widget.index].status != 'cancelled')
           KeyboardVisibilityBuilder(
             builder: (context, isKeyboardVisible) {
-              return AnimatedPadding(
-                padding: EdgeInsets.only(
-                  bottom: isKeyboardVisible?300:0,
-                ),
-                duration: const Duration(milliseconds: 380),
-                curve: Curves.easeInOut,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      _fileDownloadBuilder(() {}),
-                      _chatInputBuilder(),
-                    ],
-                  ),
-                ),
+              return Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
+                child: _chatInputBuilder(),
               );
             },
           ),
@@ -108,6 +88,8 @@ class _SpecialRequestChatState extends State<SpecialRequestChat> {
     child: TextFormField(
       controller: _chatController,
       keyboardType: TextInputType.text,
+      maxLines: 5,
+      minLines: 1,
       decoration: InputDecoration(
         focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: ColorsManager.primary),
@@ -147,7 +129,6 @@ class _SpecialRequestChatState extends State<SpecialRequestChat> {
         messages.insert(messages.length, SpecialRequestDetails(id: widget.request.result![widget.index].id, role: 'user', content: _chatController.text, createdAt: DateTime.now().toString()));
         SpecialRequestListServices.sendMessage(context, widget.request.result![widget.index].id, _chatController.text);
         _chatController.clear();
-
       });
     }
   }
@@ -157,9 +138,15 @@ class _SpecialRequestChatState extends State<SpecialRequestChat> {
     child: Column(
       crossAxisAlignment: model.role == 'admin'? CrossAxisAlignment.start:CrossAxisAlignment.end,
       children: [
-        model.role == 'admin admin'?_adminHeader(model.createdAt):_userHeader(model.createdAt),
+        model.role == 'admin'?_adminHeader(model.createdAt):_userHeader(model.createdAt),
         const SizedBox(height: 20,),
-        _chatTextBuilder(model.content)
+        _chatTextBuilder(model.content),
+        if(model.type == 'file')
+        const SizedBox(height: 10,),
+        if(model.type == 'file')
+        _fileDownloadBuilder(() {
+          launch(AppConstants.MAIN_URL+model.content!);
+        }),
       ],
     ),
   );

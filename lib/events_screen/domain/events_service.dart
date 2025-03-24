@@ -18,7 +18,7 @@ import '../data/EventReminderObject.dart';
 class EventsService{
   static Future<List<EventsObject>?> getEvents(BuildContext context) async {
     // Uri
-    var request = MultipartRequest('GET', Uri.parse(AppConstants.MAIN_URL + "event_categories"));
+    var request = MultipartRequest('GET', Uri.parse(AppConstants.MAIN_URL + "api/event_categories"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // String token = prefs.getString("token")!;
     // log("token"+token);
@@ -63,7 +63,7 @@ class EventsService{
 
   static Future<List<EventsObject>?> getMainEventsCategories(BuildContext context) async {
     // Uri
-    var request = MultipartRequest('GET', Uri.parse("${AppConstants.MAIN_URL}main_categories"));
+    var request = MultipartRequest('GET', Uri.parse("${AppConstants.MAIN_URL}api/main_categories"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // String token = prefs.getString("token")!;
     // log("token"+token);
@@ -123,7 +123,7 @@ class EventsService{
     }
     // Uri
     var request = MultipartRequest(
-        'GET', Uri.parse(AppConstants.MAIN_URL + "events?event_category_id=${event_category_id}"+url));
+        'GET', Uri.parse(AppConstants.MAIN_URL + "api/events?event_category_id=${event_category_id}"+url));
     // String token = prefs.getString("token")!;
     // log("token"+token);
     // Headers
@@ -209,7 +209,7 @@ class EventsService{
       }
     }
     // Uri
-    var request = MultipartRequest('GET', Uri.parse( (url.isEmpty)?(AppConstants.MAIN_URL +"events"):AppConstants.MAIN_URL +"events?"+url));
+    var request = MultipartRequest('GET', Uri.parse( (url.isEmpty)?(AppConstants.MAIN_URL +"api/events"):AppConstants.MAIN_URL +"api/events?"+url));
     // String token = prefs.getString("token")!;
     // log("token"+token);
     // // Headers
@@ -267,7 +267,7 @@ class EventsService{
   static Future<List<FamiliesObject>?> getFamilies(BuildContext context) async {
     // Uri
     var request = MultipartRequest(
-        'GET', Uri.parse(AppConstants.MAIN_URL + "families"));
+        'GET', Uri.parse(AppConstants.MAIN_URL + "api/families"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // String token = prefs.getString("token")!;
     //log("token"+token);
@@ -311,7 +311,7 @@ class EventsService{
   }
   static Future<bool?> addReminder(BuildContext context,String id) async {
     // Uri
-    var request = MultipartRequest('POST', Uri.parse(AppConstants.MAIN_URL + "user_daily_events"));
+    var request = MultipartRequest('POST', Uri.parse(AppConstants.MAIN_URL + "api/user_daily_events"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);
@@ -363,7 +363,7 @@ class EventsService{
   }
   static Future<bool?> deleteReminder(BuildContext context,String id) async {
     // Uri
-    var request = MultipartRequest('DELETE', Uri.parse(AppConstants.MAIN_URL + "user_daily_events?user_daily_event_id=$id"));
+    var request = MultipartRequest('DELETE', Uri.parse(AppConstants.MAIN_URL + "api/user_daily_events?user_daily_event_id=$id"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);
@@ -415,7 +415,7 @@ class EventsService{
   static Future<List<EventReminderObject>?> getEventReminders(BuildContext context) async {
     // Uri
     var request = MultipartRequest(
-        'GET', Uri.parse(AppConstants.MAIN_URL + "user_daily_events"));
+        'GET', Uri.parse(AppConstants.MAIN_URL + "api/user_daily_events"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);
@@ -461,7 +461,7 @@ class EventsService{
   static Future<bool?> deleteEvent(BuildContext context,String id) async {
     // Uri
     var request = MultipartRequest(
-        'DELETE', Uri.parse(AppConstants.MAIN_URL + "daily_event?daily_event_id=$id"));
+        'DELETE', Uri.parse(AppConstants.MAIN_URL + "api/daily_event?daily_event_id=$id"));
     log(id.toString());
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
@@ -536,7 +536,7 @@ class EventsService{
       String type
       ) async {
     // Uri
-    var request = MultipartRequest('POST', Uri.parse(AppConstants.MAIN_URL + "add_daily_events"));
+    var request = MultipartRequest('POST', Uri.parse(AppConstants.MAIN_URL + "api/add_daily_events"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);
@@ -630,7 +630,7 @@ class EventsService{
       ) async {
     // Uri
     var request = MultipartRequest(
-        'POST', Uri.parse(AppConstants.MAIN_URL + "edit_daily_events"));
+        'POST', Uri.parse(AppConstants.MAIN_URL + "api/edit_daily_events"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);
@@ -703,7 +703,7 @@ class EventsService{
   static Future<MyEventsDTO?> getMyEvents(BuildContext context) async {
     // Uri
     var request = MultipartRequest(
-        'GET', Uri.parse(AppConstants.MAIN_URL + "user_events"));
+        'GET', Uri.parse(AppConstants.MAIN_URL + "api/user_events"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);

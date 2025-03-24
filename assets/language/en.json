@@ -43,7 +43,7 @@
   "More": "More",
   "Daily Events": "Daily Events",
   "Special Request": "Special Request",
-  "All Areas": "All Areas",
+  "All Areas": "All Regions",
   "Categories": "Categories",
   "Passwords do not match": "Passwords do not match",
   "Minimum length is characters": "Minimum length of characters is ",
@@ -104,7 +104,7 @@
   "Update Addresses": "Update Addresses",
   "Delete Account": "Delete Account",
   "Events": "Events",
-  "Area": "Area",
+  "Area": "Region",
   "Family Name": "Family Name",
   "All Families": "All Families",
   "Gender": "Gender",
@@ -178,7 +178,7 @@
   "for app admins for approval": "for app admins for approval",
   "Governance": "Governance",
   "Terms and Conditions": "Terms and Conditions",
-  "Maras": "Maras",
+  "Maras": "Maris",
   "Back To Home": "Back To Home",
   "Back To Events": "Back To Events",
   "Are you sure?\nYou want to delete\nThis Event": "Are you sure?\nYou want to delete\nThis Event",
@@ -189,5 +189,7 @@
   "FileDownload.pdf": "FileDownload.pdf",
   "Request No.": "Request No.",
   "Add Special Request": "Special Requests",
-  "974":"974"
+  "974":"974",
+  "Request Added Successfully": "Request Added Successfully",
+  "Your Event Added but it's sent for admins for approval": "Your Event Added but it's sent for admins for approval"
 }

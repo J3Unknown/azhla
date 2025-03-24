@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:azhlha/otp_screen/domain/otp_service.dart';
 import 'package:azhlha/sign_up_screen/data/sign_up.dart';
 import 'package:azhlha/sign_up_screen/sign_up_service/sign_up_service.dart';
+import 'package:azhlha/utill/icons_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
@@ -12,6 +13,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../buttom_nav_bar/presentation/buttom_nav_screen.dart';
 import '../../shared/alerts.dart';
+import '../../utill/assets_manager.dart';
 import '../../utill/colors_manager.dart';
 import '../../utill/localization_helper.dart';
 
@@ -26,6 +28,7 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
+  List<TextEditingController?> otpControllers = [];
   late int otpCode;
   late String OTP;
   late String link;
@@ -36,7 +39,6 @@ class _OtpScreenState extends State<OtpScreen> {
   void initState() {
     sendOTP();
     initAwaits();
-    // TODO: implement initState
     super.initState();
   }
   void initAwaits () async{
@@ -50,7 +52,6 @@ class _OtpScreenState extends State<OtpScreen> {
     while(counter >0){
       await Future.delayed(const Duration(seconds: 1));
       setState(() {
-        
         counter --;
       });
     }
@@ -64,7 +65,7 @@ class _OtpScreenState extends State<OtpScreen> {
         elevation: 0,
         backgroundColor: Colors.white,
         leading: InkWell(
-          child: Icon(CupertinoIcons.back),
+          child: Icon(IconsManager.backButtonIcon),
           onTap: (){
             Navigator.pop(context);
           },
@@ -72,17 +73,18 @@ class _OtpScreenState extends State<OtpScreen> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 200.h,),
-            Center(child: Text(getTranslated(context,"Maras")!,style: TextStyle(color: ColorsManager.primary,fontSize: 50.sp,fontWeight: FontWeight.bold),)),
-            SizedBox(height: 30.h,),
-            Text(getTranslated(context, "Enter Received OTP")!,style: TextStyle(color: Colors.black87,fontSize: 20.sp),),
+            // Center(child: Text(getTranslated(context,"Maras")!,style: TextStyle(color: ColorsManager.primary,fontSize: 50.sp,fontWeight: FontWeight.bold),)),
+            Image.asset(imagePath+AssetsManager.logo, height: 180, width: 180,),
+            Text(getTranslated(context, "Enter Received OTP")!,style: TextStyle(color: Colors.black87,fontSize: 24.sp, fontWeight: FontWeight.w500),),
             SizedBox(height: 40.h,),
             Directionality(
               textDirection: TextDirection.ltr, // Forces LTR direction
               child: OtpTextField(
+                handleControllers: (controller) {
+                  otpControllers = controller;
+                },
                 numberOfFields: 4,
                 focusedBorderColor: ColorsManager.primary,
                 enabledBorderColor: ColorsManager.primary,
@@ -127,6 +129,12 @@ class _OtpScreenState extends State<OtpScreen> {
                   else{
                     showToastError(context, getTranslated(context, "OTP incorrect")!);
                     log("false");
+                    for (var controller in otpControllers) {
+                      controller?.clear();
+                    }
+                    setState(() {
+                      OTP = '';
+                    });
                   }
                 },
               ),

@@ -11,6 +11,7 @@ import 'package:azhlha/special_request/presentation/add_special_request.dart';
 import 'package:azhlha/terms_and_conditions/presentation/terms_and_conditions.dart';
 import 'package:azhlha/utill/app_constants.dart';
 import 'package:azhlha/utill/assets_manager.dart';
+import 'package:azhlha/utill/icons_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -100,13 +101,12 @@ class _SettingScreenState extends State<SettingScreen> {
           child: isLoading == true
               ? Container()
               :SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(height: 10.h,),
-            Center(
-              child: (token != '')?Container(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(height: 10.h,),
+              (token != '')?Container(
                 height: 100.h,
                 width: 100.w,
                 decoration: BoxDecoration(
@@ -136,12 +136,10 @@ class _SettingScreenState extends State<SettingScreen> {
                     )
                 ),
               ),
-            ),
-            SizedBox(height: 10.h,),
-            Text(getTranslated(context, "Welcome, Dear ")!+name,style: TextStyle(fontSize: 22.sp),),
-            SizedBox(height: 20.h,),
-            Center(
-              child: InkWell(
+              SizedBox(height: 10.h,),
+              Text(getTranslated(context, "Welcome, Dear ")!+name,style: TextStyle(fontSize: 22.sp),),
+              SizedBox(height: 20.h,),
+              InkWell(
                 child: Container(
                   height: 50.h,
                   width: 0.8.sw,
@@ -165,11 +163,11 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                       ),
                       SizedBox(width: 10.w,),
-                      Container(
+                      SizedBox(
                           height: 20.h,
                           width: 0.6.sw,
                           child: Text(getTranslated(context, "Profile")!)),
-                      Icon(CupertinoIcons.forward)
+                      const Icon(IconsManager.rightArrowIcon)
                     ],
                   )),
                 ),
@@ -185,10 +183,8 @@ class _SettingScreenState extends State<SettingScreen> {
                   }
                 },
               ),
-            ),
-            SizedBox(height: 10.h,),
-            Center(
-              child: InkWell(
+              SizedBox(height: 10.h,),
+              InkWell(
                 child: Container(
                   height: 50.h,
                   width: 0.8.sw,
@@ -224,10 +220,8 @@ class _SettingScreenState extends State<SettingScreen> {
                   handleLanguage(context).show();
                 },
               ),
-            ),
-            SizedBox(height: 10.h,),
-            Center(
-              child: InkWell(
+              SizedBox(height: 10.h,),
+              InkWell(
                 child: Container(
                   height: 50.h,
                   width: 0.8.sw,
@@ -243,7 +237,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     children: [
                       SizedBox(width: 5.w,),
                       Container(
-                        height: 20.h,
+                        height: 15.h,
                         width: 20.w,
                         decoration: BoxDecoration(
                             image: DecorationImage(
@@ -273,10 +267,8 @@ class _SettingScreenState extends State<SettingScreen> {
                   }
                 },
               ),
-            ),
-            SizedBox(height: 10.h,),
-            Center(
-              child: InkWell(
+              SizedBox(height: 10.h,),
+              InkWell(
                 child: Container(
                   height: 50.h,
                   width: 0.8.sw,
@@ -323,10 +315,8 @@ class _SettingScreenState extends State<SettingScreen> {
                   }
                 },
               ),
-            ),
-            SizedBox(height: 10.h,),
-            Center(
-              child: InkWell(
+              SizedBox(height: 10.h,),
+              InkWell(
                 child: Container(
                   height: 50.h,
                   width: 0.8.sw,
@@ -371,10 +361,8 @@ class _SettingScreenState extends State<SettingScreen> {
                   }
                 },
               ),
-            ),
-            SizedBox(height: 10.h,),
-            Center(
-              child: InkWell(
+              SizedBox(height: 10.h,),
+              InkWell(
                 child: Container(
                   height: 50.h,
                   width: 0.8.sw,
@@ -386,7 +374,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                   child: Center(child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+
                     children: [
                       SizedBox(width: 5.w,),
                       Container(
@@ -403,19 +391,17 @@ class _SettingScreenState extends State<SettingScreen> {
                           height: 20.h,
                           width: 0.6.sw,
                           child: Text(getTranslated(context, "Support")!)),
-                      Icon(CupertinoIcons.forward)
+                      Icon(IconsManager.rightArrowIcon)
                     ],
                   )),
 
                 ),
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ContactUsScreen()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => ContactUsScreen()));
                 },
               ),
-            ),
-            SizedBox(height: 10.h,),
-            Center(
-              child: InkWell(
+              SizedBox(height: 10.h,),
+              InkWell(
                 child: Container(
                   height: 50.h,
                   width: 0.8.sw,
@@ -425,25 +411,26 @@ class _SettingScreenState extends State<SettingScreen> {
                         color: ColorsManager.primary,
                       )
                   ),
-                  child: Center(child: Row(
+                  child: Center(
+                    child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        height: 20.h,
+                        height: 15.h,
                         width: 20.w,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             image: DecorationImage(
                                 image: AssetImage(imagePath+AssetsManager.handShake)
                             )
                         ),
                       ),
                       SizedBox(width: 10.w,),
-                      Container(
-                          height: 20.h,
-                          width: 0.6.sw,
-                          child: Text(getTranslated(context, "Terms & Conditions")!)),
-                      Icon(CupertinoIcons.forward)
+                      SizedBox(
+                        height: 20.h,
+                        width: 0.6.sw,
+                        child: Text(getTranslated(context, "Terms & Conditions")!)
+                      ),
+                      const Icon(IconsManager.rightArrowIcon)
                     ],
                   )),
                 ),
@@ -453,10 +440,8 @@ class _SettingScreenState extends State<SettingScreen> {
                           builder: (BuildContext context) => WebViewTerms()));
                 },
               ),
-            ),
-            SizedBox(height: 10.h,),
-            Center(
-              child: InkWell(
+              SizedBox(height: 10.h,),
+              InkWell(
                 child: Container(
                   height: 50.h,
                   width: 0.8.sw,
@@ -489,10 +474,8 @@ class _SettingScreenState extends State<SettingScreen> {
                   )),
                 ),
               ),
-            ),
-            SizedBox(height: 10.h,),
-            Center(
-              child: InkWell(
+              SizedBox(height: 10.h,),
+              InkWell(
                 child: Container(
                   height: 50.h,
                   width: 0.8.sw,
@@ -594,9 +577,9 @@ class _SettingScreenState extends State<SettingScreen> {
                   }
                 },
               ),
-            ),
-            SizedBox(height: 30.h,),
-          ],
+              SizedBox(height: 30.h,),
+            ],
+          ),
         ),
       )),
     );

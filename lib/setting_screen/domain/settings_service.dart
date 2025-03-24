@@ -17,7 +17,7 @@ class SettingsService{
 
 
     // URL
-    Uri uri = Uri.parse(AppConstants.MAIN_URL + 'logout');
+    Uri uri = Uri.parse(AppConstants.MAIN_URL + 'api/logout');
 
     // Headers
     Locale locale = await getLocale();

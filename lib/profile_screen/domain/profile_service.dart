@@ -28,7 +28,7 @@ class ProfileService{
 
 
     // URI
-    Uri uri = Uri.parse(AppConstants.MAIN_URL + "profile");
+    Uri uri = Uri.parse(AppConstants.MAIN_URL + "api/profile");
     log(uri.toString());
     // Body
     var body = {
@@ -65,7 +65,7 @@ class ProfileService{
     log('strat');
     log('end');
     var request = MultipartRequest(
-        'POST', Uri.parse(AppConstants.MAIN_URL + "edit_profile"));
+        'POST', Uri.parse(AppConstants.MAIN_URL + "api/edit_profile"));
 
     // Headers
     Locale locale = await getLocale();
@@ -127,7 +127,7 @@ class ProfileService{
 
 
     // URL
-    Uri uri = Uri.parse(AppConstants.MAIN_URL + 'profile');
+    Uri uri = Uri.parse(AppConstants.MAIN_URL + 'api/profile');
 
     // Headers
     Locale locale = await getLocale();

@@ -8,6 +8,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 
 import '../../otp_screen/domain/otp_service.dart';
+import '../../utill/assets_manager.dart';
 import '../../utill/colors_manager.dart';
 import '../../utill/localization_helper.dart';
 
@@ -61,83 +62,85 @@ class _FrogetPasswordScreenState extends State<FrogetPasswordScreen> {
           child: isLoading == true
               ? Container()
 
-              : Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+              : SingleChildScrollView(
+                child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Center(child: Text(getTranslated(context,"Maras")!,style: TextStyle(color: ColorsManager.primary,fontSize: 50.sp,fontWeight: FontWeight.bold),)),
-          SizedBox(height: 30.h,),
-          Text(getTranslated(context, "Enter your Number")!,style: TextStyle(color: Colors.black87,fontSize: 20.sp),),
+          Image.asset(imagePath+AssetsManager.logo, height: 180, width: 180,),
+          // Center(child: Text(getTranslated(context,"Maras")!,style: TextStyle(color: ColorsManager.primary,fontSize: 50.sp,fontWeight: FontWeight.bold),)),
+          // SizedBox(height: 30.h,),
+          Text(getTranslated(context, "Enter your Number")!,style: TextStyle(color: Colors.black87,fontSize: 24.sp, fontWeight: FontWeight.w500),),
           SizedBox(height: 40.h,),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(getTranslated(context, "Phone Number")!,style: TextStyle(color: Color.fromRGBO(136, 144, 156, 1)),),
-              SizedBox(height: 5.h,),
-              Container(
-                height: 50.h,
-                width: 0.8.sw,
-                decoration: BoxDecoration(
+                Text(getTranslated(context, "Phone Number")!,style: TextStyle(color: Color.fromRGBO(136, 144, 156, 1)),),
+                SizedBox(height: 5.h,),
+                Container(
+                  height: 50.h,
+                  width: 0.8.sw,
+                  decoration: BoxDecoration(
 
-                    borderRadius: BorderRadius.circular(10.sp),
-                    border: Border.all(
+                      borderRadius: BorderRadius.circular(10.sp),
+                      border: Border.all(
 
-                        color: ColorsManager.primary
-                    )
-                ),
-                child: Row(
-                  children: [
-                    SizedBox(width: 5.h,),
-                    (locale.languageCode == "en")?Text("+974",style: TextStyle(color: Colors.grey),):Container(),
-                    Container(
-                      height: 50.h,
-                      width: 0.65.sw,
-                      child: TextFormField(
-                        controller: phoneController,
-                          textAlign: TextAlign.center,
-                          maxLength: 8,
-                          decoration: InputDecoration(
-                            counterText: "",
-                            border: InputBorder.none,
-                            hintText: getTranslated(context, "Mobile Number")!,
-                            contentPadding: EdgeInsets.all(5.w),
-                          )
+                          color: ColorsManager.primary
+                      )
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(width: 5.h,),
+                      (locale.languageCode == "en")?Text("+974",style: TextStyle(color: Colors.grey),):Container(),
+                      Container(
+                        height: 50.h,
+                        width: 0.65.sw,
+                        child: TextFormField(
+                          controller: phoneController,
+                            textAlign: TextAlign.center,
+                            maxLength: 8,
+                            decoration: InputDecoration(
+                              counterText: "",
+                              border: InputBorder.none,
+                              hintText: getTranslated(context, "Mobile Number")!,
+                              contentPadding: EdgeInsets.all(5.w),
+                            )
+                        ),
                       ),
-                    ),
-                    (locale.languageCode == "ar")?Text("974+",style: TextStyle(color: Colors.grey),):Container()
-                  ],
-                ),
-              )
+                      (locale.languageCode == "ar")?Text("974+",style: TextStyle(color: Colors.grey),):Container()
+                    ],
+                  ),
+                )
             ],
           ),
           SizedBox(height: 20.h,),
           SizedBox(height: 20.h,),
           Center(
             child: InkWell(
-              child: Container(
-                height: 50.h,
-                width: 0.8.sw,
-                decoration: BoxDecoration(
-                    color: ColorsManager.primary,
-                    borderRadius: BorderRadius.circular(10.sp),
-                    border: Border.all(
+                child: Container(
+                  height: 50.h,
+                  width: 0.8.sw,
+                  decoration: BoxDecoration(
                       color: ColorsManager.primary,
-                    )
-                ),
-                child: InkWell(
-                    child: Center(child: Text(getTranslated(context, "Send")!,style: TextStyle(color: Colors.white,fontSize: 22.sp,fontWeight: FontWeight.bold),)),
-                  onTap: (){
-                    sendOTP();
-                    // Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => OtpPasswordScreen(phone: "+965"+phoneController.text)) );
+                      borderRadius: BorderRadius.circular(10.sp),
+                      border: Border.all(
+                        color: ColorsManager.primary,
+                      )
+                  ),
+                  child: InkWell(
+                      child: Center(child: Text(getTranslated(context, "Send")!,style: TextStyle(color: Colors.white,fontSize: 22.sp,fontWeight: FontWeight.bold),)),
+                    onTap: (){
+                      sendOTP();
+                      // Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => OtpPasswordScreen(phone: "+965"+phoneController.text)) );
 
-                  },
+                    },
+                  ),
                 ),
-              ),
             ),
           ),
 
         ],
-      )),
+      ),
+              )),
     );
   }
   void sendOTP(){

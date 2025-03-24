@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:azhlha/contatct_us_screen/Data/about_us_data.dart';
 import 'package:azhlha/contatct_us_screen/domain/about_us_service.dart';
+import 'package:azhlha/utill/assets_manager.dart';
+import 'package:azhlha/utill/icons_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -52,12 +54,12 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
-          leading: InkWell(child:Icon(CupertinoIcons.back),onTap: (){Navigator.pop(context);},),
+          leading: InkWell(child:const Icon(IconsManager.backButtonIcon),onTap: (){Navigator.pop(context);},),
           title:  Text(getTranslated(context, "Contact Us")!,style: TextStyle(color: ColorsManager.primary,fontSize: 22.sp,fontWeight: FontWeight.bold),),
           centerTitle: true,
         ),
         body: LoadingOverlay(
-            progressIndicator: SpinKitSpinningLines(
+            progressIndicator: const SpinKitSpinningLines(
               color: ColorsManager.primary,
             ),
             color: ColorsManager.primary0_1Transparency,
@@ -74,27 +76,25 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(getTranslated(context, "Name")!,style: TextStyle(color: Color.fromRGBO(136, 144, 156, 1)),),
+                      Text(getTranslated(context, "Name")!,style: TextStyle(color: ColorsManager.grey),),
                       SizedBox(height: 5.h,),
                       Container(
                         height: 50.h,
                         width: 0.8.sw,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.sp),
-                            border: Border.all(
-                                color: ColorsManager.primary
-                            )
+                          borderRadius: BorderRadius.circular(10.sp),
+                          border: Border.all(color: ColorsManager.primary)
                         ),
                         child: Center(
                           child: TextFormField(
-                              validator: RequiredValidator(errorText: 'This field is required'),
-                              controller: titleController,
-                              textAlign: TextAlign.center,
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: getTranslated(context, "Name")!,
-                                contentPadding: EdgeInsets.all(5.w),
-                              )
+                            validator: RequiredValidator(errorText: 'This field is required'),
+                            controller: titleController,
+                            textAlign: TextAlign.center,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: getTranslated(context, "Name")!,
+                              contentPadding: EdgeInsets.all(5.w),
+                            )
                           ),
                         ),
                       )
@@ -105,7 +105,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(getTranslated(context, "Mobile Number")!,style: TextStyle(color: Color.fromRGBO(136, 144, 156, 1)),),
+                    Text(getTranslated(context, "Mobile Number")!,style: const TextStyle(color: ColorsManager.grey),),
                     SizedBox(height: 5.h,),
 
                     Container(
@@ -121,8 +121,8 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         child: TextFormField(
                             validator: MultiValidator([
                               RequiredValidator(errorText: 'This field is required'),
-                              MinLengthValidator(10, errorText: getTranslated(context, "Minimum length is characters")!+'10'),
-                              MaxLengthValidator(12, errorText: getTranslated(context, "Maximum length is characters")!+'12')
+                              MinLengthValidator(10, errorText: '${getTranslated(context, "Minimum length is characters")!}10'),
+                              MaxLengthValidator(12, errorText: '${getTranslated(context, "Maximum length is characters")!}12')
                             ]),
                             controller: mobileController,
                             textAlign: TextAlign.center,
@@ -148,7 +148,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(getTranslated(context, "Message")!,style: TextStyle(color: Color.fromRGBO(136, 144, 156, 1)),),
+                    Text(getTranslated(context, "Message")!,style: TextStyle(color: ColorsManager.grey),),
                     SizedBox(height: 5.h,),
 
                     Container(
@@ -202,9 +202,9 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       child: Container(
                         height: 50.h,
                         width: 50.w,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage("assets/image/whatsapp.png")
+                            image: AssetImage(imagePath+AssetsManager.whatsappLogo)
                           )
                         ),
                       ),
@@ -217,9 +217,9 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       child: Container(
                         height: 50.h,
                         width: 50.w,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage("assets/image/facebook.png")
+                                image: AssetImage(imagePath + AssetsManager.facebookLogo)
                             )
                         ),
                       ),
@@ -233,9 +233,9 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       child: Container(
                         height: 50.h,
                         width: 50.w,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage("assets/image/instgram.png"),
+                                image: AssetImage(imagePath + AssetsManager.instagramLogo),
                             )
                         ),
                       ),

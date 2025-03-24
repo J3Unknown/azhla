@@ -1,11 +1,10 @@
 import 'dart:developer';
 import 'dart:ui';
-
 import 'package:azhlha/events_screen/data/events_details_object.dart';
 import 'package:azhlha/utill/app_constants.dart';
 import 'package:azhlha/utill/assets_manager.dart';
 import 'package:azhlha/utill/colors_manager.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:azhlha/utill/icons_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
@@ -13,8 +12,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
-
-import '../../shared/alerts.dart';
 import '../../sign_in_screen/presentation/sign_in_screen.dart';
 import '../../utill/localization_helper.dart';
 import '../domain/events_service.dart';
@@ -28,22 +25,13 @@ class EventDetails extends StatefulWidget {
 }
 
 class _EventDetailsState extends State<EventDetails> {
-  final List<String> items = [
-    'Item1',
-    'Item2',
-    'Item3',
-    'Item4',
-  ];
   String? selectedValue;
   String token = '';
-  void initawaits() async{
-
-  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: AppBar(
-        leading: InkWell(child:Icon(CupertinoIcons.back),
+        leading: InkWell(child:Icon(IconsManager.backButtonIcon),
         onTap: (){
           Navigator.pop(context);
         },
@@ -90,19 +78,24 @@ class _EventDetailsState extends State<EventDetails> {
                   bottom: -30.h,
                   child: Center(
                     child: Container(
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
                       constraints: BoxConstraints(
                         maxHeight: 80.h,
+                        maxWidth: 80.w
                       ),
                       decoration:BoxDecoration(
+                        shape: BoxShape.circle,
                         border: Border.all(
                           color: ColorsManager.primary,
                         ),
+                        image: DecorationImage(
+                          fit: BoxFit.contain,
+                          image: NetworkImage(AppConstants.MAIN_URL_IMAGE+widget.eventsDetailsObject.eventCategory!.image!)
+                        )
                       ),
-                      child: IntrinsicHeight(
-                        child: IntrinsicWidth(
-                          child: Image(image: NetworkImage(AppConstants.MAIN_URL_IMAGE+widget.eventsDetailsObject.image!))
-                        ),
-                      ),
+                      // child: Image(
+                      //   image: NetworkImage(AppConstants.MAIN_URL_IMAGE+widget.eventsDetailsObject.eventCategory!.image!)
+                      // ),
                     ),
                   ),
                 )
@@ -145,7 +138,8 @@ class _EventDetailsState extends State<EventDetails> {
               ),
             ),
             SizedBox(height: 10.h,),
-            (widget.eventsDetailsObject.type! == KeysManager.male)?Padding(
+            (widget.eventsDetailsObject.type! == KeysManager.male)?
+            Padding(
               padding:  EdgeInsets.all(20.sp),
               child: InkWell(
                 child: Container(
@@ -172,9 +166,9 @@ class _EventDetailsState extends State<EventDetails> {
                         height: 50.h,
                         width: 50.w,
                         decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(AppConstants.MAIN_URL_IMAGE+widget.eventsDetailsObject.eventCategory!.image!),
-                            )
+                          image: DecorationImage(
+                            image: AssetImage(imagePath+AssetsManager.menIcon),
+                          )
                         ),
                       ),
                       SizedBox(width: 30.w,),
@@ -423,7 +417,8 @@ class _EventDetailsState extends State<EventDetails> {
                 // },
               ),
             ):
-            (widget.eventsDetailsObject.type! == KeysManager.female)? Padding(
+            (widget.eventsDetailsObject.type! == KeysManager.female)?
+            Padding(
               padding:  EdgeInsets.all(20.sp),
               child: InkWell(
                 child: Container(
@@ -451,7 +446,7 @@ class _EventDetailsState extends State<EventDetails> {
                         width: 50.w,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: NetworkImage(AppConstants.MAIN_URL_IMAGE+widget.eventsDetailsObject.eventCategory!.image!),
+                              image: AssetImage(imagePath+AssetsManager.womenIcon),
                             )
                         ),
                       ),

@@ -16,7 +16,7 @@ class FavoriteService{
   static Future<List<FavoriteProduct>?> getFavoriteProducts(BuildContext context) async {
     // Uri
     var request = MultipartRequest(
-        'GET', Uri.parse(AppConstants.MAIN_URL + "favourite_products"));
+        'GET', Uri.parse(AppConstants.MAIN_URL + "api/favourite_products"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);
@@ -63,7 +63,7 @@ class FavoriteService{
   static Future<List<FavoriteSeller>?> getFavoriteSellers(BuildContext context) async {
     // Uri
     var request = MultipartRequest(
-        'GET', Uri.parse(AppConstants.MAIN_URL + "favourite_sellers"));
+        'GET', Uri.parse(AppConstants.MAIN_URL + "api/favourite_sellers"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);
@@ -108,7 +108,7 @@ class FavoriteService{
   static Future<bool?> deleteFromFavorites(BuildContext context,String id) async {
     // Uri
     var request = MultipartRequest(
-        'DELETE', Uri.parse(AppConstants.MAIN_URL + "favourite_products?favourite_id=$id"));
+        'DELETE', Uri.parse(AppConstants.MAIN_URL + "api/favourite_products?favourite_id=$id"));
     log(id.toString());
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
@@ -160,7 +160,7 @@ class FavoriteService{
   static Future<bool?> deleteFromFavoritesSeller(BuildContext context,String id) async {
     // Uri
     var request = MultipartRequest(
-        'DELETE', Uri.parse(AppConstants.MAIN_URL + "favourite_sellers?favourite_id=$id"));
+        'DELETE', Uri.parse(AppConstants.MAIN_URL + "api/favourite_sellers?favourite_id=$id"));
     log(id.toString());
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;

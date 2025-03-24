@@ -31,19 +31,20 @@ class _AddSpecialRequestState extends State<AddSpecialRequest> {
   final TextEditingController _timeController = TextEditingController(text: DateFormat('HH:mm').format(DateTime.now()).toString());
   final TextEditingController _descriptionController = TextEditingController();
 
-  CitiesObject? selectedCity;
+  // CitiesObject? selectedCity;
   EventsObject? selectedEvent;
-  FamiliesObject? selectedFamily;
+  // FamiliesObject? selectedFamily;
   CitiesObject? selectedRegion;
-  List<FamiliesObject> families = [];
-  List<CitiesObject> cities = [];
+  // List<FamiliesObject> families = [];
+  // List<CitiesObject> cities = [];
   List<EventsObject> events = [];
   List<CitiesObject> regions = [];
   @override
 
   void initState() {
-    loadFamilies();
-    loadCities();
+    // loadFamilies();
+    // loadCities();
+    loadRegions();
     loadEvents();
     super.initState();
   }
@@ -67,115 +68,115 @@ class _AddSpecialRequestState extends State<AddSpecialRequest> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(getTranslated(context, KeysManager.governance)!, style: const TextStyle(color: ColorsManager.grey1),),
-              SizedBox(height: 10.h,),
-              Center(
-                child: Container(
-                  height: 50.h,
-                  width: 0.9.sw,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.sp),
-                      border: Border.all(
-                          color: ColorsManager.primary
-                      )
-                  ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton2<CitiesObject>(
-                      isExpanded: true,
-                      hint: Text(
-                        getTranslated(context, KeysManager.governance)!,
-                        style: TextStyle(
-                          //fontSize: 14,
-                          color: Theme.of(context).hintColor,
-                        ),
-                      ),
-                      items: cities.map((CitiesObject item) => DropdownMenuItem<CitiesObject>(
-                        value: item,
-                        child: Text(
-                          item.name.toString(),
-                          style:  TextStyle(
-                            fontSize: 14.sp,
-                          ),
-                        ),
-                      )).toList(),
-                      value: selectedCity,
-                      onChanged: (CitiesObject? value) async{
-                        SharedPreferences prefs = await SharedPreferences.getInstance();
-
-                        setState(() {
-                          selectedCity = value;
-                          selectedRegion = null;
-                          loadRegions(selectedCity!.id!);
-                          prefs.setInt("selectedCity", selectedCity!.id!);
-                          log(selectedCity!.name!);
-                        });
-                      },
-                      buttonStyleData: const ButtonStyleData(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        height: 40,
-                        width: 140,
-                      ),
-                      menuItemStyleData: const MenuItemStyleData(
-                        height: 40,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20.h,),
-              Text(getTranslated(context, KeysManager.familyName)!, style: const TextStyle(color: ColorsManager.grey1),),
-              SizedBox(height: 10.h,),
-              Center(
-                child: Container(
-                  height: 50.h,
-                  width: 0.9.sw,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.sp),
-                      border: Border.all(
-                          color: ColorsManager.primary
-                      )
-                  ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton2<FamiliesObject>(
-                      isExpanded: true,
-                      hint: Text(
-                        getTranslated(context, KeysManager.allFamilies)!,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Theme.of(context).hintColor,
-                        ),
-                      ),
-                      items: families.map((FamiliesObject item) => DropdownMenuItem<FamiliesObject>(
-                        value: item,
-                        child: Text(
-                          item.familyName.toString(),
-                          style: const TextStyle(
-                            fontSize: 14,
-                          ),
-                        ),
-                      )).toList(),
-                      value: selectedFamily,
-                      onChanged: (FamiliesObject? value) async{
-                        SharedPreferences prefs = await SharedPreferences.getInstance();
-
-                        setState(() {
-                          selectedFamily = value!;
-                          prefs.setString(KeysManager.selectedFamily, selectedFamily!.familyName!);
-                        });
-                      },
-                      buttonStyleData: const ButtonStyleData(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        height: 40,
-                        width: 140,
-                      ),
-                      menuItemStyleData: const MenuItemStyleData(
-                        height: 40,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20.h,),
+              // Text(getTranslated(context, KeysManager.governance)!, style: const TextStyle(color: ColorsManager.grey1),),
+              // SizedBox(height: 10.h,),
+              // Center(
+              //   child: Container(
+              //     height: 50.h,
+              //     width: 0.9.sw,
+              //     decoration: BoxDecoration(
+              //         borderRadius: BorderRadius.circular(10.sp),
+              //         border: Border.all(
+              //             color: ColorsManager.primary
+              //         )
+              //     ),
+              //     child: DropdownButtonHideUnderline(
+              //       child: DropdownButton2<CitiesObject>(
+              //         isExpanded: true,
+              //         hint: Text(
+              //           getTranslated(context, KeysManager.governance)!,
+              //           style: TextStyle(
+              //             //fontSize: 14,
+              //             color: Theme.of(context).hintColor,
+              //           ),
+              //         ),
+              //         items: cities.map((CitiesObject item) => DropdownMenuItem<CitiesObject>(
+              //           value: item,
+              //           child: Text(
+              //             item.name.toString(),
+              //             style:  TextStyle(
+              //               fontSize: 14.sp,
+              //             ),
+              //           ),
+              //         )).toList(),
+              //         value: selectedCity,
+              //         onChanged: (CitiesObject? value) async{
+              //           SharedPreferences prefs = await SharedPreferences.getInstance();
+              //
+              //           setState(() {
+              //             selectedCity = value;
+              //             selectedRegion = null;
+              //             loadRegions();
+              //             prefs.setInt("selectedCity", selectedCity!.id!);
+              //             log(selectedCity!.name!);
+              //           });
+              //         },
+              //         buttonStyleData: const ButtonStyleData(
+              //           padding: EdgeInsets.symmetric(horizontal: 16),
+              //           height: 40,
+              //           width: 140,
+              //         ),
+              //         menuItemStyleData: const MenuItemStyleData(
+              //           height: 40,
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(height: 20.h,),
+              // Text(getTranslated(context, KeysManager.familyName)!, style: const TextStyle(color: ColorsManager.grey1),),
+              // SizedBox(height: 10.h,),
+              // Center(
+              //   child: Container(
+              //     height: 50.h,
+              //     width: 0.9.sw,
+              //     decoration: BoxDecoration(
+              //         borderRadius: BorderRadius.circular(10.sp),
+              //         border: Border.all(
+              //             color: ColorsManager.primary
+              //         )
+              //     ),
+              //     child: DropdownButtonHideUnderline(
+              //       child: DropdownButton2<FamiliesObject>(
+              //         isExpanded: true,
+              //         hint: Text(
+              //           getTranslated(context, KeysManager.allFamilies)!,
+              //           style: TextStyle(
+              //             fontSize: 14,
+              //             color: Theme.of(context).hintColor,
+              //           ),
+              //         ),
+              //         items: families.map((FamiliesObject item) => DropdownMenuItem<FamiliesObject>(
+              //           value: item,
+              //           child: Text(
+              //             item.familyName.toString(),
+              //             style: const TextStyle(
+              //               fontSize: 14,
+              //             ),
+              //           ),
+              //         )).toList(),
+              //         value: selectedFamily,
+              //         onChanged: (FamiliesObject? value) async{
+              //           SharedPreferences prefs = await SharedPreferences.getInstance();
+              //
+              //           setState(() {
+              //             selectedFamily = value!;
+              //             prefs.setString(KeysManager.selectedFamily, selectedFamily!.familyName!);
+              //           });
+              //         },
+              //         buttonStyleData: const ButtonStyleData(
+              //           padding: EdgeInsets.symmetric(horizontal: 16),
+              //           height: 40,
+              //           width: 140,
+              //         ),
+              //         menuItemStyleData: const MenuItemStyleData(
+              //           height: 40,
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(height: 20.h,),
               Text(getTranslated(context, KeysManager.area)!, style: const TextStyle(color: ColorsManager.grey1),),
               SizedBox(height: 10.h,),
               Center(
@@ -285,7 +286,7 @@ class _AddSpecialRequestState extends State<AddSpecialRequest> {
               SizedBox(height: 10.h,),
               TextFormField(
                 controller: _budgetController,
-                keyboardType: TextInputType.text,
+                keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
                     borderSide: const BorderSide(color: ColorsManager.primary),
@@ -413,12 +414,11 @@ class _AddSpecialRequestState extends State<AddSpecialRequest> {
                     ),
                   ),
                   onPressed: () {
-                    log(_timeController.text);
+                    //log(_timeController.text);
                     SpecialRequestListServices.sendSpecialRequest(
                       context,
                       categoryId: selectedEvent!.id!,
                       areaId: selectedRegion!.id!,
-                      familyName: selectedFamily!.familyName!,
                       budget: int.parse(_budgetController.text),
                       date: selectedDate.toString(),
                       time: _timeController.text.substring(0,5),
@@ -435,17 +435,17 @@ class _AddSpecialRequestState extends State<AddSpecialRequest> {
     );
   }
 
-  void loadCities() {
-    AddressService.getCities(context).then((value) {
-      log(value.toString());
-      setState(() {
-        cities = value!;
-      });
-      log(cities.length.toString());
-    });
-  }
-  void loadRegions(int id) {
-    AddressService.getRegions(context,id).then((value) {
+  // void loadCities() {
+  //   AddressService.getCities(context).then((value) {
+  //     log(value.toString());
+  //     setState(() {
+  //       cities = value!;
+  //     });
+  //     log(cities.length.toString());
+  //   });
+  // }
+  void loadRegions() {
+    AddressService.getRegions(context).then((value) {
       log(value.toString());
       setState(() {
         regions = value!;
@@ -453,15 +453,15 @@ class _AddSpecialRequestState extends State<AddSpecialRequest> {
       log(regions.length.toString());
     });
   }
-  void loadFamilies() {
-    EventsService.getFamilies(context).then((value) {
-      log(value.toString());
-      setState(() {
-        families = value!;
-      });
-      log(families.length.toString());
-    });
-  }
+  // void loadFamilies() {
+  //   EventsService.getFamilies(context).then((value) {
+  //     log(value.toString());
+  //     setState(() {
+  //       families = value!;
+  //     });
+  //     log(families.length.toString());
+  //   });
+  // }
   void loadEvents() {
     EventsService.getMainEventsCategories(context).then((value) {
       log(value.toString());

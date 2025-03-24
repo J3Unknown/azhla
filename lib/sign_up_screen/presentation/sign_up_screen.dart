@@ -11,6 +11,7 @@ import '../../otp_screen/presentation/otp_screen.dart';
 import '../../shared/validations.dart';
 import '../../terms_and_conditions/presentation/terms_and_conditions.dart';
 import '../../terms_and_conditions/presentation/web_view_terms.dart';
+import '../../utill/assets_manager.dart';
 import '../../utill/colors_manager.dart';
 
 class SignUp extends StatefulWidget {
@@ -61,14 +62,14 @@ class _SignUpState extends State<SignUp> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 100.h,),
-            Center(child: Text(getTranslated(context,"Maras")!,style: TextStyle(color: ColorsManager.primary, fontSize: 50.sp,fontWeight: FontWeight.bold),)),
+            Image.asset(imagePath+AssetsManager.logo, height: 180, width: 180,),
+            // SizedBox(height: 100.h,),
+            // Center(child: Text(getTranslated(context,"Maras")!,style: TextStyle(color: ColorsManager.primary, fontSize: 50.sp,fontWeight: FontWeight.bold),)),
+            //SizedBox(height: 30.h,),
+            Text(getTranslated(context, "Sign Up")!,style: TextStyle(color: Colors.black87,fontSize: 24.sp, fontWeight: FontWeight.w500),),
             SizedBox(height: 30.h,),
-            Text(getTranslated(context, "Sign Up")!,style: TextStyle(color: Colors.black87,fontSize: 20.sp),),
-            SizedBox(height: 40.h,),
             SingleChildScrollView(
               child: Form(
                 key: formGlobalKey,

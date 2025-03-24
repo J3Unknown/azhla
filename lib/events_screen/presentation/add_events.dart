@@ -9,8 +9,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
+// import 'package:shared_preferences/shared_preferences.dart';
 import '../../address_screen/data/cities_object.dart';
 import '../../address_screen/domain/address_service.dart';
 import '../../shared/validations.dart';
@@ -40,10 +39,8 @@ class _AddEventPageState extends State<AddEventPage> {
   var personalPhoto;
   String image = '';
   String photopath = '';
-  List<CitiesObject> cities = [];
   List<CitiesObject> regions = [];
   CitiesObject? selectedRegion;
-  CitiesObject? selectedCity;
   final ImagePicker picker = ImagePicker();
   TextEditingController titleController = TextEditingController();
   TextEditingController familyNameController = TextEditingController();
@@ -56,7 +53,7 @@ class _AddEventPageState extends State<AddEventPage> {
   void initState() {
     loadFamilies();
     loadEvents();
-    loadCities();
+    loadRegions();
     // TODO: implement initState
     super.initState();
   }
@@ -69,6 +66,11 @@ class _AddEventPageState extends State<AddEventPage> {
       backgroundColor: ColorsManager.white,
       appBar: AppBar(
         backgroundColor: ColorsManager.white,
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: Icon(IconsManager.backButtonIcon),
+          onPressed: () => Navigator.pop(context),
+        ),
         title: Text(
           getTranslated(context, KeysManager.addEvent)!,
           style: TextStyle(
@@ -180,8 +182,7 @@ class _AddEventPageState extends State<AddEventPage> {
                             .toList(),
                         value: selectedEvent,
                         onChanged: (EventsObject? value) async {
-                          SharedPreferences prefs =
-                              await SharedPreferences.getInstance();
+                          //SharedPreferences prefs = await SharedPreferences.getInstance();
 
                           setState(() {
                             selectedEvent = value!;
@@ -250,7 +251,7 @@ class _AddEventPageState extends State<AddEventPage> {
                             color: Theme.of(context).hintColor,
                           ),
                         ),
-                        items: cities
+                        items: regions
                             .map((CitiesObject item) =>
                                 DropdownMenuItem<CitiesObject>(
                                   value: item,
@@ -262,13 +263,11 @@ class _AddEventPageState extends State<AddEventPage> {
                                   ),
                                 ))
                             .toList(),
-                        value: selectedCity,
+                        value: selectedRegion,
                         onChanged: (CitiesObject? value) async {
 
                           setState(() {
-                            selectedCity = value;
-                            selectedRegion = null;
-                            loadRegions(selectedCity!.id!);
+                            selectedRegion = value;
                             // prefs.setInt("selectedCity", selectedCity!.id!);
                             // log(selectedCity!.name!);
                           });
@@ -288,73 +287,6 @@ class _AddEventPageState extends State<AddEventPage> {
                 SizedBox(
                   height: 10.h,
                 ),
-                Text(getTranslated(context, KeysManager.area)!),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Center(
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 60.h,
-                        width: 0.98.sw,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.sp),
-                            border: Border.all(
-                                color: ColorsManager.primary)),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton2<CitiesObject>(
-                            isExpanded: true,
-                            hint: Text(
-                              getTranslated(context, KeysManager.allAreas)!,
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Theme.of(context).hintColor,
-                              ),
-                            ),
-                            items: regions
-                                .map((CitiesObject item) =>
-                                    DropdownMenuItem<CitiesObject>(
-                                      value: item,
-                                      child: Text(
-                                        item.name.toString(),
-                                        style:  TextStyle(
-                                          fontSize: 20.sp,
-                                        ),
-                                      ),
-                                    ))
-                                .toList(),
-                            value: selectedRegion,
-                            onChanged: (CitiesObject? value) async {
-                              setState(() {
-                                areaRequired = true;
-                                selectedRegion = value;
-                              });
-                            },
-                            buttonStyleData: const ButtonStyleData(
-                              padding: EdgeInsets.symmetric(horizontal: 16),
-                              height: 40,
-                              width: 140,
-                            ),
-                            menuItemStyleData: const MenuItemStyleData(
-                              height: 40,
-                            ),
-                          ),
-                        ),
-                      ),
-                      (!temp)
-                          ? Text(
-                              getTranslated(context, KeysManager.requiredFieldMessage)!,
-                              style: TextStyle(color: ColorsManager.red),
-                            )
-                          : Container()
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                SizedBox(height: 10),
                 Text(getTranslated(context, KeysManager.date)!),
                 SizedBox(
                   height: 10.h,
@@ -520,7 +452,6 @@ class _AddEventPageState extends State<AddEventPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 400.h),
               ],
             ),
           ),
@@ -530,18 +461,8 @@ class _AddEventPageState extends State<AddEventPage> {
     );
   }
 
-  void loadCities() {
-    AddressService.getCities(context).then((value) {
-      log(value.toString());
-      setState(() {
-        cities = value!;
-      });
-      log(cities.length.toString());
-    });
-  }
-
-  void loadRegions(int id) {
-    AddressService.getRegions(context, id).then((value) {
+  void loadRegions() {
+    AddressService.getRegions(context).then((value) {
       log(value.toString());
       setState(() {
         regions = value!;

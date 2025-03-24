@@ -13,7 +13,7 @@ import '../data/cities_object.dart';
 class AddressService{
   static Future<List<CitiesObject>?> getCities(BuildContext context) async {
     // Uri
-    var request = MultipartRequest('GET', Uri.parse(AppConstants.MAIN_URL + "cities"));
+    var request = MultipartRequest('GET', Uri.parse("${AppConstants.MAIN_URL}api/cities"));
     //SharedPreferences prefs = await SharedPreferences.getInstance();
    // String token = prefs.getString("token")!;
     //log("token"+token);
@@ -37,7 +37,7 @@ class AddressService{
     if (response.statusCode == 200) {
       var body = await response.stream.bytesToString();
       var bodyJson = jsonDecode(body);
-      log(bodyJson['result'].toString());
+      log(bodyJson['result'].length.toString());
       if (bodyJson['success'] == false) {
         showToastError(context, bodyJson['msg']);
         return null;
@@ -45,8 +45,8 @@ class AddressService{
         List<CitiesObject> cities = [];
         for(int i = 0 ;i<bodyJson['result'].length;i++){
           cities.add( CitiesObject.fromJson(bodyJson['result'][i]));
+          log(bodyJson['result'][i]);
         }
-        log("length cities"+cities.length.toString());
         return cities;
       }
     } else {
@@ -55,12 +55,12 @@ class AddressService{
       return null;
     }
   }
-  static Future<List<CitiesObject>?> getRegions(BuildContext context,int id) async {
+  static Future<List<CitiesObject>?> getRegions(BuildContext context,) async {
     // Uri
-    var request = MultipartRequest('GET', Uri.parse("${AppConstants.MAIN_URL}regions?id=$id"));
+    var request = MultipartRequest('GET', Uri.parse("${AppConstants.MAIN_URL}api/regions"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // String token = prefs.getString("token")!;
-    // log("token"+token);
+    log('${AppConstants.MAIN_URL}regions');
     // Headers
     Locale locale = await getLocale();
     request.headers.addAll({
@@ -81,7 +81,7 @@ class AddressService{
     if (response.statusCode == 200) {
       var body = await response.stream.bytesToString();
       var bodyJson = jsonDecode(body);
-      log(bodyJson['result'].toString());
+      log(bodyJson['result'].length.toString());
       if (bodyJson['success'] == false) {
         showToastError(context, bodyJson['msg']);
         return null;
@@ -89,8 +89,8 @@ class AddressService{
         List<CitiesObject> cities = [];
         for(int i = 0 ;i<bodyJson['result'].length;i++){
           cities.add( CitiesObject.fromJson(bodyJson['result'][i]));
+          log(cities[i].name!);
         }
-        log("length cities"+cities.length.toString());
         return cities;
       }
     } else {
@@ -101,8 +101,7 @@ class AddressService{
   }
   static Future<bool?> addAdrees(BuildContext context,String id,String floor_no,String street,String block_no,String building_no,String notes) async {
     // Uri
-    var request = MultipartRequest(
-        'POST', Uri.parse(AppConstants.MAIN_URL + "add_client_region"));
+    var request = MultipartRequest('POST', Uri.parse("${AppConstants.MAIN_URL}api/add_client_region"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);
@@ -113,8 +112,6 @@ class AddressService{
       'Accept':'application/json',
       'Lang':locale.languageCode,
     });
-
-
 
     // Body
     request.fields.addAll({
@@ -131,7 +128,7 @@ class AddressService{
     StreamedResponse response = await request.send();
     log(response.request!.headers.toString());
     log(request.url.toString());
-    log(response.statusCode!.toString());
+    log(response.statusCode.toString());
     log(request.method);
     log(request.fields.toString());
     if (response.statusCode == 200) {

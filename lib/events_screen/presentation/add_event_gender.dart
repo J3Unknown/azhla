@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:azhlha/events_screen/domain/events_service.dart';
+import 'package:azhlha/utill/colors_manager.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -79,15 +80,15 @@ class _AddEventGenderState extends State<AddEventGender> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(getTranslated(context, "Add Event")!,style: TextStyle(color: Color.fromRGBO(170, 143, 10, 1),fontSize: 22.sp,fontWeight: FontWeight.bold),),
+        title: Text(getTranslated(context, "Add Event")!,style: TextStyle(color: ColorsManager.primary,fontSize: 22.sp,fontWeight: FontWeight.bold),),
         centerTitle: true,
       ),
       body:
       LoadingOverlay(
       progressIndicator: SpinKitSpinningLines(
-      color: Color.fromRGBO(254, 222, 0, 1),
+      color: ColorsManager.primary,
     ),
-    color: Color.fromRGBO(254, 222, 0, 0.1),
+    color: ColorsManager.primary0_1Transparency,
     isLoading: isLoading,
     child: isLoading == true
     ? Container():
@@ -104,7 +105,7 @@ class _AddEventGenderState extends State<AddEventGender> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.sp),
                     border: Border.all(
-                        color: Color.fromRGBO(170, 143, 10, 1)
+                        color: ColorsManager.primary
                     )
                 ),
                 child: DropdownButtonHideUnderline(
@@ -182,7 +183,7 @@ class _AddEventGenderState extends State<AddEventGender> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.sp),
                         border: Border.all(
-                            color: Color.fromRGBO(170, 143, 10, 1)
+                            color: ColorsManager.primary
                         )
                     ),
                     child: Center(
@@ -208,7 +209,7 @@ class _AddEventGenderState extends State<AddEventGender> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.sp),
                         border: Border.all(
-                            color: Color.fromRGBO(170, 143, 10, 1)
+                            color: ColorsManager.primary
                         )
                     ),
                     child: Center(
@@ -233,7 +234,7 @@ class _AddEventGenderState extends State<AddEventGender> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.sp),
                         border: Border.all(
-                            color: Color.fromRGBO(170, 143, 10, 1)
+                            color: ColorsManager.primary
                         )
                     ),
                     child: Center(
@@ -256,7 +257,7 @@ class _AddEventGenderState extends State<AddEventGender> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.sp),
                           border: Border.all(
-                              color: Color.fromRGBO(170, 143, 10, 1)
+                              color:ColorsManager.primary
                           )
                       ),
                       child: Center(child: Text((manWord == "")? getTranslated(context, "location")!:manWord)),
@@ -312,7 +313,7 @@ class _AddEventGenderState extends State<AddEventGender> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.sp),
                         border: Border.all(
-                            color: Color.fromRGBO(170, 143, 10, 1)
+                            color: ColorsManager.primary
                         )
                     ),
                     child: Center(
@@ -337,7 +338,7 @@ class _AddEventGenderState extends State<AddEventGender> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.sp),
                         border: Border.all(
-                            color: Color.fromRGBO(170, 143, 10, 1)
+                            color:ColorsManager.primary
                         )
                     ),
                     child: Center(
@@ -362,7 +363,7 @@ class _AddEventGenderState extends State<AddEventGender> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.sp),
                         border: Border.all(
-                            color: Color.fromRGBO(170, 143, 10, 1)
+                            color: ColorsManager.primary
                         )
                     ),
                     child: Center(
@@ -385,7 +386,7 @@ class _AddEventGenderState extends State<AddEventGender> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.sp),
                           border: Border.all(
-                              color: Color.fromRGBO(170, 143, 10, 1)
+                              color: ColorsManager.primary
                           )
                       ),
                       child: Center(child: Text((womanWord == "")? getTranslated(context, "location")!:womanWord)),
@@ -485,7 +486,7 @@ class _AddEventGenderState extends State<AddEventGender> {
                 },
                 child: Text(getTranslated(context, "Confirm")!),
                 style: ElevatedButton.styleFrom(
-                  primary:  Color.fromRGBO(170, 143, 10, 1),
+                  primary:  ColorsManager.primary,
                   padding: EdgeInsets.symmetric(
                       horizontal: size.width * 0.3, vertical: 15),
                   textStyle: TextStyle(fontSize: 18),

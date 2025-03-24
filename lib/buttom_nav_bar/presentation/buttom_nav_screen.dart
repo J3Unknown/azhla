@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../home_screen/presentation/home_screen.dart';
 import '../../basket_screen/presentation/basket_screen.dart';
 import '../../favourite_screen/presentation/favorite_screen.dart';
@@ -21,10 +20,22 @@ class ButtomNavBarScreen extends StatefulWidget {
 class _ButtomNavBarScreenState extends State<ButtomNavBarScreen> {
   late int _selectedIndex;
   String token = '';
+  final List<GlobalKey<NavigatorState>> _navigatorKeys = List.generate(
+    5, // The number of tabs
+        (index) => GlobalKey<NavigatorState>(),
+  );
 
+  late List<Widget> _screens = [];
   @override
   void initState() {
     super.initState();
+    _screens = [
+      PageNavigator(screen: const HomeScreen(), navigatorKey: _navigatorKeys[0]),
+      PageNavigator(screen: const MyReservations(), navigatorKey: _navigatorKeys[1]),
+      PageNavigator(screen: const BasketScreen(), navigatorKey: _navigatorKeys[2]),
+      PageNavigator(screen: const FavoriteScreen(), navigatorKey: _navigatorKeys[3]),
+      PageNavigator(screen: const SettingScreen(), navigatorKey: _navigatorKeys[4]),
+    ];
     _selectedIndex = widget.intial;
     initToken();
   }
@@ -38,19 +49,18 @@ class _ButtomNavBarScreenState extends State<ButtomNavBarScreen> {
     }
   }
 
+
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    if (_selectedIndex == index) {
+      // Ensure the navigator of the current tab pops to the first route
+      _navigatorKeys[_selectedIndex].currentState?.popUntil((route) => route.isFirst);
+    } else {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
   }
 
-  final List<Widget> _screens = [
-    PageNavigator(screen: const HomeScreen()),
-    PageNavigator(screen: const MyReservations()),
-    PageNavigator(screen: const BasketScreen()),
-    PageNavigator(screen: const FavoriteScreen()),
-    PageNavigator(screen: const SettingScreen()),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -72,10 +82,11 @@ class _ButtomNavBarScreenState extends State<ButtomNavBarScreen> {
             label: getTranslated(context, "Reservations"),
           ),
           BottomNavigationBarItem(
-            icon: const ImageIcon(
-              AssetImage("assets/image/basket.png"),
-              size: 25,
-            ),
+            icon: const Icon(CupertinoIcons.cart),
+            // icon: const ImageIcon(
+            //   AssetImage("assets/image/basket.png"),
+            //   size: 25,
+            // ),
             label: getTranslated(context, "Basket"),
           ),
           BottomNavigationBarItem(
@@ -90,33 +101,22 @@ class _ButtomNavBarScreenState extends State<ButtomNavBarScreen> {
       ),
     );
   }
+
 }
 
-class PageNavigator extends StatefulWidget {
+class PageNavigator extends StatelessWidget {
   final Widget screen;
-  PageNavigator({required this.screen});
+  final GlobalKey<NavigatorState> navigatorKey;
 
-  @override
-  _PageNavigatorState createState() => _PageNavigatorState();
-}
-
-class _PageNavigatorState extends State<PageNavigator> {
-  late GlobalKey<NavigatorState> _navigatorKey;
-
-  @override
-  void initState() {
-    super.initState();
-    _navigatorKey = GlobalKey<NavigatorState>();
-    print("InitState called for ${widget.screen.runtimeType}"); // Debugging
-  }
+  const PageNavigator({required this.screen, required this.navigatorKey});
 
   @override
   Widget build(BuildContext context) {
     return Navigator(
-      key: _navigatorKey,
+      key: navigatorKey,
       onGenerateRoute: (routeSettings) {
         return MaterialPageRoute(
-          builder: (context) => widget.screen,
+          builder: (context) => screen,
         );
       },
     );

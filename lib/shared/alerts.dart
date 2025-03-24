@@ -84,6 +84,97 @@ void showToast(BuildContext context, String msg) {
   );
 }
 
+void showSpecialRequestToast(BuildContext context, String msg) {
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return Padding(
+        padding: EdgeInsets.only(top: 200.h, bottom: 200.h),
+        child: Dialog(
+          insetPadding: EdgeInsets.all(15),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.0),
+            side: BorderSide(
+              color: ColorsManager.primary,
+              width: 2.0,
+            ),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min, // Ensure dialog height is dynamic
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: 10.h,),
+              Container(
+                height: 60.h,
+                width: 60.w,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(imagePath+AssetsManager.specialRequestAlert),
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+              SizedBox(height: 10.h),
+              Text(
+                getTranslated(context,msg)!,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22.sp,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                getTranslated(context, 'Your Event Added but it\'s sent for admins for approval')!,
+                style: TextStyle(
+                  color: ColorsManager.grey,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 18.sp,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 20.h),
+              Container(
+                height: 50.h,
+                width: 0.5.sw,
+                decoration: BoxDecoration(
+                  color: ColorsManager.primary,
+                  borderRadius: BorderRadius.circular(10.sp),
+                ),
+                child: TextButton(
+                  child: Text(getTranslated(context, "Back To Home")!,style: const TextStyle(color: ColorsManager.white),),
+                  onPressed : () {
+                    Navigator.pop(context);
+                    Navigator.of(context, rootNavigator: true).push( MaterialPageRoute(builder: (BuildContext context) =>ButtomNavBarScreen(intial:0)));
+                  },
+                ),
+              ),
+              SizedBox(height: 15.h,),
+              Container(
+                height: 50.h,
+                width: 0.5.sw,
+                decoration: BoxDecoration(
+                  color: ColorsManager.white,
+                  borderRadius: BorderRadius.circular(10.sp),
+                  border: Border.all(color: ColorsManager.primary,)
+                ),
+                child: TextButton(
+                  child: Text(getTranslated(context, "Back To Events")!,style: const TextStyle(color: ColorsManager.primary,),),
+                  onPressed : () {
+                    Navigator.of(context, rootNavigator: true).pop('dialog');
+                    Navigator.of(context, rootNavigator: true).push( MaterialPageRoute(builder: (BuildContext context) => const EventsScreen()));
+                  },
+                ),
+              ),
+              SizedBox(height: 20.h,),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
+
 showToastError(BuildContext context, String msg){
   return showDialog(
     context: context,

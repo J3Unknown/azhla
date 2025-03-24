@@ -104,24 +104,26 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
   late FlutterGifController _gifController;
-
+  final int totalFrames = 24;
+  final double frameRate = 12;
   @override
   void initState() {
     super.initState();
     _gifController = FlutterGifController(vsync: this);
 
-    // Adjust the GIF settings
+    double gifDuration = totalFrames / frameRate;
+
     _gifController.repeat(
       min: 0,
-      max: 21, // Change this based on the number of frames in your GIF
-      period: const Duration(milliseconds: 2300), // Match the GIF duration
+      max: totalFrames.toDouble(),
+      period: Duration(milliseconds: (gifDuration * 1000).toInt()), // Match the GIF duration
     );
 
-    _route();
+    _route(gifDuration);
   }
 
-  void _route() {
-    Timer(const Duration(milliseconds: 2300), () async {
+  void _route(double delaySeconds) {
+    Timer(Duration(milliseconds: (delaySeconds * 1000).toInt()), () async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       if (!prefs.containsKey("FirstTime")) {
         Navigator.pushReplacement(
@@ -139,8 +141,8 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
       backgroundColor: Colors.black,
       body: Center(
         child: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          width:double.infinity,
+          height: double.infinity,
           child: GifImage(
             fit: BoxFit.cover,
             controller: _gifController,

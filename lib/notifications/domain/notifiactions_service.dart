@@ -14,7 +14,7 @@ class NotificationsService{
   static Future<List<NotificationsDTO>?> getAllNotifications(BuildContext context) async {
     // Uri
     var request = MultipartRequest(
-        'GET', Uri.parse(AppConstants.MAIN_URL + "notifications"));
+        'GET', Uri.parse(AppConstants.MAIN_URL + "api/notifications"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     // Headers
@@ -58,7 +58,7 @@ class NotificationsService{
   static Future<bool?> markAsRead(BuildContext context,String id) async {
     // Uri
     var request = MultipartRequest(
-        'POST', Uri.parse(AppConstants.MAIN_URL + "read_notification"));
+        'POST', Uri.parse(AppConstants.MAIN_URL + "api/read_notification"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);

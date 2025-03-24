@@ -14,7 +14,7 @@ import '../../utill/localization_helper.dart';
 class BasketService{
   static Future<List<BasketObject>?> basket(BuildContext context) async {
     // Uri
-    var request = MultipartRequest('GET', Uri.parse(AppConstants.MAIN_URL + "myBasket"));
+    var request = MultipartRequest('GET', Uri.parse(AppConstants.MAIN_URL + "api/myBasket"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);
@@ -59,7 +59,7 @@ class BasketService{
   static Future<bool?> deleteFromBasket(BuildContext context,String id) async {
     // Uri
     var request = MultipartRequest(
-        'POST', Uri.parse(AppConstants.MAIN_URL + "cancelItem"));
+        'POST', Uri.parse(AppConstants.MAIN_URL + "api/cancelItem"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);
@@ -109,7 +109,7 @@ class BasketService{
   static Future<bool?> addToBasket(BuildContext context,String id,List<ExtraServicesRequest> extraServicesRequest) async {
     // Uri
     var request = MultipartRequest(
-        'POST', Uri.parse(AppConstants.MAIN_URL + "addToBasket"));
+        'POST', Uri.parse(AppConstants.MAIN_URL + "api/addToBasket"));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("token")!;
     log("token"+token);

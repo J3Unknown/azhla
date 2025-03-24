@@ -50,8 +50,7 @@ class UserService{
     log(body.toString());
     log(uri.toString());
     log(headers.toString());
-    Response res = await post(uri, body: body,
-        headers: headers); // There is no body or encoding because this is get request
+    Response res = await post(uri, body: body, headers: headers); // There is no body or encoding because this is get request
     log("Sent");
 
     if (res.statusCode == 200) {
